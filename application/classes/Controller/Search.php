@@ -11,7 +11,7 @@ class Controller_Search extends My_Layout_User_Logged_Controller {
     public function action_index()
 	{
         $this->setTitle('Search Page')
-            ->view('search/index')
+            ->view('home/index')
             ->render();
     }
 

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Home extends My_Layout_Controller {
+class Controller_Home extends My_Layout_User_Controller {
 
 	public function action_index()
 	{

@@ -6,10 +6,9 @@ class My_Layout_User_Controller extends My_Layout_Controller
 	{
 		parent::before();
 		//choose main template
-                if (!Auth::instance()->logged_in()) {
-                    $this->redirect('/');
-                }
-                
+//                if (Auth::instance()->logged_in()) {
+//                    $this->redirect('search/index');
+//                }
 
                 Helper_Output::factory()
                                         ->link_js('libs/bootstrap-dropdown')

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class My_Layout_User_Logged_Controller extends My_Layout_User_Controller
+class My_Layout_User_Logged_Controller extends My_Layout_Controller
 {
     protected $logged_user;
     
