@@ -16,11 +16,18 @@ class My_Layout_Controller extends Controller {
 		$this->_title 		= $config->get('Site Title');
 		$this->_keywords 	= $config->get('Site Keywords');
 		$this->_description     = $config->get('Site Description');
+                $this->template         = View::factory('layouts/main');
+                
+                if (Auth::instance()->logged_in()) {
+                    Helper_Mainmenu::init(Kohana::$config->load('login_main_menu')->as_array());   
+                } else {
+                    Helper_Mainmenu::init(Kohana::$config->load('main_menu')->as_array());
+                }
                 
                 //include mandatory css js for both side ( Client & Admin )
                 Helper_Uploader::createTempIfNotExist();
 		Helper_Output::factory()
-                                        ->link_js('libs/jquey-1.8.2.min')
+                                        ->link_js('libs/jquey-1.9.1.min')
                                         ->link_css('bootstrap.min')
                                         ->link_css('bootstrap-responsive.min')
                                         ->link_css('main')

@@ -6,9 +6,11 @@ class My_Layout_User_Controller extends My_Layout_Controller
 	{
 		parent::before();
 		//choose main template
-                Helper_Mainmenu::init(Kohana::$config->load('main_menu')->as_array());
+                if (!Auth::instance()->logged_in()) {
+                    $this->redirect('/');
+                }
                 
-		$this->template = View::factory('layouts/main');
+
                 Helper_Output::factory()
                                         ->link_js('libs/bootstrap-dropdown')
                                         ->link_js('libs/bootstrap-collapse')

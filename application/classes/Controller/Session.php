@@ -1,41 +1,34 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Session extends My_Layout_User_Controller {
+class Controller_Session extends My_Layout_Controller {
 
-	public function action_login()
-	{
-        if (Auth::instance()->logged_in())
-        {
+    public function action_login()
+    {
+        Helper_Mainmenu::setActiveItem('sign_in');
+        if (Auth::instance()->logged_in()) {
             $this->redirect('home/index');
-        }
-        else
-        {
-            if ($this->request->post())
-            {
+        } else {
+            if ($this->request->post()) {
                 $status = Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
-                if ($status)
-                {
+                if ($status) {
                     $this->redirect('/');
-                }
-                else
-                {
+                } else {
                     Helper_Alert::setStatus('error');
                     Helper_Alert::set_flash(Kohana::$config->load('errors')->get('001'));
                 }
             }
         }
+        $this->setTitle('Sign In')->view('session/login')->render();
+    }
 
-        $this->setTitle('Landing page')->view('home/index')->render();
-	}
-
-    public function action_register()
+    public function action_create()
     {
+        Helper_Mainmenu::setActiveItem('create_account');
         if ($this->request->post()) {
             $model = ORM::factory('User');
             $profile = array(
                 'first_name' => $this->request->post('first_name'),
-                'last_name'  => $this->request->post('last_name'),
-                'address'    => $this->request->post('address')
+                'last_name'  => $this->request->post('last_name')
             );
             try {
                 $model->values(array(
@@ -52,7 +45,7 @@ class Controller_Session extends My_Layout_User_Controller {
                 Helper_Alert::set_flash($e->errors('User'));
             }
         }
-        $this->setTitle('Register')
+        $this->setTitle('Create Account')
             ->view('session/register')
             ->render();
     }

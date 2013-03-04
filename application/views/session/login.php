@@ -1,35 +1,23 @@
-<form class="form-actions" action="<?php echo URL::site('session/create') ?>" method="POST">
+
+<form class="form-actions" action="<?php echo URL::site('session/login') ?>" method="POST">
     <fieldset class="places">
-        <legend>Create Account</legend>
+        <legend>Register</legend>
         <div class="row-fluid">
             <div class="span6">
                 <div class="control-group">
-                    <label class="control-label" for="first_name">First Name:</label>
-                    <div class="controls">
-                        <input class="span12" type="text" id="first_name" placeholder="John" name="first_name">
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="last_name">Last Name:</label>
-                    <div class="controls">
-                        <input class="span12" type="text" id="last_name" placeholder="Smith" name="last_name">
-                    </div>
-                </div>
-                <div class="control-group">
                     <label class="control-label" for="email">Email:</label>
                     <div class="controls">
-                        <input class="span12" type="text" id="email" placeholder="john@mail.com" name="email">
+                        <input class="span12" type="text" id="email" placeholder="Email" name="email">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="password">Password:</label>
                     <div class="controls">
-                        <input class="span12" type="text" id="password" placeholder="Password" name="password">
+                        <input class="span12" type="password" id="email" placeholder="Password" name="password">
                     </div>
                 </div>
                 <div class="control-group pull-right">
-                    <input class="btn btn-large" value="Cancel" type="reset">
-                    <input class="btn btn-large btn-primary" value="Save" type="submit">
+                    <input class="btn btn-large btn-primary" value="Sign In" type="submit">
                 </div>
             </div>
             <div class="span6">

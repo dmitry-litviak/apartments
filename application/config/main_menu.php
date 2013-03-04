@@ -3,31 +3,22 @@ return array(
                                       "search" => array(
                                                       'title'   => 'Search page',
                                                       'url'     => 'search',
-                                                      'status'  => 0
-                                                      ),
-                                      "profile" => array(
-                                                      'title' 	=> 'My Profile',
-                                                      'url'    	=> 'user/profile',
-                                                      'status'  => 0
-                                                      ),
-                                      "apartments" => array(
-                                                      'title' 	=> 'My Apartments',
-                                                      'url'    	=> 'apartments',
+                                                      'status'  => 1
+                                      ),
+//                                      "feedback" => array(
+//                                                      'title' 	=> 'Feedback',
+//                                                      'url'    	=> 'feedback',
+//                                                      'status'  => 0
+//                                      ),
+                                      "create_account" => array(
+                                                      'title' 	=> 'Create Account',
+                                                      'url'    	=> 'session/create',
                                                       'status'  => 0
                                       ),
-                                      "favorites" => array(
-                                                      'title' 	=> 'My Favorites',
-                                                      'url'    	=> 'favorites',
+                                      "sign_in" => array(
+                                                      'title' 	=> 'Sign In',
+                                                      'url'    	=> 'session/login',
                                                       'status'  => 0
                                       ),
-                                      "logout" => array(
-                                                      'title' 	=> 'Logout',
-                                                      'url'    	=> 'session/logout',
-                                                      'status'  => 0
-                                                      ),
-                                      "admin"  => array(
-                                                      'title' 	=> 'Administration',
-                                                      'url'    	=> 'admin',
-                                                      'status'  => 0
-                                      )
+                                      
 );

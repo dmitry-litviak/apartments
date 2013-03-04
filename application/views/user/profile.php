@@ -25,14 +25,8 @@
                           </select>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="address">Address: </label>
-                        <div class="controls">
-                            <input class="span10" type="text" id="address" placeholder="Example: Great Britain , London, Baker Street 5" name="profile[address]" value="<?php echo $logged_user->user_profile->address ?>">
-                        </div>
-                    </div>
-                    </div>
-                    <div class="span5">
+                </div>
+                <div class="span5">
                         <div class="control-group">
                           <label class="control-label" for="email">Email</label>
                           <div class="controls">
@@ -49,7 +43,7 @@
                                 <input class="span10" type="file" name="file" >
                             </div>
                           </div>
-                    </div>
+                </div>
                 </div>
             </fieldset>
         <input class="btn btn-large btn-primary" value="Save" type="submit">

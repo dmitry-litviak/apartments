@@ -1,6 +1,5 @@
-<!-- Main hero unit for a primary marketing message or call to action -->
-<div class="hero-unit">
-  <h1>Landing Page!</h1>
-  <p>Insert home page text.</p>
-  <p><a class="btn btn-primary btn-large">Any Button &raquo;</a></p>
+<div class="jumbotron">
+  <h1>Marketing stuff!</h1>
+  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+  <a class="btn btn-large btn-success" href="http://twitter.github.com/bootstrap/examples/justified-nav.html#">Get started today</a>
 </div>
