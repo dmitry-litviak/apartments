@@ -38,6 +38,7 @@ class Controller_Session extends My_Layout_User_Controller {
                 ));
                 $model->save();
                 $model->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
+                Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
                 $this->redirect('/');
             }
             catch (ORM_Validation_Exception $e) {
