@@ -1,0 +1,1 @@
+User <?php echo  $obj->getFullName() ?> (<?php echo $obj->email ;?>) want a request callback.
