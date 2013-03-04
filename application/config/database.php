@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-if(Kohana::$environment == 40){
+$whitelist = array('mrlogo.loc');
+if(in_array($_SERVER['HTTP_HOST'], $whitelist)){
 
     return array
     (
@@ -21,36 +22,11 @@ if(Kohana::$environment == 40){
                  * Ports and sockets may be appended to the hostname.
                  */
                 'hostname'   => 'localhost',
-                'database'   => 'appartments',
+                'database'   => 'apartments',
                 'username'   => 'root',
                 'password'   => 'root',
                 'persistent' => FALSE,
             ),
-            'table_prefix' => '',
-            'charset'      => 'utf8',
-            'caching'      => FALSE,
-        ),
-        'alternate' => array(
-            'type'       => 'PDO',
-            'connection' => array(
-                /**
-                 * The following options are available for PDO:
-                 *
-                 * string   dsn         Data Source Name
-                 * string   username    database username
-                 * string   password    database password
-                 * boolean  persistent  use persistent connections?
-                 */
-                'dsn'        => 'mysql:host=localhost;dbname=kohana',
-                'username'   => 'root',
-                'password'   => 'r00tdb',
-                'persistent' => FALSE,
-            ),
-            /**
-             * The following extra options are available for PDO:
-             *
-             * string   identifier  set the escaping identifier
-             */
             'table_prefix' => '',
             'charset'      => 'utf8',
             'caching'      => FALSE,
@@ -77,7 +53,7 @@ if(Kohana::$environment == 40){
                  * Ports and sockets may be appended to the hostname.
                  */
                 'hostname'   => 'localhost',
-                'database'   => 'appartments',
+                'database'   => 'apartments',
                 'username'   => 'root',
                 'password'   => 'qwerfvbnm321Q',
                 'persistent' => FALSE,
@@ -85,35 +61,9 @@ if(Kohana::$environment == 40){
             'table_prefix' => '',
             'charset'      => 'utf8',
             'caching'      => FALSE,
-        ),
-        'alternate' => array(
-            'type'       => 'PDO',
-            'connection' => array(
-                /**
-                 * The following options are available for PDO:
-                 *
-                 * string   dsn         Data Source Name
-                 * string   username    database username
-                 * string   password    database password
-                 * boolean  persistent  use persistent connections?
-                 */
-                'dsn'        => 'mysql:host=localhost;dbname=kohana',
-                'username'   => 'root',
-                'password'   => 'r00tdb',
-                'persistent' => FALSE,
-            ),
-            /**
-             * The following extra options are available for PDO:
-             *
-             * string   identifier  set the escaping identifier
-             */
-            'table_prefix' => '',
-            'charset'      => 'utf8',
-            'caching'      => FALSE,
         )
     );
 
 }
-
 
 
