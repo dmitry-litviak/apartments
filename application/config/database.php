@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-$whitelist = array('mrlogo.loc');
+$whitelist = array('apartments.loc');
 if(in_array($_SERVER['HTTP_HOST'], $whitelist)){
 
     return array
