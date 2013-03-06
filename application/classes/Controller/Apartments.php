@@ -35,7 +35,7 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
                     $name   = basename(md5($_FILES['image']['name'].time())). '.' .pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
                     $target = $place_upload_dir . $name;
                     move_uploaded_file($_FILES['image']['tmp_name'], $target);
-                    $image_small = Image::factory($target)->resize(80, 80);
+                    $image_small = Image::factory($target)->resize(265, 265);
                     $image_small->save($place_upload_dir . 'small_' . $name);
                     $model->img = $name;
                     $model->save();
