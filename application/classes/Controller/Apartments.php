@@ -5,8 +5,9 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
     public function action_index()
     {
         Helper_Mainmenu::setActiveItem('apartments');
+        $data['apartments'] = ORM::factory('Apartment')->find_all();
         $this->setTitle('Apartments Page')
-             ->view('apartments/index')
+             ->view('apartments/index', $data)
              ->render();
     }
 
@@ -31,10 +32,12 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
                     $place_upload_dir = Kohana::$config->load('config')->get('apartments_files') . $model->id . '/photos/';
                     if(!is_dir($place_upload_dir))
                         mkdir($place_upload_dir, 0777, true);
-
-                    $target    = $place_upload_dir . basename($_FILES['relevant_file']['name']);
-                    move_uploaded_file($_FILES['relevant_file']['tmp_name'], $target);
-                    $model->image = URL::base() . $target;
+                    $name   = basename(md5($_FILES['image']['name'].time())). '.' .pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                    $target = $place_upload_dir . $name;
+                    move_uploaded_file($_FILES['image']['tmp_name'], $target);
+                    $image_small = Image::factory($target)->resize(80, 80);
+                    $image_small->save($place_upload_dir . 'small_' . $name);
+                    $model->img = $name;
                     $model->save();
                 }
                 $this->redirect('apartments');

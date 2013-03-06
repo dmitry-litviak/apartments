@@ -14,18 +14,20 @@ create = {
     this.geocoder = void 0;
     this.map = void 0;
     this.marker = void 0;
-    return this.type_switcher = $("#type_switcher");
+    this.type_switcher = $("#type_switcher");
+    return this.type = $("#type");
   },
   bind_events: function() {
     this.gmaps_init();
     this.autocomplete_init();
-    return this.init_type_switcher();
+    this.init_type_switcher();
+    return this.prevent_enter();
   },
   gmaps_init: function() {
     var latlng, me, options;
-    latlng = new google.maps.LatLng(51.751724, -1.255284);
+    latlng = new google.maps.LatLng(54.66102679999999, -107.2491508);
     options = {
-      zoom: 2,
+      zoom: 3,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -109,7 +111,7 @@ create = {
         return me.update_map(ui.item.geocode.geometry);
       }
     });
-    this.gmap_input.bind("keydown", function(event) {
+    return this.gmap_input.bind("keydown", function(event) {
       if (event.keyCode === 13) {
         _this.geocode_lookup("address", _this.gmap_input.val(), true);
         return _this.gmap_input.autocomplete("disable");
@@ -117,11 +119,22 @@ create = {
         return _this.gmap_input.autocomplete("enable");
       }
     });
-    return {
-      init_type_switcher: function() {
-        return console.log(this.type_switcher.children());
+  },
+  init_type_switcher: function() {
+    var _this = this;
+    return this.type_switcher.children().click(function(e) {
+      var el;
+      el = $(e.currentTarget);
+      return _this.type.val(el.data("id"));
+    });
+  },
+  prevent_enter: function() {
+    return $(window).keydown(function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        return false;
       }
-    };
+    });
   }
 };
 

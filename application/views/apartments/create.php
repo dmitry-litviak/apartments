@@ -13,7 +13,7 @@
                         <div class="control-group">
                             <label class="control-label" for="descr">Description:</label>
                             <div class="controls">
-                                <textarea class="span12" type="text" id="descr" placeholder="Wonderfull apartment near metro station and starbucks" name="descr"></textarea>
+                                <textarea class="span12" type="text" id="descr" placeholder="Wonderful apartment near metro station and starbucks" name="descr"></textarea>
                             </div>
                         </div>
                         <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -33,7 +33,7 @@
                           <label class="control-label" for="cost">Type of apartment:</label>
                             <div class="btn-group" data-toggle="buttons-radio" id="type_switcher">
                              <?php foreach ($types as $type): ?>
-                                <button type="button" class="btn" data-id="<?php echo $type->id ?>"><?php echo $type->title ?></button>
+                                <button type="button" class="btn  <?php echo $type->id == 1 ? 'active' : '' ?>" data-id="<?php echo $type->id ?>"><?php echo $type->title ?></button>
                              <?php endforeach; ?>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
 
                         <input name="lat" id="lat" type="hidden" value="">
                         <input name="lng" id="lng" type="hidden" value="">
-                        <input name="type_id" id="type" type="hidden" value="">
+                        <input name="type_id" id="type" type="hidden" value="1">
 <!--                        <div class="control-group">
                             <label class="control-label" for="lat">Latitude:</label>
                             <div class="controls">
@@ -68,7 +68,6 @@
                                 <input class="span12" name="lng" type="text" value="" readonly>
                             </div>
                         </div>-->
-                        <a id="reset" href="#" style="display:none;">Reset Marker</a>
                     </div>
                 </div>
             </fieldset>

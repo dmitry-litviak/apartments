@@ -125,7 +125,7 @@ Kohana::modules(array(
          'mailer'     => MODPATH.'mailer',       // Email sending
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	// 'image'      => MODPATH.'image',      // Image manipulation
+	 'image'      => MODPATH.'image',      // Image manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation

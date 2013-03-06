@@ -12,19 +12,21 @@ create =
     @map           = undefined
     @marker        = undefined
     @type_switcher = $("#type_switcher") 
+    @type          = $("#type") 
     
   bind_events: ->
     do @gmaps_init
     do @autocomplete_init
     do @init_type_switcher
+    do @prevent_enter
   
   # move the marker to a new position, and center the map on it
   # initialise the google maps objects, and add listeners
   gmaps_init: ->
     # center of the universe
-    latlng = new google.maps.LatLng(51.751724, -1.255284)
+    latlng = new google.maps.LatLng(54.66102679999999, -107.2491508)
     options =
-      zoom: 2
+      zoom: 3
       center: latlng
       mapTypeId: google.maps.MapTypeId.ROADMAP
     me = @
@@ -139,14 +141,19 @@ create =
       else
         # re-enable if previously disabled above
         @gmap_input.autocomplete "enable"
-    
+        
     
   #not map code
-    init_type_switcher: ->
-      console.log @type_switcher.children()
-#      @remove_buttons.click (e) =>
-#        el = $(e.currentTarget)
+  init_type_switcher: ->
+    @type_switcher.children().click (e) =>
+      el = $(e.currentTarget)
+      @type.val el.data("id")
       
- 
+  prevent_enter: ->
+    $(window).keydown (event) ->
+      if event.keyCode is 13
+        event.preventDefault()
+        false
+     
 $(document).ready ->
   do create.init

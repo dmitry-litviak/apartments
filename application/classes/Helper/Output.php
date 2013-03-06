@@ -82,10 +82,10 @@ class Helper_Output
             }
         }
         
-        public static function getAvatar($user)
+        public static function get_apartment($apartment, $type = "")
         {
-            if ($user->user_profile->avatar) {
-                return URL::site(Kohana::$config->load('config')->get('user_files') . $user->id . '/avatar/' . $user->user_profile->avatar);
+            if ($apartment->img) {
+                return URL::site(Kohana::$config->load('config')->get('apartments_files') . $apartment->id . '/photos/' . $type . $apartment->img);
             } else {
                 return URL::site('img/icon-no-image-512.png');
             }

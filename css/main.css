@@ -87,3 +87,10 @@ body {
 #gmaps-error {
   color: #cc0000;
 }
+
+.bordered {
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
