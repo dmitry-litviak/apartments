@@ -94,3 +94,10 @@ body {
     margin-bottom: 10px;
     border-radius: 10px;
 }
+.bordered-img {
+    border: 4px solid #e5e5e5;
+}
+
+.hr-thin {
+    margin: 10px 0;
+}
