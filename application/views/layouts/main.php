@@ -28,6 +28,7 @@
               <hr>
               <?php echo View::factory('layouts/partials/footer')->render(); ?>
         </div>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
         <?php echo Helper_Output::renderJs(); ?>
     </body>
 </html>

@@ -1,0 +1,1 @@
+<h2>Here will be list of apartments</h2>
