@@ -21,10 +21,10 @@ class Controller_User extends My_Layout_User_Logged_Controller {
 	{
         Helper_Mainmenu::setActiveItem('profile');
         Helper_Output::factory()->link_css('datepicker')
+                                ->link_css('bootstrap.fileupload.min')
                                 ->link_js('libs/bootstrap-datepicker')
                                 ->link_js('libs/jquery.ui.widget')
-                                ->link_js('libs/jquery.iframe-transport')
-                                ->link_js('libs/jquery.fileupload')
+                                ->link_js('libs/bootstrap.fileupload.min')
                                 ->link_js('libs/jquery.validate.min')
                                 ->link_js('users/save')
                                 ;
@@ -35,12 +35,24 @@ class Controller_User extends My_Layout_User_Logged_Controller {
 	}
         
     public function action_save()
-	{
+    {
         if ($this->request->post())
         {
             try
             {
                 ORM::factory('User_Profile')->update_profile($this->request->post('profile'), array_keys($this->request->post('profile')), $this->logged_user->user_profile->id);
+                if ($_FILES['avatar']['tmp_name']) {
+                    $place_upload_dir = Kohana::$config->load('config')->get('user_files') . $this->logged_user->id . '/avatar/';
+                    Helper_Output::clear_dir($place_upload_dir);
+                    if(!is_dir($place_upload_dir))
+                        mkdir($place_upload_dir, 0777, true);
+                    $name   = basename(md5($_FILES['avatar']['name'].time())). '.' .pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+                    $target = $place_upload_dir . $name;
+                    move_uploaded_file($_FILES['avatar']['tmp_name'], $target);
+                    $image_small = Image::factory($target)->resize(265, 265);
+                    $image_small->save($place_upload_dir . 'small_' . $name);
+                    ORM::factory('User_Profile')->update_profile(array('avatar' => $name), array('avatar'), $this->logged_user->user_profile->id);
+                }
                 Helper_Alert::set_flash('Profile has been successfully updated');
             }
             catch (ORM_Validation_Exception $e)
@@ -51,58 +63,6 @@ class Controller_User extends My_Layout_User_Logged_Controller {
         }
 
         $this->redirect('user/profile');
-	}
-        
-        
-    public function action_request_callback()
-    {
-        if($this->request->is_ajax())
-        {
-            $res = Library_Mail::factory()->setFrom(array($this->logged_user->email => $this->logged_user->getFullName()))
-                                          ->setSubject('Request Callback')
-                                          ->setView('mailer/service/mail', $this->logged_user)
-                                          ->send();
-
-            Helper_Jsonresponse::render_json('success', null, $res);
-
-        }else{
-            $this->response->status(404);
-        }
-        #$this->redirect('user/contact');
     }
-
-    //need simple action for add ssl secure protocol
-    public function action_send_secure_message()
-    {
-        try
-        {
-            ORM::factory('User_Message')->save_message($this->request->post('message'));
-            Helper_Alert::set_flash('Was send');
-        }
-        catch (ORM_Validation_Exception $e)
-        {
-            Helper_Alert::setStatus('error');
-            Helper_Alert::set_flash($e->errors('User_Message'));
-        }
-        $this->redirect('user/contact');
-    }
-        
-//        public function action_test(){
-//                Mailer::factory('Service')->request(array(
-//                'user'     => array(
-//                        'email'         => $this->logged_user->email,
-//                        'user_fullname' => $this->logged_user->getFullName(),
-//                    )
-//                ));
-//                
-//                $res = Library_Mail::factory()->setFrom(array($this->logged_user->email => $this->logged_user->getFullName()))
-//                                       ->setSubject('Request Callback')
-//                                       ->setView('mailer/service/mail', $this->logged_user)
-//                                       ->send();
-//                
-//                               Helper_Jsonresponse::render_json('success', null, $res);
-//                
-//        }
-        
 
 } // End User Controller

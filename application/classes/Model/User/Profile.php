@@ -18,24 +18,6 @@ class Model_User_Profile extends ORM {
                     ),
             );
     }
-    
-    public function filters()
-    {
-            return array(
-                'p_issue_date' => array(
-                    array('strtotime')
-                ),
-                'p_expiry_date' => array(
-                    array('strtotime')
-                ),
-                'avatar'=> array(
-                        array('Helper_Uploader::replaceAvatarImage', array(':value', ':model')),
-                ),
-                'dob'=> array(
-                        array('Helper_Output::timestampForDB'),
-                ),
-            );
-    }
         
     public function create_profile($values, $expected)
     {

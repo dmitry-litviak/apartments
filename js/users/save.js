@@ -11,7 +11,6 @@ user = {
   },
   bindEvents: function() {
     var picker;
-    this.initUploader();
     this.initValidation();
     picker = $('.date').datepicker();
     return picker.on('changeDate', function(ev) {
@@ -36,22 +35,6 @@ user = {
       },
       highlight: function(label) {
         return $(label).closest(".control-group").addClass("error");
-      }
-    });
-  },
-  initUploader: function() {
-    var _this = this;
-    return new uploader({
-      selector: $('input[type=file]'),
-      addCallback: function(e, data) {
-        return $('#avatar-img').attr('src', SYS.spinerUrl);
-      },
-      doneCallback: function(e, data) {
-        $('#avatar-img').attr('src', SYS.baseUrl + data.result.data);
-        return $('#avatar').val(data.result.data);
-      },
-      progressCallback: function(progress) {
-        return $(".upload-progress").text("uploading... " + progress + "%");
       }
     });
   }

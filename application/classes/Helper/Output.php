@@ -101,10 +101,15 @@ class Helper_Output
             }
         }
         
-        public static function getAvatar($user)
+        public static function get_avatar($user)
         {
             if ($user->user_profile->avatar) {
-                return URL::site(Kohana::$config->load('config')->get('user_files') . $user->id . '/avatar/' . $user->user_profile->avatar);
+                $file  = Kohana::$config->load('config')->get('user_files') . $user->id . '/avatar/' . $user->user_profile->avatar;
+                if (file_exists($file)) {
+                    return URL::site($file);
+                } else {
+                    return URL::site('img/icon-no-image-512.png');
+                }
             } else {
                 return URL::site('img/icon-no-image-512.png');
             }
@@ -124,6 +129,14 @@ class Helper_Output
                 }
             }
             return $arr;
+        }
+        
+        public static function clear_dir( $dir ) {
+            if ($objs = glob($dir."/*")) {
+                foreach($objs as $obj) {
+                    is_dir($obj) ? $this->clearDir($obj) : unlink($obj);
+                }
+            }
         }
         
         
