@@ -17,9 +17,9 @@
                             </div>
                         </div>
                         <div class="fileupload fileupload-new" data-provides="fileupload">
-                            <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+                            <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"><img src="<?php echo URL::site('img/icon-no-image-512.png') ?>" /></div>
                             <div>
-                              <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="image" /></span>
+                                <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" name="image" /></span>
                               <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                             </div>
                         </div>
@@ -31,49 +31,43 @@
                         </div>
                         <div class="control-group">
                           <label class="control-label" for="cost">Type of apartment:</label>
-                            <div class="btn-group" data-toggle="buttons-radio">
+                            <div class="btn-group" data-toggle="buttons-radio" id="type_switcher">
                              <?php foreach ($types as $type): ?>
-                                <button type="button" class="btn"><?php echo $type->title ?></button>
+                                <button type="button" class="btn" data-id="<?php echo $type->id ?>"><?php echo $type->title ?></button>
                              <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
                     <div class="span6">
                         <div class="control-group">
+                            <label class="control-label" for="gmaps-input-address">Type address:</label>
+                            <div class="controls">
+                                <input id='gmaps-input-address' name="address" class="span12" placeholder='Start typing a place name...' type='text' name="" />
+                                <div id='gmaps-error'></div>
+                            </div>
+                        </div>
+                        <div class="control-group">
                             <label class="control-label">Map:</label>
                             <div class="controls">
-                                <div class="map_canvas"></div>
+                                <div id='gmaps-canvas' class="map_canvas"></div>
                             </div>
                         </div>
 
-                        <div class="control-group">
-                            <label class="control-label" for="geocomplete">Type address:</label>
-                            <div class="controls">
-                                <div class="input-append">
-                                    <input class="span12" id="geocomplete" type="text" placeholder="Type in an address">
-                                    <button id="find" class="btn" type="button">Find</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="control-group">
+                        <input name="lat" id="lat" type="hidden" value="">
+                        <input name="lng" id="lng" type="hidden" value="">
+                        <input name="type_id" id="type" type="hidden" value="">
+<!--                        <div class="control-group">
                             <label class="control-label" for="lat">Latitude:</label>
                             <div class="controls">
-                                <input class="span12" name="lat" type="text" value="">
+                                <input class="span12" name="lat" type="text" value="" readonly>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="lat">Longitude:</label>
                             <div class="controls">
-                                <input class="span12" name="lng" type="text" value="">
+                                <input class="span12" name="lng" type="text" value="" readonly>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="formatted_address">Address:</label>
-                            <div class="controls">
-                                <input class="span12" name="formatted_address" type="text" value="">
-                            </div>
-                        </div>
+                        </div>-->
                         <a id="reset" href="#" style="display:none;">Reset Marker</a>
                     </div>
                 </div>

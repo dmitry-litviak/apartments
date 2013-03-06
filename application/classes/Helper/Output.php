@@ -164,5 +164,21 @@ class Helper_Output
             return implode(", ", $times);
         }
         
+        public static function clean($post) {
+            $arr = $post;
+            foreach ($arr as &$value)
+            {
+                if (is_array($value)){
+                    $value = self::clean($value);
+                } else {
+                    if(!get_magic_quotes_gpc()) {
+                        $value = addslashes($value);
+                    }
+                    $value = strip_tags(htmlspecialchars(stripslashes($value)));
+                }
+            }
+            return $arr;
+        }
+        
         
 }
