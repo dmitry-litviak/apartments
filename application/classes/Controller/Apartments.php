@@ -9,7 +9,7 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
                         ->link_css('jquery-ui-1.8.16.custom')
                         ->link_js('libs/bootstrap.fileupload.min')
                         ->link_js('apartments/index');
-        $data['apartments'] = ORM::factory('Apartment')->find_all();
+        $data['apartments'] = ORM::factory('Apartment')->where('user_id', '=', $this->logged_user->id)->find_all();
         $this->setTitle('Apartments Page')
              ->view('apartments/index', $data)
              ->render();
