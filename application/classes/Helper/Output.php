@@ -131,11 +131,20 @@ class Helper_Output
             return $arr;
         }
         
-        public static function clear_dir( $dir ) {
+        public static function clear_dir($dir) {
             if ($objs = glob($dir."/*")) {
                 foreach($objs as $obj) {
                     is_dir($obj) ? $this->clearDir($obj) : unlink($obj);
                 }
+            }
+        }
+        
+        public static function get_status($status)
+        {
+            if ($status) {
+                return '<span class="label label-success">Approved</span>';
+            } else {
+                return '<span class="label label-important">In the process of approving by administrator</span>';
             }
         }
         

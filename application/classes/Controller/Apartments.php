@@ -5,6 +5,10 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
     public function action_index()
     {
         Helper_Mainmenu::setActiveItem('apartments');
+        Helper_Output::factory()->link_css('bootstrap.fileupload.min')
+                        ->link_css('jquery-ui-1.8.16.custom')
+                        ->link_js('libs/bootstrap.fileupload.min')
+                        ->link_js('apartments/index');
         $data['apartments'] = ORM::factory('Apartment')->find_all();
         $this->setTitle('Apartments Page')
              ->view('apartments/index', $data)
@@ -28,7 +32,7 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
             try {
                 $model->values($post);
                 $model->save();
-                if ($_FILES) {
+                if ($_FILES['image']['tmp_name']) {
                     $place_upload_dir = Kohana::$config->load('config')->get('apartments_files') . $model->id . '/photos/';
                     if(!is_dir($place_upload_dir))
                         mkdir($place_upload_dir, 0777, true);
@@ -51,6 +55,16 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
         $this->setTitle('Apartments Create Page')
              ->view('apartments/create', $data)
              ->render();
+    }
+    
+    public function action_delete() {
+        $apartment = ORM::factory('Apartment')->where('id', '=', $this->request->post('id'))->find();
+        if ($this->logged_user->id == $apartment->user_id) {
+            $apartment->delete();
+            Helper_Jsonresponse::render_json('success', '' , '');
+        } else {
+            Helper_Jsonresponse::render_json('error', '' , '');
+        }
     }
 
 } 
