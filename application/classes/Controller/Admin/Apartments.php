@@ -71,7 +71,6 @@ public function action_create()
                                 ->link_js('admin/apartments/create');
         if ($this->request->post()) { 
             $post = Helper_Output::clean($this->request->post());
-            $post['user_id'] = $this->logged_user->id;
             $model = ORM::factory('Apartment', $this->request->param('id'));
             try {
                 $model->values($post);
