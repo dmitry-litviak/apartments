@@ -1,4 +1,4 @@
-    <form class="form-actions" action="<?php echo URL::site('apartments/create') ?>" enctype="multipart/form-data" method="POST" id="form_create">
+    <form class="form-actions" action="<?php echo URL::site('admin/apartments/create') ?>" enctype="multipart/form-data" method="POST" id="form_create">
         <fieldset class="places">
             <legend>Create Apartment</legend>   
                 <div class="row-fluid">

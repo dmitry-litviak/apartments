@@ -33,7 +33,7 @@ index = {
       el = $(e.currentTarget);
       _this.modal.modal('hide');
       return $.ajax({
-        url: SYS.baseUrl + 'apartments/delete',
+        url: SYS.baseUrl + 'admin/apartments/delete',
         data: $.param({
           id: el.data('id')
         }),

@@ -1,5 +1,5 @@
 
-    <form class="form-actions" action="<?php echo URL::site('apartments/edit') ?>" enctype="multipart/form-data" method="POST">
+    <form class="form-actions" action="<?php echo URL::site('apartments/edit/' . $apartment->id ) ?>" id="form_edit" enctype="multipart/form-data" method="POST">
         <fieldset class="places">
             <legend>Edit Apartment</legend>   
                 <div class="row-fluid">
@@ -60,6 +60,6 @@
                     </div>
                 </div>
             </fieldset>
-        <input class="btn btn-large btn-primary pull-right" value="Edit" type="submit">
+        <input class="btn btn-large btn-primary pull-right" value="Save" type="submit">
     </form>
 

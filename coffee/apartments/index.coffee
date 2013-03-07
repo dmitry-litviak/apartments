@@ -25,7 +25,7 @@ index =
       el = $(e.currentTarget)
       @modal.modal('hide')
       $.ajax
-        url: SYS.baseUrl + 'apartments/delete'
+        url: SYS.baseUrl + 'admin/apartments/delete'
         data: $.param({id : el.data('id')})
         type: 'POST'
         dataType: 'json'

@@ -11,7 +11,13 @@ return array(
                                                       'url'    	=> 'admin/users',
                                                       'icon'    => 'icon-user',
                                                       'status'  => 0,
-                                                      ),               
+                                                      ),
+                                      "apartments"       => array(
+                                                      'title' 	=> 'Apartments',
+                                                      'url'    	=> 'admin/apartments',
+                                                      'icon'    => 'icon-home',
+                                                      'status'  => 0,
+                                                        ),    
 //                                      "blog"   => array(
 //                                                      'title' 	=> 'Blog',
 //                                                      'url'    	=> 'admin/blog',
