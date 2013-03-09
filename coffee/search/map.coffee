@@ -24,7 +24,7 @@ map =
     do @initialize_map
     
   initialize_map: ->
-    @jmap.css('height', innerHeight/1.2)
+    @jmap.css('height', innerHeight/1.6)
     unless @lat_input.val() == "" and @lng_input.val() == ""
       @map_options.center = new google.maps.LatLng(@lat_input.val(), @lng_input.val())  
     @map = document.getElementById(@map_name)

@@ -26,7 +26,7 @@ map = {
     return this.initialize_map();
   },
   initialize_map: function() {
-    this.jmap.css('height', innerHeight / 1.2);
+    this.jmap.css('height', innerHeight / 1.6);
     if (!(this.lat_input.val() === "" && this.lng_input.val() === "")) {
       this.map_options.center = new google.maps.LatLng(this.lat_input.val(), this.lng_input.val());
     }
