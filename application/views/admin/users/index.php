@@ -1,5 +1,4 @@
-<div class="hero-unit">
-    <table class="table table-condensed">
+    <table class="table table-striped">
         <thead>
                 <tr>
                         <th>#</th>
@@ -13,5 +12,4 @@
 </table>
 <div class="buttons">
      <a href="<?php echo URL::base() ?>admin/users/create" class="btn btn-primary" type="button">Create New User</a>
-</div>
 </div>

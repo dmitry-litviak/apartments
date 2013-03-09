@@ -11,6 +11,7 @@ class My_Layout_Admin_Controller extends My_Layout_Controller
                 
                 $this->logged_user = $auth->get_user();
                 Helper_Adminsitebar::init(Kohana::$config->load('admin_menu')->as_array());
+                Helper_Output::factory()->link_css('admin');
                 
 		$this->template = View::factory('layouts/admin');
                 

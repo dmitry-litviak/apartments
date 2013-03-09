@@ -1,5 +1,4 @@
-<div class="hero-unit">
-    <table class="table table-condensed">
+    <table class="table table-striped">
         <thead>
                 <tr>
                         <th>#</th>
@@ -16,8 +15,7 @@
 <div class="buttons">
      <a href="<?php echo URL::site('admin/apartments/create') ?>" class="btn btn-primary" type="button">Create New Apartment</a>
 </div>
-</div>
-
+<hr>
 <span class="label label-important">Note: click on status label to change the status of apartment</span>
 
 <!-- Modal -->

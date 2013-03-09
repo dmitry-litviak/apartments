@@ -14,6 +14,7 @@ class My_Layout_User_Controller extends My_Layout_Controller
                                         ->link_js('libs/bootstrap-dropdown')
                                         ->link_js('libs/bootstrap-collapse')
                                         ->link_js('application')
+                                        ->link_css('main')
                                         ;
 	}
         

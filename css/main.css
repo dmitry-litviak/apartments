@@ -120,3 +120,7 @@ label.error {
 .small-image{
     height: 64px;
 }
+
+.justified {
+    text-align: justify;
+}
