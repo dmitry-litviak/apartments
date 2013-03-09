@@ -23,7 +23,7 @@ map =
     do @initialize_map
     
   initialize_map: ->
-    $(@map).css('height', innerHeight/2)
+    $(@map).css('height', innerHeight/1.2)
     unless @lat_input.val() == "" and @lng_input.val() == ""
       @map_options.center = new google.maps.LatLng(@lat_input.val(), @lng_input.val())  
     console.log @map_options

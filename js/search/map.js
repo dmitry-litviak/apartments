@@ -25,7 +25,7 @@ map = {
     return this.initialize_map();
   },
   initialize_map: function() {
-    $(this.map).css('height', innerHeight / 2);
+    $(this.map).css('height', innerHeight / 1.2);
     if (!(this.lat_input.val() === "" && this.lng_input.val() === "")) {
       this.map_options.center = new google.maps.LatLng(this.lat_input.val(), this.lng_input.val());
     }
