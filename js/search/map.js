@@ -7,30 +7,46 @@ map = {
     return this.bind_events();
   },
   detect_elements: function() {
-    this.map = document.getElementById("map_canvas");
-    return this.map_options = {
+    this.gmap_input = $("#gmaps-input-address");
+    this.gmap_error = $("#gmaps-error");
+    this.lat_input = $("#lat");
+    this.lng_input = $("#lng");
+    this.map_name = "gmaps-canvas";
+    this.map_options = {
       zoom: 8,
-      center: new google.maps.LatLng(-34.397, 150.644),
+      center: new google.maps.LatLng(54.66102679999999, -107.2491508),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+    this.geocoder = void 0;
+    this.map = void 0;
+    return this.marker = void 0;
   },
   bind_events: function() {
     return this.initialize_map();
   },
   initialize_map: function() {
-    var contentString, infowindow, marker;
-    map = new google.maps.Map(this.map, this.map_options);
-    contentString = "<div id=\"content\">Тут всё то про что должно быть рассказано</div>";
-    infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    marker = new google.maps.Marker({
-      position: new google.maps.LatLng(-34.397, 150.644),
-      map: map,
-      title: "Uluru (Ayers Rock)"
-    });
-    return google.maps.event.addListener(marker, "click", function() {
-      return infowindow.open(map, marker);
+    $(this.map).css('height', innerHeight / 2);
+    if (!(this.lat_input.val() === "" && this.lng_input.val() === "")) {
+      this.map_options.center = new google.maps.LatLng(this.lat_input.val(), this.lng_input.val());
+    }
+    console.log(this.map_options);
+    this.map = document.getElementById(this.map_name);
+    return map = new google.maps.Map(this.map, this.map_options);
+  },
+  get_markers: function() {
+    var _this = this;
+    return $.ajax({
+      url: SYS.baseUrl + 'search/get_markers',
+      data: $.param({
+        id: el.data('id')
+      }),
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        if (res.text = "success") {
+          return $('.media#' + el.data('id')).remove();
+        }
+      }
     });
   }
 };

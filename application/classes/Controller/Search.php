@@ -10,16 +10,22 @@ class Controller_Search extends My_Layout_User_Logged_Controller {
 
     public function action_index()
     {
+        Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
+                                ->link_js('libs/jquery.validate.min')
+                                ->link_js('search/index')
+                                ;
         $data['types'] = ORM::factory('Type')->find_all();
         $this->setTitle('Search Page')
             ->view('search/index', $data)
             ->render();
     }
-    public function action_show_map()
+    public function action_map()
     {
-        Helper_Output::factory()->link_js('search/map');
+        Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
+                                ->link_js('search/map');
+//        Helper_Main::print_flex($_POST);die;
         $this->setTitle('Map Page')
-            ->view('search/map')
+            ->view('search/map', $_POST)
             ->render();
     }
 

@@ -73,7 +73,6 @@ body {
 
 #gmaps-canvas {
   height: 400px;
-  
   border: 1px solid #999;
   -moz-box-shadow:    0px 0px 5px #ccc;
   -webkit-box-shadow: 0px 0px 5px #ccc;
@@ -123,4 +122,8 @@ label.error {
 
 .justified {
     text-align: justify;
+}
+
+.btn-group>.btn:hover, .btn-group>.btn:focus, .btn-group>.btn:active, .btn-group>.btn.active {
+z-index: 0;
 }
