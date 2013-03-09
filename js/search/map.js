@@ -12,6 +12,7 @@ map = {
     this.lat_input = $("#lat");
     this.lng_input = $("#lng");
     this.map_name = "gmaps-canvas";
+    this.jmap = $("#gmaps-canvas");
     this.map_options = {
       zoom: 8,
       center: new google.maps.LatLng(54.66102679999999, -107.2491508),
@@ -25,11 +26,10 @@ map = {
     return this.initialize_map();
   },
   initialize_map: function() {
-    $(this.map).css('height', innerHeight / 1.2);
+    this.jmap.css('height', innerHeight / 1.2);
     if (!(this.lat_input.val() === "" && this.lng_input.val() === "")) {
       this.map_options.center = new google.maps.LatLng(this.lat_input.val(), this.lng_input.val());
     }
-    console.log(this.map_options);
     this.map = document.getElementById(this.map_name);
     return map = new google.maps.Map(this.map, this.map_options);
   },

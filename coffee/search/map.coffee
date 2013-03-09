@@ -9,6 +9,7 @@ map =
     @lat_input     = $("#lat")
     @lng_input     = $("#lng")
     @map_name      = "gmaps-canvas"
+    @jmap          = $("#gmaps-canvas")
     @map_options = 
       zoom: 8
       center: new google.maps.LatLng(54.66102679999999, -107.2491508)
@@ -23,10 +24,9 @@ map =
     do @initialize_map
     
   initialize_map: ->
-    $(@map).css('height', innerHeight/1.2)
+    @jmap.css('height', innerHeight/1.2)
     unless @lat_input.val() == "" and @lng_input.val() == ""
       @map_options.center = new google.maps.LatLng(@lat_input.val(), @lng_input.val())  
-    console.log @map_options
     @map = document.getElementById(@map_name)
     map = new google.maps.Map(@map, @map_options)
     
