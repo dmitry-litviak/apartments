@@ -1,6 +1,9 @@
 <legend>Apartments list</legend>
+<div class="center">
+<a class="btn btn-large btn-primary" href="<?php echo URL::site('apartments/create') ?>">Create Apartment</a>
+</div>
 <?php if (!count($apartments)): ?>
-    <h5>You don't have apartments. To create them click "Create" at the bottom<h5>
+    <h5>You don't have apartments. To create them click "Create" at the top<h5>
 <?php else: ?>
     <?php foreach ($apartments as $apartment): ?>
         <div class="media bordered" id="<?php echo $apartment->id ?>">
@@ -42,10 +45,6 @@
         </div>
     <?php endforeach; ?>
 <?php endif; ?>
-<br>
-<div class="center">
-<a class="btn btn-large btn-primary" href="<?php echo URL::site('apartments/create') ?>">Create Apartment</a>
-</div>
 
 <!-- Modal -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -23,9 +23,9 @@
                 </div>
                 <div class="control-group">
                         <label class="control-label">How many bedrooms?</label>
-                        <div class="btn-group" data-toggle="buttons-radio" id="type_switcher">
+                        <div class="btn-group" data-toggle="buttons-checkbox" id="type_switcher">
                          <?php foreach ($types as $type): ?>
-                            <button type="button" class="btn  <?php echo $type->id == 1 ? 'active' : '' ?>" data-id="<?php echo $type->id ?>"><?php echo $type->title ?></button>
+                            <button type="button" class="btn" value="<?php echo $type->id ?>"><?php echo $type->title ?></button>
                          <?php endforeach; ?>
                         </div>
                 </div>
@@ -36,7 +36,7 @@
                 </div>
                 <input name="lat" id="lat" type="hidden" value="">
                 <input name="lng" id="lng" type="hidden" value="">
-                <input name="type_id" id="type" type="hidden" value="1">
+                <!--<input name="type_id" id="type" type="hidden" value="1">-->
                 <div id='gmaps-error'></div>
             </div>
             <div class="span6 justified">

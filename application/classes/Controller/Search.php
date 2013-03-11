@@ -23,10 +23,25 @@ class Controller_Search extends My_Layout_User_Logged_Controller {
     {
         Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
                                 ->link_js('search/map');
-//        Helper_Main::print_flex($_POST);die;
+        $_POST['type_id'] = json_encode($_POST['type_id']);
         $this->setTitle('Map Page')
             ->view('search/map', $_POST)
             ->render();
+    }
+    
+    public function action_get_markers()
+    {
+        $post = Helper_Output::clean($this->request->post());
+        $apartments = ORM::factory('Apartment')->where('lat', '>', $post['options']['lat'] - 2)
+                                               ->where('lat', '<', $post['options']['lat'] + 2)
+                                               ->where('lng', '>', $post['options']['lng'] - 2)
+                                               ->where('lng', '<', $post['options']['lng'] + 2)
+                                               ->find_all()->as_array();
+        $data = array();
+        foreach ($apartments as $apartment) {
+            $data[] = $apartment->as_array();
+        }
+        Helper_Jsonresponse::render_json('success', "", $data);
     }
 
 }

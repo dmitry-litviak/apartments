@@ -20,9 +20,10 @@ index =
 #    do @gmaps_init
     do @autocomplete_init
     #not map:
-    do @init_type_switcher
+    do @form_submiter
     do @prevent_enter
     do @init_validate
+#    do @init_type_switcher
   
   update_ui: (address, latLng) ->
     @gmap_input.autocomplete "close"
@@ -80,10 +81,20 @@ index =
         
     
   #not map code
-  init_type_switcher: ->
-    @type_switcher.children().click (e) =>
-      el = $(e.currentTarget)
-      @type.val el.data("id")
+#  init_type_switcher: ->
+#    @type_switcher.children().click (e) =>
+#      console.log $(".btn-group .btn.active")
+      
+  form_submiter: ->
+    me = @
+    @form_search.submit =>
+      if @form_search.valid()
+        $(".btn-group .btn.active").each ->
+          input = document.createElement("input")
+          input.setAttribute "type", "hidden"
+          input.setAttribute "name", "type_id[]"
+          input.setAttribute "value", @value
+          me.form_search.append input
       
   prevent_enter: ->
     $(window).keydown (event) ->

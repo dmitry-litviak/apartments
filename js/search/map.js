@@ -9,42 +9,63 @@ map = {
   detect_elements: function() {
     this.gmap_input = $("#gmaps-input-address");
     this.gmap_error = $("#gmaps-error");
-    this.lat_input = $("#lat");
-    this.lng_input = $("#lng");
+    this.search_options = {
+      lat: $("#lat").val(),
+      lng: $("#lng").val(),
+      to: $("#to").val(),
+      from: $("#from").val(),
+      type_id: $("#type_id").val()
+    };
     this.map_name = "gmaps-canvas";
     this.jmap = $("#gmaps-canvas");
     this.map_options = {
-      zoom: 8,
+      zoom: 10,
+      maxZoom: 18,
+      minZoom: 10,
       center: new google.maps.LatLng(54.66102679999999, -107.2491508),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     this.geocoder = void 0;
     this.map = void 0;
-    return this.marker = void 0;
+    return this.markers = [];
   },
   bind_events: function() {
     return this.initialize_map();
   },
   initialize_map: function() {
     this.jmap.css('height', innerHeight / 1.6);
-    if (!(this.lat_input.val() === "" && this.lng_input.val() === "")) {
-      this.map_options.center = new google.maps.LatLng(this.lat_input.val(), this.lng_input.val());
+    if (!(this.search_options.lat === "" && this.search_options.lng === "")) {
+      this.map_options.center = new google.maps.LatLng(this.search_options.lat, this.search_options.lng);
     }
-    this.map = document.getElementById(this.map_name);
-    return map = new google.maps.Map(this.map, this.map_options);
+    map = document.getElementById(this.map_name);
+    this.map = new google.maps.Map(map, this.map_options);
+    return this.get_markers();
   },
   get_markers: function() {
-    var _this = this;
+    var me,
+      _this = this;
+    me = this;
     return $.ajax({
       url: SYS.baseUrl + 'search/get_markers',
       data: $.param({
-        id: el.data('id')
+        options: me.search_options
       }),
       type: 'POST',
       dataType: 'json',
       success: function(res) {
+        var markerClusterer;
         if (res.text = "success") {
-          return $('.media#' + el.data('id')).remove();
+          console.log(res);
+          $.each(res.data, function(i, item) {
+            return me.markers.push(new google.maps.Marker({
+              position: new google.maps.LatLng(item.lat, item.lng)
+            }));
+          });
+          return markerClusterer = new MarkerClusterer(me.map, me.markers, {
+            maxZoom: 15,
+            gridSize: 50,
+            styles: null
+          });
         }
       }
     });

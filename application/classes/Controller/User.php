@@ -38,9 +38,10 @@ class Controller_User extends My_Layout_User_Logged_Controller {
     {
         if ($this->request->post())
         {
+            $post = Helper_Output::clean($this->request->post());
             try
             {
-                ORM::factory('User_Profile')->update_profile($this->request->post('profile'), array_keys($this->request->post('profile')), $this->logged_user->user_profile->id);
+                ORM::factory('User_Profile')->update_profile($post['profile'], array_keys($post['profile']), $this->logged_user->user_profile->id);
                 if ($_FILES['avatar']['tmp_name']) {
                     $place_upload_dir = Kohana::$config->load('config')->get('user_files') . $this->logged_user->id . '/avatar/';
                     Helper_Output::clear_dir($place_upload_dir);

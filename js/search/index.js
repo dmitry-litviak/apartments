@@ -20,7 +20,7 @@ index = {
   },
   bind_events: function() {
     this.autocomplete_init();
-    this.init_type_switcher();
+    this.form_submiter();
     this.prevent_enter();
     return this.init_validate();
   },
@@ -90,12 +90,21 @@ index = {
       }
     });
   },
-  init_type_switcher: function() {
-    var _this = this;
-    return this.type_switcher.children().click(function(e) {
-      var el;
-      el = $(e.currentTarget);
-      return _this.type.val(el.data("id"));
+  form_submiter: function() {
+    var me,
+      _this = this;
+    me = this;
+    return this.form_search.submit(function() {
+      if (_this.form_search.valid()) {
+        return $(".btn-group .btn.active").each(function() {
+          var input;
+          input = document.createElement("input");
+          input.setAttribute("type", "hidden");
+          input.setAttribute("name", "type_id[]");
+          input.setAttribute("value", this.value);
+          return me.form_search.append(input);
+        });
+      }
     });
   },
   prevent_enter: function() {
