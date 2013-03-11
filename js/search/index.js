@@ -48,7 +48,7 @@ index = {
         }
       } else {
         if (type === "address") {
-          me.gmap_error.html("Sorry! We couldn't find " + value + ". Try a different search term, or click the map.");
+          me.gmap_error.html("Sorry! We couldn't find " + value + ". Try a different search term.");
           return me.gmap_error.show();
         } else {
           me.gmap_error.html("Woah... that's pretty remote! You're going to have to manually enter a place name.");

@@ -7,6 +7,7 @@
                     <label class="control-label" for="search">Where do you want to live?</label>
                     <div class="controls">
                             <input type="text" class="span12" name='search' id="search">
+                            <div id='gmaps-error'></div>
                     </div>
                 </div>
                 <div class="control-group">
@@ -37,7 +38,6 @@
                 <input name="lat" id="lat" type="hidden" value="">
                 <input name="lng" id="lng" type="hidden" value="">
                 <!--<input name="type_id" id="type" type="hidden" value="1">-->
-                <div id='gmaps-error'></div>
             </div>
             <div class="span6 justified">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

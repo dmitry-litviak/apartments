@@ -23,7 +23,9 @@ class Controller_Search extends My_Layout_User_Logged_Controller {
     {
         Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
                                 ->link_js('search/map');
-        $_POST['type_id'] = json_encode($_POST['type_id']);
+        if (!empty($_POST['type_id'])) {
+            $_POST['type_id'] = json_encode($_POST['type_id']);
+        }
         $this->setTitle('Map Page')
             ->view('search/map', $_POST)
             ->render();
