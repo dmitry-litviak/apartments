@@ -4,7 +4,7 @@ class Controller_Favorites extends My_Layout_User_Logged_Controller {
 
     public function action_index()
     {
-        Helper_Mainmenu::setActiveItem('apartments');
+        Helper_Mainmenu::setActiveItem('favorites');
         Helper_Output::factory()
                         ->link_css('jquery-ui-1.8.16.custom');
         $data['apartments'] = $this->logged_user->apartments->find_all();
