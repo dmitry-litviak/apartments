@@ -22,10 +22,13 @@ class Controller_Search extends My_Layout_User_Logged_Controller {
     public function action_map()
     {
         Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
+                                ->link_js('libs/underscore')
+                                ->link_js('public/assets/workspace')
                                 ->link_js('search/map');
         if (!empty($_POST['type_id'])) {
             $_POST['type_id'] = json_encode($_POST['type_id']);
         }
+//        var_dump($_POST['type_id']);die;
         $this->setTitle('Map Page')
             ->view('search/map', $_POST)
             ->render();
@@ -33,17 +36,51 @@ class Controller_Search extends My_Layout_User_Logged_Controller {
     
     public function action_get_markers()
     {
-        $post = Helper_Output::clean($this->request->post());
-        $apartments = ORM::factory('Apartment')->where('lat', '>', $post['options']['lat'] - 2)
+        $post  = Helper_Output::clean($this->request->post());
+        $types = json_decode($this->request->post('options.type_id'));
+        $apartments = DB::select('id', 'lat', 'lng')->from('apartments')
+                                               ->where('lat', '>', $post['options']['lat'] - 2)
                                                ->where('lat', '<', $post['options']['lat'] + 2)
                                                ->where('lng', '>', $post['options']['lng'] - 2)
-                                               ->where('lng', '<', $post['options']['lng'] + 2)
-                                               ->find_all()->as_array();
-        $data = array();
-        foreach ($apartments as $apartment) {
-            $data[] = $apartment->as_array();
+                                               ->where('lng', '<', $post['options']['lng'] + 2);
+        if (!empty($post['options']['from'])) {
+            $apartments = $apartments->where('cost', '>', $post['options']['from']);
         }
-        Helper_Jsonresponse::render_json('success', "", $data);
+        if (!empty($post['options']['to'])) {
+            $apartments = $apartments->where('cost', '<', $post['options']['to']);
+        }
+        if (!empty($types)) {
+            $apartments = $apartments->where_open();
+            foreach ($types as $type_id) {
+                $apartments = $apartments->or_where('type_id', '=', $type_id);
+            }
+            $apartments = $apartments->where_close();
+        }
+        $apartments = $apartments->where('status', '=', 1)->execute()->as_array();
+        Helper_Jsonresponse::render_json('success', "", $apartments);
+    }
+    
+    public function action_get_apartment()
+    {
+        $apartment           = ORM::factory('Apartment', $this->request->post('id'));
+        $apartment->img      = Helper_Output::get_apartment($apartment, 'small_');
+        $apartment->type_id  = $apartment->type->title;
+        $fav = DB::select()->from('apartments_users')->where('apartment_id', '=', $apartment->id)->where('user_id', '=', $this->logged_user->id)->execute()->get('id');
+        Helper_Jsonresponse::render_json('success', "", array( "ap"  => $apartment->as_array(),
+                                                               "fav" => array("status"  => $fav,
+                                                                              "user_id" => $this->logged_user->id
+                                                                             )
+                                                             ));
+    }
+    
+    public function action_set_favorite()
+    {
+//        ORM::factory("Favorite")->set('apartment_id', $this->request->post('id'))
+//                                ->set('user_id', $this->request->post('user_id'))
+//                                ->save();
+        DB::insert('apartments_users', array('apartment_id', 'user_id'))->values(array($this->request->post('id'), $this->request->post('user_id')))->execute();
+//        $this->logged_user->add('favorites', ORM::factory('Apartment', $this->request->post('id')));
+        Helper_Jsonresponse::render_json('success', "", "");
     }
 
 }

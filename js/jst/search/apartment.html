@@ -1,14 +1,23 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object bordered-img" src="<%= item.ap.img %>" height="128" width="128">
+        </a>
+        <div class="span5">
+            <h4><%= item.ap.title %></h4>
+            <div>
+                <strong>Description:</strong>
+                <%= item.ap.descr %>
+            </div>
+            <div>
+                <strong>Address:</strong>
+                <%= item.ap.address %>
+            </div>
+            <div>
+                <strong>Cost:</strong>
+                <span class="label label-success">$<%= item.ap.cost %></span>
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite(<%= item.ap.id %>, this, <%= item.fav.user_id %>)" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
+            </div>
+        </div>
+    </div>
