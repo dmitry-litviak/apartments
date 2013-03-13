@@ -5,6 +5,8 @@ class Controller_Session extends My_Layout_User_Controller {
     public function action_login()
     {
         Helper_Mainmenu::setActiveItem('sign_in');
+        Helper_Output::factory()->link_js('libs/jquery.validate.min')
+                                ->link_js('session/login');
         if (Auth::instance()->logged_in()) {
             $this->redirect('home/index');
         } else {
@@ -24,20 +26,18 @@ class Controller_Session extends My_Layout_User_Controller {
     public function action_create()
     {
         Helper_Mainmenu::setActiveItem('create_account');
+        Helper_Output::factory()->link_js('libs/jquery.validate.min')
+                                ->link_js('session/register');
         if ($this->request->post()) {
             $model = ORM::factory('User');
-            $profile = array(
-                'first_name' => $this->request->post('first_name'),
-                'last_name'  => $this->request->post('last_name')
-            );
+            $post = Helper_Output::clean($this->request->post());
             try {
-                $model->values(array(
-                    'email'              => $this->request->post('email'),
-                    'password'           => $this->request->post('password'),
-                    'user_profile_id'    => ORM::factory('User_Profile')->create_profile($profile, array('first_name', 'last_name'))
-                ));
+                $model->values($post);
                 $model->save();
                 $model->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
+                if ($post['type_id'] == 2) {
+                    $model->add('roles', ORM::factory('Role')->where('name', '=', 'owner')->find());
+                }
                 Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
                 $this->redirect('/');
             }

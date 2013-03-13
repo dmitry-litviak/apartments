@@ -25,16 +25,9 @@ class Controller_Admin_Users extends My_Layout_Admin_Controller {
     {
         if ($this->request->post()) {
             $model = ORM::factory('User');
-            $profile = array(
-                                'first_name' => $this->request->post('first_name'),
-                                'last_name'   => $this->request->post('last_name')
-                            );
+            $post = Helper_Output::clean($this->request->post());
             try {
-                $model->values(array(
-                                        'email'              => $this->request->post('email'),
-                                        'password'           => $this->request->post('password'),
-                                        'user_profile_id'    => ORM::factory('User_Profile')->create_profile($profile, array('first_name', 'last_name'))
-                                    ));
+                $model->values($post);
                 $model->save();
                 $model->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
                 $this->redirect('admin/users');
@@ -53,20 +46,13 @@ class Controller_Admin_Users extends My_Layout_Admin_Controller {
         $data["user"] = ORM::factory('User', $this->request->param('id'));
 
         if ($this->request->post()) {
+            $post = Helper_Output::clean($this->request->post());
             $data["user"] = ORM::factory('User', $this->request->post("id"));
-            $profile = array(
-                                "first_name" => $this->request->post('first_name'),
-                                "last_name"   => $this->request->post('last_name')
-                            );
             try {
-                $data["user"]->values(array(
-                                                "email"              => $this->request->post('email'),
-                                                "password"           => $this->request->post('password'),
-                                                "user_profile_id"    => ORM::factory('User_Profile')->create_profile($profile, array('first_name', 'last_name'))
-                                            ));
+                $data["user"]->values($post);
                 $data["user"]->save();
                 $data["user"]->remove("roles");
-                $data["user"]->add('roles', ORM::factory('Role', $this->request->post('role_id')));
+                Helper_Main::add_roles($data["user"], ORM::factory('Role', $this->request->post('role_id')));
                 $this->redirect('admin/users/');
             }
             catch (ORM_Validation_Exception $e) {
@@ -112,8 +98,8 @@ class Controller_Admin_Users extends My_Layout_Admin_Controller {
                 $tempArray    = array();
                 $tempArray[]  = $user->id;
                 $tempArray[]  = $user->email;
-                $tempArray[]  = $user->user_profile->first_name;
-                $tempArray[]  = $user->user_profile->last_name;
+                $tempArray[]  = $user->first_name;
+                $tempArray[]  = $user->last_name;
                 $role         = $user->roles->order_by('role_id', 'desc')->find()->name;
                 $tempArray[]  = $role == 'admin' ? '<span class="label label-important">' . $role . '</span>' : '<span class="label label-info">' . $role . '</span>';
                 $tempArray[]  = '<a href="'.URL::site('admin/users/edit/'.$user->id).'" class="btn btn-small btn-primary"> Edit </a>

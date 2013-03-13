@@ -7,13 +7,13 @@
                     <div class="control-group">
                         <label class="control-label" for="first_name">First Name:</label>
                         <div class="controls">
-                            <input class="span10" type="text" id="first_name" placeholder="As on Passport" name="profile[first_name]" value="<?php echo $logged_user->user_profile->first_name ?>">
+                            <input class="span10" type="text" id="first_name" placeholder="As on Passport" name="first_name" value="<?php echo $logged_user->first_name ?>">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="last_name">Last Name:</label>
                         <div class="controls">
-                            <input class="span10" type="text" id="last_name" placeholder="As on Passport" name="profile[last_name]" value="<?php echo $logged_user->user_profile->last_name ?>">
+                            <input class="span10" type="text" id="last_name" placeholder="As on Passport" name="last_name" value="<?php echo $logged_user->last_name ?>">
                         </div>
                     </div>
                     <div class="control-group">

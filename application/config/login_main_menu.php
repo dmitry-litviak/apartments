@@ -10,19 +10,14 @@ return array(
                                                       'url'    	=> 'user/profile',
                                                       'status'  => 0
                                       ),
-                                      "apartments" => array(
-                                                      'title' 	=> 'My Apartments',
-                                                      'url'    	=> 'apartments',
-                                                      'status'  => 0
-                                      ),
                                       "favorites" => array(
                                                       'title' 	=> 'My Favorites',
                                                       'url'    	=> 'favorites',
                                                       'status'  => 0
                                       ),
-                                      "logout" => array(
-                                                      'title' 	=> 'Logout',
-                                                      'url'    	=> 'session/logout',
-                                                      'status'  => 0
-                                      ),
+//                                      "logout" => array(
+//                                                      'title' 	=> 'Logout',
+//                                                      'url'    	=> 'session/logout',
+//                                                      'status'  => 0
+//                                      ),
     );

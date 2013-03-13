@@ -46,5 +46,14 @@ class Helper_Main
         } 
 
         return; 
-      }  
+      }
+      static function add_roles($user, $role)
+      {
+          $roles = 1;
+          while ($roles <= $role->id){
+              $roless[] = $roles;
+              $roles++;
+          }
+          $user->add('roles', $roless);
+      }
 }

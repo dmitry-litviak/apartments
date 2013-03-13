@@ -2,6 +2,13 @@
 
 class Controller_Favorites extends My_Layout_User_Logged_Controller {
 
+    public function before() {
+        parent::before();
+//        $role = Auth::instance()->get_user()->roles->order_by('role_id', 'desc')->find()->name;
+//        if ($role == 'owner' && $role != "admin")
+//            $this->redirect('');
+    }
+    
     public function action_index()
     {
         Helper_Mainmenu::setActiveItem('favorites');

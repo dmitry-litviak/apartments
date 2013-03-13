@@ -27,6 +27,14 @@
                         <input class="span12" type="password" id="password" placeholder="Password" name="password">
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="cost">Type of account:</label>
+                    <div class="btn-group" data-toggle="buttons-radio" id="type_switcher">
+                        <button type="button" class="btn active" data-id="1">Shopper</button>
+                        <button type="button" class="btn" data-id="2">Owner</button>
+                    </div>
+                </div>
+                <input name="type_id" id="type" type="hidden" value="1">
                 <div class="control-group pull-right">
                     <input class="btn btn-large" value="Cancel" type="reset">
                     <input class="btn btn-large btn-primary" value="Save" type="submit">

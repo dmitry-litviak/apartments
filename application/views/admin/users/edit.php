@@ -13,13 +13,13 @@
     <div class="control-group">
       <label class="control-label" for="first_name">First Name</label>
       <div class="controls">
-        <input type="text" id="first_name" placeholder="First Name" name="first_name" value="<?php echo $user->user_profile->first_name ?>">
+        <input type="text" id="first_name" placeholder="First Name" name="first_name" value="<?php echo $user->first_name ?>">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="last_name">Last Name</label>
       <div class="controls">
-        <input type="text" id="last_name" placeholder="Last Name" name="last_name" value="<?php echo $user->user_profile->last_name ?>">
+        <input type="text" id="last_name" placeholder="Last Name" name="last_name" value="<?php echo $user->last_name ?>">
       </div>
     </div>
      

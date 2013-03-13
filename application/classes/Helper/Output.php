@@ -103,8 +103,8 @@ class Helper_Output
         
         public static function get_avatar($user)
         {
-            if ($user->user_profile->avatar) {
-                $file  = Kohana::$config->load('config')->get('user_files') . $user->id . '/avatar/' . $user->user_profile->avatar;
+            if ($user->avatar) {
+                $file  = Kohana::$config->load('config')->get('user_files') . $user->id . '/avatar/' . $user->avatar;
                 if (file_exists($file)) {
                     return URL::site($file);
                 } else {
