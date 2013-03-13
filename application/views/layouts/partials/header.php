@@ -6,7 +6,7 @@
           <div class="container">
             <ul class="nav">
                 <?php echo Helper_Mainmenu::render() ?>
-                <?php if (Auth::instance()->get_user()): ?>
+                <?php if (Auth::instance()->get_user()->id): ?>
                     <?php $role = Auth::instance()->get_user()->roles->order_by('role_id', 'desc')->find()->name ?>
                     <?php if ($role == 'login' || $role == 'admin'): ?>
                         <li><a href="<?php echo URL::site('favorites') ?>">My Favorites</a></li>
