@@ -10,11 +10,11 @@ return array(
                                                       'url'    	=> 'user/profile',
                                                       'status'  => 0
                                       ),
-                                      "favorites" => array(
-                                                      'title' 	=> 'My Favorites',
-                                                      'url'    	=> 'favorites',
-                                                      'status'  => 0
-                                      ),
+//                                      "favorites" => array(
+//                                                      'title' 	=> 'My Favorites',
+//                                                      'url'    	=> 'favorites',
+//                                                      'status'  => 0
+//                                      ),
 //                                      "logout" => array(
 //                                                      'title' 	=> 'Logout',
 //                                                      'url'    	=> 'session/logout',

@@ -2,20 +2,16 @@
 
 class Controller_Home extends My_Layout_User_Controller {
 
-	public function action_index()
-	{
-        //go away from landing page if you logged in ;)
-        if(Auth::instance()->logged_in())
-            $this->redirect('search');
-
-
-        $this->setTitle('Landing Page')
-             ->view('home/index')
-             ->render();
-	}
-
-    public function action_test(){
-        phpinfo();
+    public function action_index()
+    {
+        Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
+                ->link_js('libs/jquery.validate.min')
+                ->link_js('search/index')
+        ;
+        $data['types'] = ORM::factory('Type')->find_all();
+        $this->setTitle('Search Page')
+                ->view('search/index', $data)
+                ->render();
     }
 
 } // End Home Controller

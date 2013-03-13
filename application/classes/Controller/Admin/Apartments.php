@@ -103,6 +103,8 @@ public function action_create()
     
     public function action_delete() {
         $apartment = ORM::factory('Apartment')->where('id', '=', $this->request->post('id'))->find();
+        @unlink(Kohana::$config->load('config')->get('apartments_files') . $apartment->id . '/photos/' . $apartment->img);
+        @unlink(Kohana::$config->load('config')->get('apartments_files') . $apartment->id . '/photos/small_' . $apartment->img);
         $apartment->delete();
         Helper_Jsonresponse::render_json('success', '' , '');
     }

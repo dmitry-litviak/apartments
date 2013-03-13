@@ -11,16 +11,55 @@ class Controller_Session extends My_Layout_User_Controller {
             $this->redirect('home/index');
         } else {
             if ($this->request->post()) {
-                $status = Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
-                if ($status) {
-                    $this->redirect('/');
-                } else {
+                try {
+                    $status = Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
+                    $role   = Auth::instance()->get_user()->roles->order_by('role_id', 'desc')->find()->name;
+                    if ($status && $role != "owner") {
+                        $this->redirect('/');
+                    } else {
+                        Auth::instance()->logout();
+                        Helper_Alert::setStatus('error');
+                        Helper_Alert::set_flash(Kohana::$config->load('errors')->get('004'));
+                    }
+                }
+                catch (ErrorException $e)
+                {
                     Helper_Alert::setStatus('error');
                     Helper_Alert::set_flash(Kohana::$config->load('errors')->get('001'));
                 }
             }
         }
-        $this->setTitle('Sign In')->view('session/login')->render();
+        $this->setTitle('User Login')->view('session/login')->render();
+    }
+    
+    public function action_owner_login()
+    {
+        Helper_Mainmenu::setActiveItem('owner_sign_in');
+        Helper_Output::factory()->link_js('libs/jquery.validate.min')
+                                ->link_js('session/login');
+        if (Auth::instance()->logged_in()) {
+            $this->redirect('home/index');
+        } else {
+            if ($this->request->post()) {
+                try {
+                    $status = Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
+                    $role = Auth::instance()->get_user()->roles->order_by('role_id', 'desc')->find()->name;
+                    if ($status && ($role == "owner" || $role == "admin")) {
+                        $this->redirect('/');
+                    } else {
+                            Auth::instance()->logout();
+                            Helper_Alert::setStatus('error');
+                            Helper_Alert::set_flash(Kohana::$config->load('errors')->get('003'));
+                    }
+                }
+                catch (ErrorException $e)
+                {
+                    Helper_Alert::setStatus('error');
+                    Helper_Alert::set_flash(Kohana::$config->load('errors')->get('001'));
+                }
+            }
+        }
+        $this->setTitle('List for Free')->view('session/owner_login')->render();
     }
 
     public function action_create()

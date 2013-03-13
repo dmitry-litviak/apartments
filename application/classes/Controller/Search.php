@@ -2,7 +2,7 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Search extends My_Layout_User_Logged_Controller {
+class Controller_Search extends My_Layout_User_Controller {
 
     public function before() {
         parent::before();
@@ -62,13 +62,21 @@ class Controller_Search extends My_Layout_User_Logged_Controller {
         $apartment = ORM::factory('Apartment', $this->request->post('id'));
         $apartment->img = Helper_Output::get_apartment($apartment, 'small_');
         $apartment->type_id = $apartment->type->title;
-        $fav = DB::select()->from('apartments_users')->where('apartment_id', '=', $apartment->id)->where('user_id', '=', $this->logged_user->id)->execute()->get('id');
+        $fav     = 0;
+        $user_id = 0;
+        if (Auth::instance()->logged_in()) {
+            $user = Auth::instance()->get_user();
+            $role = $user->roles->order_by('role_id', 'desc')->find()->name;
+            if ($role != "owner") {
+                $user_id = $user->id;
+                $fav     = DB::select()->from('apartments_users')->where('apartment_id', '=', $apartment->id)->where('user_id', '=', $user_id)->execute()->get('id');
+            }
+        }
         Helper_Jsonresponse::render_json('success', "", array("ap" => $apartment->as_array(),
-                                                              "fav" => array("status" => $fav,
-                                                              "user_id" => $this->logged_user->id,
-                                                              
-                
-            )
+                                                              "fav" => array(
+                                                                             "status" => $fav,
+                                                                             "user_id" => $user_id,
+                                                                            )
         ));
     }
 

@@ -16,8 +16,13 @@ return array(
                                                       'status'  => 0
                                       ),
                                       "sign_in" => array(
-                                                      'title' 	=> 'Sign In',
+                                                      'title' 	=> 'User Login',
                                                       'url'    	=> 'session/login',
+                                                      'status'  => 0
+                                      ),
+                                      "owner_sign_in" => array(
+                                                      'title' 	=> 'List for Free',
+                                                      'url'    	=> 'session/owner_login',
                                                       'status'  => 0
                                       ),
                                       
