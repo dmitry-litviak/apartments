@@ -1,4 +1,4 @@
-    <div class="media">
+<!--    <div class="media">
         <a class="pull-left" href="#">
             <img class="media-object bordered-img" src="<%= item.ap.img %>" height="128" width="128">
         </a>
@@ -28,4 +28,46 @@
                 <% } %>
             </div>
         </div>
+    </div>-->
+<div class="tabbable tabs-left">
+    <ul class="nav nav-tabs">
+        <li class=""><a href="#lA" data-toggle="tab">Photos</a></li>
+        <li class="active"><a href="#lB" data-toggle="tab">Details</a></li>
+        <li><a href="#lC" data-toggle="tab">Contact</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="lA">
+            <img class="bordered-img" src="<%= item.ap.img %>" height="128" width="128">
+        </div>
+        <div class="tab-pane active" id="lB">
+            <h4><%= item.ap.title %></h4>
+            <div>
+                <strong>Description:</strong>
+                <%= item.ap.descr %>
+            </div>
+            <div>
+                <strong>Address:</strong>
+                <%= item.ap.address %>
+            </div>
+            <div>
+                <strong>Rooms:</strong>
+                <%= item.ap.type_id %>
+            </div>
+            <div>
+                <strong>Cost:</strong>
+                <span class="label label-success">$<%= item.ap.cost %></span>
+            </div>
+        </div>
+        <div class="tab-pane" id="lC">
+            <p><strong>Email</strong>:  </p>
+        </div>
     </div>
+</div>
+
+<div class="">
+    <% if (item.fav.user_id != 0) { %>
+    <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite( < %= item.ap.id % > , this, < %= item.fav.user_id % > )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
+    <% } else {%>
+    <button class="btn btn-danger disabled" id="favorite" >You should sign in as a shopper to use favorites feature</button>
+    <% } %>
+</div>
