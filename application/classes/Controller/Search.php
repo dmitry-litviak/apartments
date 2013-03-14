@@ -73,6 +73,7 @@ class Controller_Search extends My_Layout_User_Controller {
             }
         }
         Helper_Jsonresponse::render_json('success', "", array("ap" => $apartment->as_array(),
+                                                              "email" => $apartment->owner->email,
                                                               "fav" => array(
                                                                              "status" => $fav,
                                                                              "user_id" => $user_id,
