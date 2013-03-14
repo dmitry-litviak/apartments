@@ -40,22 +40,24 @@
             <img class="bordered-img" src="<%= item.ap.img %>" height="128" width="128">
         </div>
         <div class="tab-pane active" id="lB">
-            <h4><%= item.ap.title %></h4>
-            <div>
-                <strong>Description:</strong>
-                <%= item.ap.descr %>
-            </div>
-            <div>
-                <strong>Address:</strong>
-                <%= item.ap.address %>
-            </div>
-            <div>
-                <strong>Rooms:</strong>
-                <%= item.ap.type_id %>
-            </div>
-            <div>
-                <strong>Cost:</strong>
-                <span class="label label-success">$<%= item.ap.cost %></span>
+            <div class="span4" style="margin-left: 0px" >
+                <h4><%= item.ap.title %></h4>
+                <div>
+                    <strong>Description:</strong>
+                    <%= item.ap.descr %>
+                </div>
+                <div>
+                    <strong>Address:</strong>
+                    <%= item.ap.address %>
+                </div>
+                <div>
+                    <strong>Rooms:</strong>
+                    <%= item.ap.type_id %>
+                </div>
+                <div>
+                    <strong>Cost:</strong>
+                    <span class="label label-success">$<%= item.ap.cost %></span>
+                </div>
             </div>
         </div>
         <div class="tab-pane" id="lC">
@@ -64,7 +66,7 @@
     </div>
 </div>
 
-<div class="">
+<div class="center" style="margin-top: 10px">
     <% if (item.fav.user_id != 0) { %>
     <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite( < %= item.ap.id % > , this, < %= item.fav.user_id % > )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
     <% } else {%>
