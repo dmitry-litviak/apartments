@@ -68,8 +68,8 @@
 
 <div class="center" style="margin-top: 10px">
     <% if (item.fav.user_id != 0) { %>
-    <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite( < %= item.ap.id % > , this, < %= item.fav.user_id % > )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
-    <% } else {%>
+    <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite(<%= item.ap.id %> , this, <%= item.fav.user_id %> )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
+    <% } else { %>
     <button class="btn btn-danger disabled" id="favorite" >You should sign in as a shopper to use favorites feature</button>
     <% } %>
 </div>
