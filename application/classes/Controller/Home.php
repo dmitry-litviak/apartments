@@ -9,7 +9,7 @@ class Controller_Home extends My_Layout_User_Controller {
                 ->link_js('search/index')
         ;
         $data['types'] = ORM::factory('Type')->find_all();
-        $this->setTitle('Search Page')
+        $this->setTitle('Search Apartments')
                 ->view('search/index', $data)
                 ->render();
     }

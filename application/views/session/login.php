@@ -1,7 +1,7 @@
 
 <form class="form-actions" action="<?php echo URL::site('session/login') ?>" method="POST">
     <fieldset class="places">
-        <legend>Register</legend>
+        <legend>Login</legend>
         <div class="row-fluid">
             <div class="span6">
                 <div class="control-group">

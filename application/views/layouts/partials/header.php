@@ -1,26 +1,21 @@
 
-    <div class="masthead">
-      <h3 class="muted">Apartments Site</h3>
-      <div class="navbar">
+<div class="masthead">
+    <h3 class="muted zero-margin"><a class="head" href="<?php echo URL::base() ?>">Apartments Site</a></h3>
+    <h5 class="muted zero-margin"><a class="head" href="<?php echo URL::base() ?>">Tag Line</a></h5>
+    <hr class="hr-thin">
+    <div class="navbar">
         <div class="navbar-inner">
-          <div class="container">
-            <ul class="nav">
-                <?php echo Helper_Mainmenu::render() ?>
-                <?php if (Auth::instance()->get_user()): ?>
-                    <?php $role = Auth::instance()->get_user()->roles->order_by('role_id', 'desc')->find()->name ?>
-                    <?php if ($role == 'login' || $role == 'admin'): ?>
-                        <li><a href="<?php echo URL::site('favorites') ?>">My Favorites</a></li>
+            <div class="container">
+                <ul class="nav">
+                    <?php echo Helper_Mainmenu::render() ?>
+                    <?php if (Auth::instance()->get_user()): ?>
+                        <?php $role = Auth::instance()->get_user()->roles->order_by('role_id', 'desc')->find()->name ?>
+                        <?php if ($role == 'admin'): ?>
+                            <li><a href="<?php echo URL::site('admin/dashboard') ?>">Admin Panel</a></li>
+                        <?php endif; ?>
                     <?php endif; ?>
-                    <?php if ($role == 'owner' || $role == 'admin'): ?>
-                        <li><a href="<?php echo URL::site('apartments') ?>">My Apartments</a></li>
-                    <?php endif; ?>
-                    <?php if ($role == 'admin'): ?>
-                        <li><a href="<?php echo URL::site('admin/dashboard') ?>">Admin Panel</a></li>
-                    <?php endif; ?>
-                    <li><a href="<?php echo URL::site('session/logout') ?>">Logout</a></li>
-                <?php endif; ?>
-            </ul>
-          </div>
+                </ul>
+            </div>
         </div>
-      </div><!-- /.navbar -->
-    </div>
+    </div><!-- /.navbar -->
+</div>

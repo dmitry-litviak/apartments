@@ -31,40 +31,10 @@ class Controller_Session extends My_Layout_User_Controller {
         }
         $this->setTitle('User Login')->view('session/login')->render();
     }
-    
-    public function action_owner_login()
-    {
-        Helper_Mainmenu::setActiveItem('owner_sign_in');
-        Helper_Output::factory()->link_js('libs/jquery.validate.min')
-                                ->link_js('session/login');
-        if (Auth::instance()->logged_in()) {
-            $this->redirect('home/index');
-        } else {
-            if ($this->request->post()) {
-                try {
-                    $status = Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
-                    $role = Auth::instance()->get_user()->roles->order_by('role_id', 'desc')->find()->name;
-                    if ($status && ($role == "owner" || $role == "admin")) {
-                        $this->redirect('/');
-                    } else {
-                            Auth::instance()->logout();
-                            Helper_Alert::setStatus('error');
-                            Helper_Alert::set_flash(Kohana::$config->load('errors')->get('003'));
-                    }
-                }
-                catch (ErrorException $e)
-                {
-                    Helper_Alert::setStatus('error');
-                    Helper_Alert::set_flash(Kohana::$config->load('errors')->get('001'));
-                }
-            }
-        }
-        $this->setTitle('List for Free')->view('session/owner_login')->render();
-    }
 
     public function action_create()
     {
-        Helper_Mainmenu::setActiveItem('create_account');
+        Helper_Mainmenu::setActiveItem('register');
         Helper_Output::factory()->link_js('libs/jquery.validate.min')
                                 ->link_js('session/register');
         if ($this->request->post()) {
@@ -74,9 +44,6 @@ class Controller_Session extends My_Layout_User_Controller {
                 $model->values($post);
                 $model->save();
                 $model->add('roles', ORM::factory('Role')->where('name', '=', 'login')->find());
-                if ($post['type_id'] == 2) {
-                    $model->add('roles', ORM::factory('Role')->where('name', '=', 'owner')->find());
-                }
                 Auth::instance()->login($this->request->post('email'), $this->request->post('password'));
                 $this->redirect('/');
             }

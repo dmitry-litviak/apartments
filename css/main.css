@@ -128,3 +128,21 @@ label.error {
 .btn-group>.btn:hover, .btn-group>.btn:focus, .btn-group>.btn:active, .btn-group>.btn.active {
 z-index: 0;
 }
+
+a.head, a.head:visited, a.head:hover, a.head:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.center-vert {
+    vertical-align: middle;
+}
+
+.zero-margin {
+    margin: 0 0;
+}
+
+.ap-block {
+    width: 350px;
+    height: 200px;
+}

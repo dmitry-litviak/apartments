@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 return array(
                                       "search" => array(
-                                                      'title'   => 'Search page',
+                                                      'title'   => 'Search Apartments',
                                                       'url'     => 'search',
                                                       'status'  => 1
                                       ),
@@ -10,14 +10,19 @@ return array(
                                                       'url'    	=> 'user/profile',
                                                       'status'  => 0
                                       ),
-//                                      "favorites" => array(
-//                                                      'title' 	=> 'My Favorites',
-//                                                      'url'    	=> 'favorites',
-//                                                      'status'  => 0
-//                                      ),
-//                                      "logout" => array(
-//                                                      'title' 	=> 'Logout',
-//                                                      'url'    	=> 'session/logout',
-//                                                      'status'  => 0
-//                                      ),
+                                      "apartments" => array(
+                                                      'title' 	=> 'My Listings',
+                                                      'url'    	=> 'apartments',
+                                                      'status'  => 0
+                                      ),
+                                      "favorites" => array(
+                                                      'title' 	=> 'My Favorites',
+                                                      'url'    	=> 'favorites',
+                                                      'status'  => 0
+                                      ),
+                                      "logout" => array(
+                                                      'title' 	=> 'Logout',
+                                                      'url'    	=> 'session/logout',
+                                                      'status'  => 0
+                                      ),
     );

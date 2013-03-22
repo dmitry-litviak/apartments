@@ -15,7 +15,7 @@ class Controller_Search extends My_Layout_User_Controller {
                 ->link_js('search/index')
         ;
         $data['types'] = ORM::factory('Type')->find_all();
-        $this->setTitle('Search Page')
+        $this->setTitle('Search Apartments')
                 ->view('search/index', $data)
                 ->render();
     }
@@ -62,22 +62,19 @@ class Controller_Search extends My_Layout_User_Controller {
         $apartment = ORM::factory('Apartment', $this->request->post('id'));
         $apartment->img = Helper_Output::get_apartment($apartment, 'small_');
         $apartment->type_id = $apartment->type->title;
-        $fav     = 0;
+        $fav = 0;
         $user_id = 0;
         if (Auth::instance()->logged_in()) {
             $user = Auth::instance()->get_user();
-            $role = $user->roles->order_by('role_id', 'desc')->find()->name;
-            if ($role != "owner") {
-                $user_id = $user->id;
-                $fav     = DB::select()->from('apartments_users')->where('apartment_id', '=', $apartment->id)->where('user_id', '=', $user_id)->execute()->get('id');
-            }
+            $user_id = $user->id;
+            $fav = DB::select()->from('apartments_users')->where('apartment_id', '=', $apartment->id)->where('user_id', '=', $user_id)->execute()->get('id');
         }
         Helper_Jsonresponse::render_json('success', "", array("ap" => $apartment->as_array(),
-                                                              "email" => $apartment->owner->email,
-                                                              "fav" => array(
-                                                                             "status" => $fav,
-                                                                             "user_id" => $user_id,
-                                                                            )
+            "email" => $apartment->owner->email,
+            "fav" => array(
+                "status" => $fav,
+                "user_id" => $user_id,
+            )
         ));
     }
 

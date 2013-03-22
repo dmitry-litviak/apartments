@@ -1,4 +1,4 @@
-<div id='gmaps-canvas' class="map_canvas"></div>
+
 <div id='gmaps-error'></div>
 <input type="hidden" id="lng" value="<?php echo $lng ?>">
 <input type="hidden" id="lat" value="<?php echo $lat ?>">

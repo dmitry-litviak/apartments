@@ -14,11 +14,12 @@ map =
       from    : $("#from").val()
       type_id : $("#type_id").val()
     @map_name    = "gmaps-canvas"
+    $("#" + @map_name).show()
     @jmap        = $("#gmaps-canvas")
     @map_options =
-      zoom: 10
+      zoom: 7
       maxZoom: 18
-      minZoom: 10
+      minZoom: 7
       center: new google.maps.LatLng(54.66102679999999, -107.2491508)
       mapTypeId: google.maps.MapTypeId.ROADMAP
     
@@ -86,7 +87,27 @@ map =
           markerClusterer = new MarkerClusterer(me.map, me.markers,
             maxZoom: 15
             gridSize: 50
-            styles: null
+            styles: [
+                      height: 29
+                      url: SYS.baseUrl + "img/marker-images/clusterMarker1.png" 
+                      width: 29
+                    ,
+                      height: 34
+                      url: SYS.baseUrl + "img/marker-images/clusterMarker2.png"
+                      width: 34
+                    ,
+                      height: 47
+                      url: SYS.baseUrl + "img/marker-images/clusterMarker3.png"
+                      width: 47
+                    ,
+                      height: 56
+                      url: SYS.baseUrl + "img/marker-images/clusterMarker4.png"
+                      width: 56
+                    ,
+                      height: 56
+                      url: SYS.baseUrl + "img/marker-images/clusterMarker4.png"
+                      width: 56
+                    ]
           )      
  
 $(document).ready ->
