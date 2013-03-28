@@ -149,7 +149,7 @@ public function action_create()
             {
                 $tempArray    = array();
                 $tempArray[]  = $apartment->id;
-                $tempArray[]  = '<img class="small-image" src="' . Helper_Output::get_apartment($apartment, "small_") .'" />';
+                $tempArray[]  = '<img class="small-image" src="' . Helper_Output::get_apartment_first_img($apartment)  .'" />';
                 $tempArray[]  = $apartment->title;
                 $tempArray[]  = $apartment->address;
                 $tempArray[]  = $apartment->descr;

@@ -69,9 +69,13 @@ class Controller_Search extends My_Layout_User_Controller {
             $user_id = $user->id;
             $fav = DB::select()->from('apartments_users')->where('apartment_id', '=', $apartment->id)->where('user_id', '=', $user_id)->execute()->get('id');
         }
+        $images = DB::select()->from('images')->where('apartment_id', '=', $apartment->id)->execute()->as_array();
+        if (!count($images)) {
+            $images[0] = URL::site('img/icon-no-image-512.png'); 
+        }
         Helper_Jsonresponse::render_json('success', "", array("ap" => $apartment->as_array(),
             "email" => $apartment->owner->email,
-            "images"=> DB::select()->from('images')->where('apartment_id', '=', $apartment->id)->execute()->as_array(),
+            "images"=> $images,
             "fav" => array(
                 "status" => $fav,
                 "user_id" => $user_id,

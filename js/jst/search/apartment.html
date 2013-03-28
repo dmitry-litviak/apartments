@@ -3,31 +3,32 @@
     <div class="tabbable tabs-below">
         <div class="tab-content">
             <div class="tab-pane ap-block center" id="lA">
-                <div id="myCarousel" class="carousel slide">
+                <% var rand = Math.floor(Math.random()*100000) %>
+                <div id="myCarousel<%=rand %>" class="carousel slide">
                     <ol class="carousel-indicators">
                         <% _.each(item.images, function(image, index) { %>
-                            <% if (index == 1) { %>
-                            <li data-target="#myCarousel" data-slide-to="<%= index %>" class="active"></li>
-                            <% } else { %>
-                                <li data-target="#myCarousel" data-slide-to="<%= index %>" class=""></li>
-                            <% } %>
+                        <% if (index == 0) { %>
+                        <li data-target="#myCarousel<%=rand %>" data-slide-to="<%= index %>" class="active"></li>
+                        <% } else { %>
+                        <li data-target="#myCarousel<%=rand %>" data-slide-to="<%= index %>" class=""></li>
+                        <% } %>
                         <% }) %>
                     </ol>
                     <div class="carousel-inner">
                         <% _.each(item.images, function(image, index) { %>
-                            <% if (index == 1) { %>
-                                <div class="item active">
-                                    <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
-                                </div>
-                            <% } else { %>
-                                <div class="item">
-                                    <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
-                                </div>
-                            <% } %>
+                        <% if (index == 0) { %>
+                        <div class="item active">
+                            <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
+                        </div>
+                        <% } else { %>
+                        <div class="item">
+                            <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
+                        </div>
+                        <% } %>
                         <% }) %>
                     </div>
-                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-                    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                    <a class="left carousel-control" href="#myCarousel<%=rand %>" data-slide="prev">‹</a>
+                    <a class="right carousel-control" href="#myCarousel<%=rand %>" data-slide="next">›</a>
                 </div>
             </div>
             <div class="tab-pane active ap-block" id="lB">
