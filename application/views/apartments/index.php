@@ -8,7 +8,7 @@
     <?php foreach ($apartments as $apartment): ?>
         <div class="media bordered" id="<?php echo $apartment->id ?>">
             <a class="pull-left" href="#">
-                <img class="media-object bordered-img" src="<?php echo Helper_Output::get_apartment($apartment, "small_") ?>">
+                <img class="media-object bordered-img" src="<?php echo Helper_Output::get_apartment_first_img($apartment) ?>">
             </a>
             <div class="media-body">
                 <h4 class="media-heading"><?php echo $apartment->title ?></h4>

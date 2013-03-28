@@ -1,4 +1,5 @@
 create = 
+  template       : JST["apartments/create_thumb"]
   init: ->
     do @detect_elements
     do @bind_events
@@ -16,6 +17,10 @@ create =
     @type          = $("#type") 
     @form_create   = $("#form_create")
     @form_edit     = $("#form_edit")
+    @fileupload    = $("#fileupload")
+    @th_container  = $(".thumbnails")
+    @image_counter = 0
+    @images        = $(".t-images") 
     
   bind_events: ->
     do @gmaps_init
@@ -24,6 +29,8 @@ create =
     do @init_type_switcher
     do @prevent_enter
     do @init_validate
+    do @init_uploader
+    do @init_fancybox
   
   # move the marker to a new position, and center the map on it
   # initialise the google maps objects, and add listeners
@@ -195,7 +202,65 @@ create =
 
         success: (label) ->
           label.text("OK!").addClass("valid").closest(".control-group").addClass "success"
-   
+  
+  remove_click: (object) ->
+    el = $(object)
+    $.ajax
+      url: SYS.baseUrl + 'uploader/remove'
+      data: $.param({url : el.parents("div.caption").prev().val()})
+      type: 'POST'
+      dataType: 'json'
+      success: (res) =>
+        if res.text == "success"
+          el.parents('li').remove()
+          
+          
+  remove_direct: (url) ->
+    $.ajax
+      url: SYS.baseUrl + 'uploader/remove'
+      data: $.param({url : url})
+      type: 'POST'
+      dataType: 'json'
+      success: (res) =>
+        if res.text == "success"
+          console.log(res.text)
+           
+  remove_click_existed: (object) ->
+    el = $(object)
+    $.ajax
+      url: SYS.baseUrl + 'uploader/remove_existed'
+      data: $.param({id : el.data('id')})
+      type: 'POST'
+      dataType: 'json'
+      success: (res) =>
+        if res.text == "success"
+          el.parents('li').remove()
+  
+  init_fancybox: ->
+    if @images.length != 0
+      @images.fancybox
+        transitionIn: "none"
+        transitionOut: "none"
+  
+  init_uploader: ->
+    me = @
+    @fileupload.fileupload
+      acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+      dataType: "json"
+      fail: (e, data) ->
+        alert("Only gif, jpeg and png are allowed")
+      dataType: "json"
+      done: (e, data) ->
+        if data.result.text is 'success'
+          me.image_counter++
+          if me.image_counter > 1
+            alert("Only 10 images allowed")
+            me.remove_direct(data.result.url)
+          else 
+            tem = me.template({item: data.result, url: SYS.baseUrl})
+            me.th_container.append tem
+        else
+          alert("Only gif, jpeg and png are allowed")
 
      
 $(document).ready ->

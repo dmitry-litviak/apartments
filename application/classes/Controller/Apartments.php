@@ -24,8 +24,13 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
         Helper_Mainmenu::setActiveItem('apartments');
         Helper_Output::factory()->link_css('bootstrap.fileupload.min')
                 ->link_css('jquery-ui-1.8.16.custom')
-                ->link_js('libs/bootstrap.fileupload.min')
+//                ->link_js('libs/bootstrap.fileupload.min')
                 ->link_js('libs/jquery.validate.min')
+                ->link_js('libs/jquery.fileupload')
+                ->link_js('libs/jquery.fileupload-ui')
+                ->link_js('libs/jquery.fileupload-fp')
+                ->link_js('libs/underscore')
+                ->link_js('public/assets/workspace')
                 ->link_js('apartments/create');
         if ($this->request->post()) {
             $post = Helper_Output::clean($this->request->post());
@@ -34,17 +39,8 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
             try {
                 $model->values($post);
                 $model->save();
-                if ($_FILES['image']['tmp_name']) {
-                    $place_upload_dir = Kohana::$config->load('config')->get('apartments_files') . $model->id . '/photos/';
-                    if (!is_dir($place_upload_dir))
-                        mkdir($place_upload_dir, 0777, true);
-                    $name = basename(md5($_FILES['image']['name'] . time())) . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                    $target = $place_upload_dir . $name;
-                    move_uploaded_file($_FILES['image']['tmp_name'], $target);
-                    $image_small = Image::factory($target)->resize(265, 265);
-                    $image_small->save($place_upload_dir . 'small_' . $name);
-                    $model->img = $name;
-                    $model->save();
+                if (!empty($post['images'])) {
+                    Helper_Uploader::save_gallery_images($model, $post['images']);
                 }
                 $this->redirect('apartments');
             } catch (ORM_Validation_Exception $e) {
@@ -60,12 +56,19 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
 
     public function action_edit() {
         $apartment = ORM::factory('Apartment')->where('id', '=', $this->request->param('id'))->find();
+        $data['images'] = ORM::factory('Image')->where('apartment_id', '=', $apartment->id)->find_all();
         if ($this->logged_user->id == $apartment->user_id) {
             Helper_Mainmenu::setActiveItem('apartments');
             Helper_Output::factory()->link_css('bootstrap.fileupload.min')
                     ->link_css('jquery-ui-1.8.16.custom')
+                    ->link_css('fancybox/jquery.fancybox-1.3.4')
                     ->link_js('libs/jquery.validate.min')
-                    ->link_js('libs/bootstrap.fileupload.min')
+                    ->link_js('libs/jquery.fileupload')
+                    ->link_js('libs/jquery.fileupload-ui')
+                    ->link_js('libs/jquery.fileupload-fp')
+                    ->link_js('libs/underscore')
+                    ->link_js('public/assets/workspace')
+                    ->link_js('libs/fancybox/jquery.fancybox-1.3.4_patch')
                     ->link_js('apartments/create');
             if ($this->request->post()) {
                 $post = Helper_Output::clean($this->request->post());
@@ -74,17 +77,8 @@ class Controller_Apartments extends My_Layout_User_Logged_Controller {
                 try {
                     $model->values($post);
                     $model->save();
-                    if ($_FILES['image']['tmp_name']) {
-                        $place_upload_dir = Kohana::$config->load('config')->get('apartments_files') . $model->id . '/photos/';
-                        if (!is_dir($place_upload_dir))
-                            mkdir($place_upload_dir, 0777, true);
-                        $name = basename(md5($_FILES['image']['name'] . time())) . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                        $target = $place_upload_dir . $name;
-                        move_uploaded_file($_FILES['image']['tmp_name'], $target);
-                        $image_small = Image::factory($target)->resize(265, 265);
-                        $image_small->save($place_upload_dir . 'small_' . $name);
-                        $model->img = $name;
-                        $model->save();
+                    if (!empty($post['images'])) {
+                        Helper_Uploader::save_gallery_images($model, $post['images']);
                     }
                     $this->redirect('apartments');
                 } catch (ORM_Validation_Exception $e) {

@@ -2,7 +2,7 @@
 var map;
 
 map = {
-  template: JST["apartment"],
+  template: JST["search/apartment"],
   init: function() {
     this.detect_elements();
     return this.bind_events();
@@ -21,7 +21,7 @@ map = {
     $("#" + this.map_name).show();
     this.jmap = $("#gmaps-canvas");
     this.map_options = {
-      zoom: 7,
+      zoom: 10,
       maxZoom: 18,
       minZoom: 7,
       center: new google.maps.LatLng(54.66102679999999, -107.2491508),
@@ -106,7 +106,8 @@ map = {
                 success: function(res) {
                   if (res.text = "success") {
                     infowindow.content = me.template({
-                      item: res.data
+                      item: res.data,
+                      url: SYS.baseUrl
                     });
                     return infowindow.open(me.map, marker);
                   }
@@ -120,22 +121,27 @@ map = {
             gridSize: 50,
             styles: [
               {
-                height: 29,
-                url: SYS.baseUrl + "img/marker-images/clusterMarker1.png",
-                width: 29
-              }, {
+                opt_textColor: "#fff",
                 height: 34,
                 url: SYS.baseUrl + "img/marker-images/clusterMarker2.png",
                 width: 34
               }, {
+                opt_textColor: "#fff",
+                height: 34,
+                url: SYS.baseUrl + "img/marker-images/clusterMarker2.png",
+                width: 34
+              }, {
+                opt_textColor: "#fff",
                 height: 47,
                 url: SYS.baseUrl + "img/marker-images/clusterMarker3.png",
                 width: 47
               }, {
+                opt_textColor: "#fff",
                 height: 56,
                 url: SYS.baseUrl + "img/marker-images/clusterMarker4.png",
                 width: 56
               }, {
+                opt_textColor: "#fff",
                 height: 56,
                 url: SYS.baseUrl + "img/marker-images/clusterMarker4.png",
                 width: 56

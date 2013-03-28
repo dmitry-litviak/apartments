@@ -1,0 +1,9 @@
+<li class="span3" >
+  <div class="thumbnail">
+      <img src="<%= url + item.data %>" alt="ALT NAME" style="height: 150px ">
+      <input type="hidden" name="images[]" value="<%= item.data %>" />
+    <div class="caption">
+      <p align="center"><a onclick="javascript: create.remove_click(this)" class="btn btn-primary btn-block remove-th">Remove</a></p>
+    </div>
+  </div>
+</li>

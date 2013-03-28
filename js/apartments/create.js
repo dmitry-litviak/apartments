@@ -2,6 +2,7 @@
 var create;
 
 create = {
+  template: JST["apartments/create_thumb"],
   init: function() {
     this.detect_elements();
     return this.bind_events();
@@ -17,14 +18,20 @@ create = {
     this.type_switcher = $("#type_switcher");
     this.type = $("#type");
     this.form_create = $("#form_create");
-    return this.form_edit = $("#form_edit");
+    this.form_edit = $("#form_edit");
+    this.fileupload = $("#fileupload");
+    this.th_container = $(".thumbnails");
+    this.image_counter = 0;
+    return this.images = $(".t-images");
   },
   bind_events: function() {
     this.gmaps_init();
     this.autocomplete_init();
     this.init_type_switcher();
     this.prevent_enter();
-    return this.init_validate();
+    this.init_validate();
+    this.init_uploader();
+    return this.init_fancybox();
   },
   gmaps_init: function() {
     var latlng, me, options;
@@ -177,6 +184,96 @@ create = {
         },
         success: function(label) {
           return label.text("OK!").addClass("valid").closest(".control-group").addClass("success");
+        }
+      }
+    });
+  },
+  remove_click: function(object) {
+    var el,
+      _this = this;
+    el = $(object);
+    return $.ajax({
+      url: SYS.baseUrl + 'uploader/remove',
+      data: $.param({
+        url: el.parents("div.caption").prev().val()
+      }),
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        if (res.text === "success") {
+          return el.parents('li').remove();
+        }
+      }
+    });
+  },
+  remove_direct: function(url) {
+    var _this = this;
+    return $.ajax({
+      url: SYS.baseUrl + 'uploader/remove',
+      data: $.param({
+        url: url
+      }),
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        if (res.text === "success") {
+          return console.log(res.text);
+        }
+      }
+    });
+  },
+  remove_click_existed: function(object) {
+    var el,
+      _this = this;
+    el = $(object);
+    return $.ajax({
+      url: SYS.baseUrl + 'uploader/remove_existed',
+      data: $.param({
+        id: el.data('id')
+      }),
+      type: 'POST',
+      dataType: 'json',
+      success: function(res) {
+        if (res.text === "success") {
+          return el.parents('li').remove();
+        }
+      }
+    });
+  },
+  init_fancybox: function() {
+    if (this.images.length !== 0) {
+      return this.images.fancybox({
+        transitionIn: "none",
+        transitionOut: "none"
+      });
+    }
+  },
+  init_uploader: function() {
+    var me;
+    me = this;
+    return this.fileupload.fileupload({
+      acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+      dataType: "json",
+      fail: function(e, data) {
+        return alert("Only gif, jpeg and png are allowed");
+      },
+      dataType: "json",
+      done: function(e, data) {
+        var tem;
+        if (data.result.text === 'success') {
+          me.image_counter++;
+          if (me.image_counter > 1) {
+            alert("Only 10 images allowed");
+            return me.remove_direct(data.result.url);
+          } else {
+            tem = me.template({
+              item: data.result,
+              url: SYS.baseUrl
+            });
+            return me.th_container.append(tem);
+          }
+        } else {
+          return alert("Only gif, jpeg and png are allowed");
         }
       }
     });

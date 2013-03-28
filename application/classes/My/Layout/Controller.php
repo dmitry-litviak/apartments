@@ -32,6 +32,7 @@ class My_Layout_Controller extends Controller {
                                         ->link_css('bootstrap-responsive.min')
                                         ->link_js('libs/jquery-ui.min')
                                         ->link_js('libs/bootstrap.min')
+                                        ->link_js('application')
                                         ;
 	}
 

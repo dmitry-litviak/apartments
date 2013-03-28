@@ -3,7 +3,32 @@
     <div class="tabbable tabs-below">
         <div class="tab-content">
             <div class="tab-pane ap-block center" id="lA">
-                <img class="bordered-img" src="<%= item.ap.img %>" height="150" width="150">
+                <div id="myCarousel" class="carousel slide">
+                    <ol class="carousel-indicators">
+                        <% _.each(item.images, function(image, index) { %>
+                            <% if (index == 1) { %>
+                            <li data-target="#myCarousel" data-slide-to="<%= index %>" class="active"></li>
+                            <% } else { %>
+                                <li data-target="#myCarousel" data-slide-to="<%= index %>" class=""></li>
+                            <% } %>
+                        <% }) %>
+                    </ol>
+                    <div class="carousel-inner">
+                        <% _.each(item.images, function(image, index) { %>
+                            <% if (index == 1) { %>
+                                <div class="item active">
+                                    <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
+                                </div>
+                            <% } else { %>
+                                <div class="item">
+                                    <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
+                                </div>
+                            <% } %>
+                        <% }) %>
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                </div>
             </div>
             <div class="tab-pane active ap-block" id="lB">
                 <div class="justified" style="margin-left: 0px" >
@@ -31,9 +56,9 @@
             <div class="tab-pane ap-block" id="lD">
                 <div class="center">
                     <% if (item.fav.user_id != 0) { %>
-                        <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite(<%= item.ap.id %> , this, <%= item.fav.user_id %>)" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
+                    <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite( < %= item.ap.id % > , this, < %= item.fav.user_id % > )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
                     <% } else { %>
-                        <button class="btn btn-danger disabled" id="favorite" >You should sign in to use favorites feature</button>
+                    <button class="btn btn-danger disabled" id="favorite" >You should sign in to use favorites feature</button>
                     <% } %>
                 </div>
             </div>

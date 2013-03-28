@@ -1,5 +1,5 @@
 map = 
-  template       : JST["apartment"]
+  template       : JST["search/apartment"]
   init: ->
     do @detect_elements
     do @bind_events
@@ -17,7 +17,7 @@ map =
     $("#" + @map_name).show()
     @jmap        = $("#gmaps-canvas")
     @map_options =
-      zoom: 7
+      zoom: 10
       maxZoom: 18
       minZoom: 7
       center: new google.maps.LatLng(54.66102679999999, -107.2491508)
@@ -81,29 +81,34 @@ map =
                 dataType: 'json'
                 success: (res) =>
                   if res.text = "success"
-                    infowindow.content = me.template({item: res.data})
+                    infowindow.content = me.template({item: res.data, url : SYS.baseUrl})
                     infowindow.open me.map, marker
             me.markers.push(marker);
           markerClusterer = new MarkerClusterer(me.map, me.markers,
             maxZoom: 15
             gridSize: 50
             styles: [
-                      height: 29
-                      url: SYS.baseUrl + "img/marker-images/clusterMarker1.png" 
-                      width: 29
+                      opt_textColor: "#fff"
+                      height: 34
+                      url: SYS.baseUrl + "img/marker-images/clusterMarker2.png" 
+                      width: 34
                     ,
+                      opt_textColor: "#fff"
                       height: 34
                       url: SYS.baseUrl + "img/marker-images/clusterMarker2.png"
                       width: 34
                     ,
+                      opt_textColor: "#fff"
                       height: 47
                       url: SYS.baseUrl + "img/marker-images/clusterMarker3.png"
                       width: 47
                     ,
+                      opt_textColor: "#fff"
                       height: 56
                       url: SYS.baseUrl + "img/marker-images/clusterMarker4.png"
                       width: 56
                     ,
+                      opt_textColor: "#fff"
                       height: 56
                       url: SYS.baseUrl + "img/marker-images/clusterMarker4.png"
                       width: 56
