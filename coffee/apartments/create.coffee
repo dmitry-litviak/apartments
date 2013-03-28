@@ -253,9 +253,9 @@ create =
       done: (e, data) ->
         if data.result.text is 'success'
           me.image_counter++
-          if me.image_counter > 1
+          if me.image_counter > 10
             alert("Only 10 images allowed")
-            me.remove_direct(data.result.url)
+            me.remove_direct(data.result.data)
           else 
             tem = me.template({item: data.result, url: SYS.baseUrl})
             me.th_container.append tem

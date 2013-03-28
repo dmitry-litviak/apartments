@@ -262,9 +262,9 @@ create = {
         var tem;
         if (data.result.text === 'success') {
           me.image_counter++;
-          if (me.image_counter > 1) {
+          if (me.image_counter > 10) {
             alert("Only 10 images allowed");
-            return me.remove_direct(data.result.url);
+            return me.remove_direct(data.result.data);
           } else {
             tem = me.template({
               item: data.result,
