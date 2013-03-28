@@ -1,9 +1,9 @@
 <div>
     <h4><%= item.ap.title %></h4>
     <div class="tabbable tabs-below">
+        <% var rand = Math.floor(Math.random()*100000) %>
         <div class="tab-content">
-            <div class="tab-pane ap-block center" id="lA">
-                <% var rand = Math.floor(Math.random()*100000) %>
+            <div class="tab-pane ap-block center" id="lA<%=rand %>">
                 <div id="myCarousel<%=rand %>" class="carousel slide">
                     <ol class="carousel-indicators">
                         <% _.each(item.images, function(image, index) { %>
@@ -35,7 +35,7 @@
                     <a class="right carousel-control" href="#myCarousel<%=rand %>" data-slide="next">›</a>
                 </div>
             </div>
-            <div class="tab-pane active ap-block" id="lB">
+            <div class="tab-pane active ap-block" id="lB<%=rand %>">
                 <div class="justified" style="margin-left: 0px" >
                     <div>
                         <strong>Description:</strong>
@@ -55,10 +55,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane ap-block" id="lC">
+            <div class="tab-pane ap-block" id="lC<%=rand %>">
                 <p><strong>Email</strong>: <%= item.email %> </p>
             </div>
-            <div class="tab-pane ap-block" id="lD">
+            <div class="tab-pane ap-block" id="lD<%=rand %>">
                 <div class="center">
                     <% if (item.fav.user_id != 0) { %>
                     <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite( < %= item.ap.id % > , this, < %= item.fav.user_id % > )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
@@ -69,10 +69,10 @@
             </div>
         </div>
         <ul class="nav nav-tabs" style="width: 360px">
-            <li><a href="#lA" data-toggle="tab">Photos</a></li>
-            <li class="active"><a href="#lB" data-toggle="tab">Details</a></li>
-            <li><a href="#lC" data-toggle="tab">Contact</a></li>
-            <li><a href="#lD" data-toggle="tab">Add to Favorites</a></li>
+            <li><a href="#lA<%=rand %>" data-toggle="tab">Photos</a></li>
+            <li class="active"><a href="#lB<%=rand %>" data-toggle="tab">Details</a></li>
+            <li><a href="#lC<%=rand %>" data-toggle="tab">Contact</a></li>
+            <li><a href="#lD<%=rand %>" data-toggle="tab">Add to Favorites</a></li>
         </ul>
     </div>
 
