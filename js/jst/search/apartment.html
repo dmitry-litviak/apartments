@@ -7,18 +7,22 @@
                 <div id="myCarousel<%=rand %>" class="carousel slide">
                     <ol class="carousel-indicators">
                         <% _.each(item.images, function(image, index) { %>
-                        <% if (index == 0) { %>
-                        <li data-target="#myCarousel<%=rand %>" data-slide-to="<%= index %>" class="active"></li>
-                        <% } else { %>
-                        <li data-target="#myCarousel<%=rand %>" data-slide-to="<%= index %>" class=""></li>
-                        <% } %>
+                            <% if (index == 0) { %>
+                                <li data-target="#myCarousel<%=rand %>" data-slide-to="<%= index %>" class="active"></li>
+                            <% } else { %>
+                                <li data-target="#myCarousel<%=rand %>" data-slide-to="<%= index %>" class=""></li>
+                            <% } %>
                         <% }) %>
                     </ol>
                     <div class="carousel-inner">
                         <% _.each(item.images, function(image, index) { %>
                         <% if (index == 0) { %>
                         <div class="item active">
-                            <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
+                            <% if (image.id == 0) { %>
+                                <img class="ad_img" src="<%= image.name %>" alt="">
+                            <% } else { %>
+                                <img class="ad_img" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + image.name %>" alt="">
+                            <% } %>
                         </div>
                         <% } else { %>
                         <div class="item">
