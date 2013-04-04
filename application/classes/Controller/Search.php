@@ -22,7 +22,11 @@ class Controller_Search extends My_Layout_User_Controller {
 
     public function action_map() {
         Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
+                ->link_css('jquery.galleryview-3.0-dev')
                 ->link_js('libs/underscore')
+                ->link_js('libs/jquery.easing.1.3')
+                ->link_js('libs/jquery.timers-1.2')
+                ->link_js('libs/jquery.galleryview-3.0-dev')
                 ->link_js('public/assets/workspace')
                 ->link_js('search/map');
         if (!empty($_POST['type_id'])) {

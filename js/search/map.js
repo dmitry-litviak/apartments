@@ -105,11 +105,17 @@ map = {
                 dataType: 'json',
                 success: function(res) {
                   if (res.text = "success") {
-                    infowindow.content = me.template({
+                    infowindow.setContent(me.template({
                       item: res.data,
                       url: SYS.baseUrl
-                    });
-                    return infowindow.open(me.map, marker);
+                    }));
+                    infowindow.open(me.map, marker);
+                    return setTimeout((function() {
+                      return $("#gallery").galleryView({
+                        panel_width: 350,
+                        panel_height: 285
+                      });
+                    }), 50);
                   }
                 }
               });

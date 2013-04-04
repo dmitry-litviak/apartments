@@ -145,7 +145,7 @@ a.head, a.head:visited, a.head:hover, a.head:active {
 
 .ap-block {
     width: 350px;
-    height: 200px;
+    height: 340px;
 }
 
 .thumbnails {
@@ -160,4 +160,10 @@ a.head, a.head:visited, a.head:hover, a.head:active {
 .ad_img {
     height: 190px;
     margin: 0 auto;
+}
+
+.apblock {
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

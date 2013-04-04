@@ -81,8 +81,14 @@ map =
                 dataType: 'json'
                 success: (res) =>
                   if res.text = "success"
-                    infowindow.content = me.template({item: res.data, url : SYS.baseUrl})
+                    infowindow.setContent me.template({item: res.data, url : SYS.baseUrl})
                     infowindow.open me.map, marker
+                    setTimeout (->
+                      $("#gallery").galleryView
+                        panel_width: 350
+                        panel_height: 285
+                    ), 50
+
             me.markers.push(marker);
           markerClusterer = new MarkerClusterer(me.map, me.markers,
             maxZoom: 15
