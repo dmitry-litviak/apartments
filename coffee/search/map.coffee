@@ -89,7 +89,7 @@ map =
                         panel_height: 285
                         panel_scale: 'fit'
                         frame_scale: 'fit'
-                    ), 50
+                    ), 70
 
             me.markers.push(marker);
           markerClusterer = new MarkerClusterer(me.map, me.markers,

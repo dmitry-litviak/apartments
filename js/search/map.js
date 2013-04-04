@@ -117,7 +117,7 @@ map = {
                         panel_scale: 'fit',
                         frame_scale: 'fit'
                       });
-                    }), 50);
+                    }), 70);
                   }
                 }
               });
