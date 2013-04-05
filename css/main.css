@@ -167,3 +167,7 @@ a.head, a.head:visited, a.head:hover, a.head:active {
     overflow-x: hidden;
     overflow-y: auto;
 }
+
+.gv_galleryWrap {
+    background: white;
+}
