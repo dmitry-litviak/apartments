@@ -16,13 +16,18 @@ index = {
     this.marker = void 0;
     this.type_switcher = $("#type_switcher");
     this.type = $("#type");
-    return this.form_search = $("#form-search");
+    this.form_search = $("#form-search");
+    return this.body = $("body");
   },
   bind_events: function() {
+    this.body_bkg();
     this.autocomplete_init();
     this.form_submiter();
     this.prevent_enter();
     return this.init_validate();
+  },
+  body_bkg: function() {
+    return this.body.addClass("bkg");
   },
   update_ui: function(address, latLng) {
     this.gmap_input.autocomplete("close");

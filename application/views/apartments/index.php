@@ -1,6 +1,5 @@
-<legend>Apartments list</legend>
 <div class="center">
-<a class="btn btn-large btn-primary" href="<?php echo URL::site('apartments/create') ?>">Create Apartment</a>
+<a class="btn btn-large btn-primary btn-block" href="<?php echo URL::site('apartments/create') ?>">Create Apartment</a>
 </div>
 <?php if (!count($apartments)): ?>
     <h5>You don't have apartments. To create them click "Create" at the top<h5>

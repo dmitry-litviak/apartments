@@ -7,6 +7,12 @@ body {
     /* The html and body elements cannot have any padding or margin. */
 }
 
+.bkg {
+    background-image: url(../img/background.jpg);
+    background-position: inherit;
+    background-repeat: repeat repeat;
+}
+
 /* Wrapper for page content to push down footer */
 #wrap {
     min-height: 100%;
@@ -42,7 +48,7 @@ body {
 /* Not required for template or sticky footer method. */
 
 #wrap > .container {
-    padding-top: 60px;
+    padding-top: 50px;
 }
 .container .credit {
     margin: 20px 0;
@@ -165,4 +171,20 @@ a.head, a.head:visited, a.head:hover, a.head:active {
     font-size: 11px;
     margin-bottom: 0px;
     line-height: 10px !important;
+}
+
+.my-hero-unit {
+    padding: 10px;
+    margin-bottom: 8px;
+    line-height: 14px;
+    font-size: 15px;
+}
+
+.filter-btn {
+    cursor: hand;
+    cursor: pointer; 
+}
+
+.home_block {
+    border: 1px solid #ab8ffc;
 }

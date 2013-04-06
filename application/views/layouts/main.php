@@ -28,6 +28,12 @@
             <div class="container">
                 <?php echo $content; ?>
             </div>
+            <div class="hero-unit my-hero-unit" style="display: none">
+                Search filters:
+                <span class="badge">Any Price</span>
+                <span class="badge">All Beds</span>
+                <span class="badge badge-warning filter-btn">Change filter</span>
+            </div>
             <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
             <div id="push"></div>
         </div>

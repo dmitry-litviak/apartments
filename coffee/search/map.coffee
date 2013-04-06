@@ -13,8 +13,6 @@ map =
       to      : $("#to").val()
       from    : $("#from").val()
       type_id : $("#type_id").val()
-    @map_name    = "gmaps-canvas"
-    $("#" + @map_name).show()
     @jmap        = $("#gmaps-canvas")
     @map_options =
       zoom: 10
@@ -32,12 +30,42 @@ map =
     @shape =
       coord: [10, 0, 11, 1, 12, 2, 13, 3, 14, 4, 15, 5, 16, 6, 17, 7, 14, 8, 15, 9, 15, 10, 15, 11, 15, 12, 15, 13, 15, 14, 15, 15, 14, 16, 3, 16, 2, 15, 2, 14, 2, 13, 2, 12, 2, 11, 2, 10, 2, 9, 3, 8, 0, 7, 1, 6, 2, 5, 3, 4, 4, 3, 3, 2, 3, 1, 3, 0, 10, 0]
       type: "poly"
-      
+    
+    @search_pan  = $(".my-hero-unit")
+    @map_name    = "gmaps-canvas"
+    $("#" + @map_name).show()
+    @search_pan.show()
+    
+    @filter_btn     = $(".filter-btn")
+    @modal          = $('#myModal')
+    @title_modal    = $('#title-modal')
+    @search_btn     = $('#fin-search')
+    
   bind_events: ->
     do @initialize_map
+    do @search_clicker
+    do @fin_search_clicker
+    
+  fin_search_clicker: ->
+    @search_btn.click (e) =>
+      el = $(e.currentTarget)
+      @modal.modal('hide')
+#      $.ajax
+#        url: SYS.baseUrl + 'admin/apartments/delete'
+#        data: $.param({id : el.data('id')})
+#        type: 'POST'
+#        dataType: 'json'
+#        success: (res) =>
+#          if res.text = "success"
+#            $('.media#' + el.data('id')).remove()
+            
+  search_clicker: ->
+    @filter_btn.click (e) =>
+      el = $(e.currentTarget)
+      @modal.modal()
     
   initialize_map: ->
-    @jmap.css('height', innerHeight/1.15)
+    @jmap.css('height', innerHeight/1.26)
     unless @search_options.lat == "" and @search_options.lng == ""
       @map_options.center = new google.maps.LatLng(@search_options.lat, @search_options.lng)  
     gmap = document.getElementById(@map_name)

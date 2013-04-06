@@ -17,8 +17,6 @@ map = {
       from: $("#from").val(),
       type_id: $("#type_id").val()
     };
-    this.map_name = "gmaps-canvas";
-    $("#" + this.map_name).show();
     this.jmap = $("#gmaps-canvas");
     this.map_options = {
       zoom: 10,
@@ -32,17 +30,43 @@ map = {
     this.markers = [];
     this.image = new google.maps.MarkerImage("../img/marker-images/image.png", new google.maps.Size(18, 17), new google.maps.Point(0, 0), new google.maps.Point(9, 17));
     this.shadow = new google.maps.MarkerImage("../img/marker-images/shadow.png", new google.maps.Size(30, 17), new google.maps.Point(0, 0), new google.maps.Point(9, 17));
-    return this.shape = {
+    this.shape = {
       coord: [10, 0, 11, 1, 12, 2, 13, 3, 14, 4, 15, 5, 16, 6, 17, 7, 14, 8, 15, 9, 15, 10, 15, 11, 15, 12, 15, 13, 15, 14, 15, 15, 14, 16, 3, 16, 2, 15, 2, 14, 2, 13, 2, 12, 2, 11, 2, 10, 2, 9, 3, 8, 0, 7, 1, 6, 2, 5, 3, 4, 4, 3, 3, 2, 3, 1, 3, 0, 10, 0],
       type: "poly"
     };
+    this.search_pan = $(".my-hero-unit");
+    this.map_name = "gmaps-canvas";
+    $("#" + this.map_name).show();
+    this.search_pan.show();
+    this.filter_btn = $(".filter-btn");
+    this.modal = $('#myModal');
+    this.title_modal = $('#title-modal');
+    return this.search_btn = $('#fin-search');
   },
   bind_events: function() {
-    return this.initialize_map();
+    this.initialize_map();
+    this.search_clicker();
+    return this.fin_search_clicker();
+  },
+  fin_search_clicker: function() {
+    var _this = this;
+    return this.search_btn.click(function(e) {
+      var el;
+      el = $(e.currentTarget);
+      return _this.modal.modal('hide');
+    });
+  },
+  search_clicker: function() {
+    var _this = this;
+    return this.filter_btn.click(function(e) {
+      var el;
+      el = $(e.currentTarget);
+      return _this.modal.modal();
+    });
   },
   initialize_map: function() {
     var gmap;
-    this.jmap.css('height', innerHeight / 1.15);
+    this.jmap.css('height', innerHeight / 1.26);
     if (!(this.search_options.lat === "" && this.search_options.lng === "")) {
       this.map_options.center = new google.maps.LatLng(this.search_options.lat, this.search_options.lng);
     }

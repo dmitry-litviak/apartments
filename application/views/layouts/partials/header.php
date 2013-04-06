@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <div class="span2" style="margin-top: 2px">
+            <div class="span2" style="margin-top: 2px; margin-left: 0px">
                 <a class="brand my-brand" href="<?php echo URL::base() ?>">Apartments Site</a><br>
                 <label class="tag-line">Tag Line</label>
             </div>

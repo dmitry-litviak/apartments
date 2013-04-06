@@ -32,6 +32,23 @@ class Controller_Search extends My_Layout_User_Controller {
         if (!empty($_POST['type_id'])) {
             $_POST['type_id'] = json_encode($_POST['type_id']);
         }
+
+        if (empty($_POST['lng'])) {
+            $_POST['lng'] = -110;
+        }
+
+        if (empty($_POST['lat'])) {
+            $_POST['lat'] = 52;
+        }
+
+        if (empty($_POST['from'])) {
+            $_POST['from'] = "";
+        }
+
+        if (empty($_POST['to'])) {
+            $_POST['to'] = "";
+        }
+        $_POST['types'] = ORM::factory('Type')->find_all();
         $this->setTitle('Map Page')
                 ->view('search/map', $_POST)
                 ->render();
@@ -76,11 +93,11 @@ class Controller_Search extends My_Layout_User_Controller {
         $images = DB::select()->from('images')->where('apartment_id', '=', $apartment->id)->execute()->as_array();
         if (!count($images)) {
             $images[0]['name'] = URL::site('img/icon-no-image-512.png');
-            $images[0]['id'] = '0'; 
+            $images[0]['id'] = '0';
         }
         Helper_Jsonresponse::render_json('success', "", array("ap" => $apartment->as_array(),
             "email" => $apartment->owner->email,
-            "images"=> $images,
+            "images" => $images,
             "fav" => array(
                 "status" => $fav,
                 "user_id" => $user_id,

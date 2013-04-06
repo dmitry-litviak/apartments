@@ -15,15 +15,20 @@ index =
     @type_switcher = $("#type_switcher") 
     @type          = $("#type") 
     @form_search   = $("#form-search")
+    @body          = $("body")
     
   bind_events: ->
 #    do @gmaps_init
+    do @body_bkg
     do @autocomplete_init
     #not map:
     do @form_submiter
     do @prevent_enter
     do @init_validate
 #    do @init_type_switcher
+  
+  body_bkg: ->
+    @body.addClass("bkg")
   
   update_ui: (address, latLng) ->
     @gmap_input.autocomplete "close"
