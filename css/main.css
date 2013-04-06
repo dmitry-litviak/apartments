@@ -1,82 +1,66 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
 body {
-    padding-top: 20px;
-    padding-bottom: 60px;
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
 }
 
-/* Custom container */
-.container {
-    margin: 0 auto;
-    max-width: 1000px;
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
 }
-.container > hr {
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+    height: 60px;
+}
+#footer {
+    background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+    #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+    padding-top: 60px;
+}
+.container .credit {
     margin: 20px 0;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-    margin: 80px 0;
-    text-align: center;
-}
-.jumbotron h1 {
-    font-size: 100px;
-    line-height: 1;
-}
-.jumbotron .lead {
-    font-size: 24px;
-    line-height: 1.25;
-}
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
-
-/* Supporting marketing content */
-.marketing {
-    margin: 60px 0;
-}
-.marketing p + h4 {
-    margin-top: 28px;
-}
-
-
-/* Customize the navbar links to be fill the entire space of the .navbar */
-.navbar .navbar-inner {
-    padding: 0;
-}
-.navbar .nav {
-    margin: 0;
-    display: table;
-    width: 100%;
-}
-.navbar .nav li {
-    display: table-cell;
-    width: 1%;
-    float: none;
-}
-.navbar .nav li a {
-    font-weight: bold;
-    text-align: center;
-    border-left: 1px solid rgba(255,255,255,.75);
-    border-right: 1px solid rgba(0,0,0,.1);
-}
-.navbar .nav li:first-child a {
-    border-left: 0;
-    border-radius: 3px 0 0 3px;
-}
-.navbar .nav li:last-child a {
-    border-right: 0;
-    border-radius: 0 3px 3px 0;
+code {
+    font-size: 80%;
 }
 .center {
     text-align:center;
 }
 
 #gmaps-canvas {
-  height: 334px;
-  border: 1px solid #999;
-  -moz-box-shadow:    0px 0px 5px #ccc;
-  -webkit-box-shadow: 0px 0px 5px #ccc;
-  box-shadow:         0px 0px 5px #ccc;
+    height: 334px;
+    border: 1px solid #999;
+    -moz-box-shadow:    0px 0px 5px #ccc;
+    -webkit-box-shadow: 0px 0px 5px #ccc;
+    box-shadow:         0px 0px 5px #ccc;
 }
 
 #gmaps-canvas img {
@@ -84,7 +68,7 @@ body {
 }
 
 #gmaps-error {
-  color: #cc0000;
+    color: #cc0000;
 }
 
 .bordered {
@@ -104,18 +88,18 @@ body {
 
 
 label.valid {
-  /*width: 30px;*/
-  /*height: 30px;*/
-  /*padding-top: 7px;*/
-  /*background: url(assets/img/valid.png) center center no-repeat;*/
-  display: inline-block;
-  text-indent: -9999px;
+    /*width: 30px;*/
+    /*height: 30px;*/
+    /*padding-top: 7px;*/
+    /*background: url(assets/img/valid.png) center center no-repeat;*/
+    display: inline-block;
+    text-indent: -9999px;
 }
 label.error {
-  font-weight: bold;
-  color: red;
-  /*padding: 2px 8px;*/
-  /*margin-top: 2px;*/
+    font-weight: bold;
+    color: red;
+    /*padding: 2px 8px;*/
+    /*margin-top: 2px;*/
 }
 
 .small-image{
@@ -127,12 +111,12 @@ label.error {
 }
 
 .btn-group>.btn:hover, .btn-group>.btn:focus, .btn-group>.btn:active, .btn-group>.btn.active {
-z-index: 0;
+    z-index: 0;
 }
 
 a.head, a.head:visited, a.head:hover, a.head:active {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 .center-vert {

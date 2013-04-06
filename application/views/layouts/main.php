@@ -21,18 +21,19 @@
 
     </head>
     <body>
-        <div style="max-width: 100%">
+        <!--<div style="max-width: 100%">-->
+        <div id="wrap">
+            <?php echo View::factory('layouts/partials/header')->render(); ?>
+            <?php Helper_Alert::get_flash() ?>
             <div class="container">
-                <?php echo View::factory('layouts/partials/header')->render(); ?>
-                <?php Helper_Alert::get_flash() ?>
                 <?php echo $content; ?>
             </div>
             <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
-            <div class="container">
-                <hr style="margin: 10px 0px">
-                <?php echo View::factory('layouts/partials/footer')->render(); ?>
-            </div>
+            <div id="push"></div>
         </div>
+
+        <?php echo View::factory('layouts/partials/footer')->render(); ?>
+        <!--</div>-->
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
         <?php echo Helper_Output::renderJs(); ?>
     </body>
