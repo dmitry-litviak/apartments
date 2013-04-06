@@ -155,3 +155,13 @@ a.head, a.head:visited, a.head:hover, a.head:active {
 .gv_galleryWrap {
     background: white;
 }
+
+.my-brand {
+    padding: 0px 20px 0px !important;
+    font-size: 17px  !important;
+}
+
+.tag-line {
+    font-size: 11px;
+    margin-bottom: 0px;
+}
