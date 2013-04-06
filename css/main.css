@@ -164,4 +164,5 @@ a.head, a.head:visited, a.head:hover, a.head:active {
 .tag-line {
     font-size: 11px;
     margin-bottom: 0px;
+    line-height: 10px !important;
 }
