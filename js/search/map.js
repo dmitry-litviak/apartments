@@ -42,7 +42,7 @@ map = {
   },
   initialize_map: function() {
     var gmap;
-    this.jmap.css('height', innerHeight / 1.2);
+    this.jmap.css('height', innerHeight / 1.15);
     if (!(this.search_options.lat === "" && this.search_options.lng === "")) {
       this.map_options.center = new google.maps.LatLng(this.search_options.lat, this.search_options.lng);
     }

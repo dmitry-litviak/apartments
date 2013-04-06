@@ -37,7 +37,7 @@ map =
     do @initialize_map
     
   initialize_map: ->
-    @jmap.css('height', innerHeight/1.2)
+    @jmap.css('height', innerHeight/1.15)
     unless @search_options.lat == "" and @search_options.lng == ""
       @map_options.center = new google.maps.LatLng(@search_options.lat, @search_options.lng)  
     gmap = document.getElementById(@map_name)
