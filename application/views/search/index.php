@@ -1,4 +1,4 @@
-<form class="form-actions center home_block" action="<?php echo URL::site('search/map') ?>" method="POST" id="form-search">
+<form class="form-actions center home_block" action="<?php echo URL::site('search/map') ?>" method="GET" id="form-search">
     <fieldset class="places">
         <div class="row-fluid">
             <div class="span12">

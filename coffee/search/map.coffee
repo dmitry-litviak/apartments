@@ -34,36 +34,133 @@ map =
     @search_pan  = $(".my-hero-unit")
     @map_name    = "gmaps-canvas"
     $("#" + @map_name).show()
-    @search_pan.show()
     
     @filter_btn     = $(".filter-btn")
     @modal          = $('#myModal')
     @title_modal    = $('#title-modal')
     @search_btn     = $('#fin-search')
+    @gmap_input     = $("#search")
+    @type_switcher  = $("#type_switcher") 
+    @type           = $("#type") 
+    @form_search    = $("#form-search")
+    @lat_input      = $("#lat")
+    @lng_input      = $("#lng")
+    @search_input   = $("#search_input")
+    @filter_label   = $("#filter_label")
+    @from           = $("#from")
+    @to             = $("#to")
+    @sel_types      = $("#sel_types")
     
   bind_events: ->
     do @initialize_map
     do @search_clicker
-    do @fin_search_clicker
+    do @autocomplete_init
+    do @form_submiter
+    do @prevent_enter
+    do @init_validate
+    do @init_search_filter
     
-  fin_search_clicker: ->
-    @search_btn.click (e) =>
-      el = $(e.currentTarget)
-      @modal.modal('hide')
-#      $.ajax
-#        url: SYS.baseUrl + 'admin/apartments/delete'
-#        data: $.param({id : el.data('id')})
-#        type: 'POST'
-#        dataType: 'json'
-#        success: (res) =>
-#          if res.text = "success"
-#            $('.media#' + el.data('id')).remove()
+  init_search_filter: ->
+    @search_pan.show()
+    console.log @search_input.val()
+    unless @search_input.val() is ""
+      @filter_label.after ' <span class="badge">' + @search_input.val() + '</span>'
+    unless @to.val() is ""
+      @filter_label.after ' <span class="badge">To: $' + @to.val() + '</span>'
+    unless @from.val() is ""
+      @filter_label.after ' <span class="badge">From: $' + @from.val() + '</span>'
+    if @to.val() is "" and @from.val() is ""
+      @filter_label.after ' <span class="badge">Any Price</span>'
+    unless @sel_types.val() is ""
+      @filter_label.after ' <span class="badge">Beds: ' + @sel_types.val() + '</span>'
+    else
+     @filter_label.after ' <span class="badge">Any Beds</span>' 
+      
+  form_submiter: ->
+    me = @
+    @form_search.submit =>
+      if @form_search.valid()
+        $(".btn-group .btn.active").each ->
+          input = document.createElement("input")
+          input.setAttribute "type", "hidden"
+          input.setAttribute "name", "type_id[]"
+          input.setAttribute "value", @value
+          me.form_search.append input
+          
+  prevent_enter: ->
+    $(window).keydown (event) ->
+      if event.keyCode is 13
+        event.preventDefault()
+        false
+        
+  init_validate: ->
+    @form_search.validate
+      rules:
+        search:
+          required: true
+
+        highlight: (label) ->
+          $(label).closest(".control-group").addClass "error"
+
+        success: (label) ->
+          label.text("OK!").addClass("valid").closest(".control-group").addClass "success"
             
   search_clicker: ->
     @filter_btn.click (e) =>
       el = $(e.currentTarget)
       @modal.modal()
-    
+  
+  update_ui: (address, latLng) ->
+    @gmap_input.autocomplete "close"
+    @gmap_input.val address
+    @lat_input.val latLng.lat()
+    @lng_input.val latLng.lng()
+  
+  autocomplete_init: ->
+    me = @
+    @geocoder = new google.maps.Geocoder()
+    @gmap_input.autocomplete
+      source: (request, response) ->
+        me.geocoder.geocode
+          address: request.term
+        , (results, status) ->
+          response $.map(results, (item) ->
+            label: item.formatted_address
+            value: item.formatted_address
+            geocode: item
+          )
+      select: (event, ui) ->
+        me.update_ui ui.item.value, ui.item.geocode.geometry.location
+    @gmap_input.bind "keydown", (event) =>
+      if event.keyCode is 13
+        @geocode_lookup "address", @gmap_input.val(), true
+        @gmap_input.autocomplete "disable"
+      else
+        @gmap_input.autocomplete "enable"
+  
+  geocode_lookup: (type, value, update) ->
+    me = @
+    update = (if typeof update isnt "undefined" then update else false)
+    request = {}
+    request[type] = value
+    @geocoder.geocode request, (results, status) ->
+      me.gmap_error.html ""
+      me.gmap_error.hide()
+      if status is google.maps.GeocoderStatus.OK
+        if results[0]
+          me.update_ui results[0].formatted_address, results[0].geometry.location
+        else
+          me.gmap_error.html "Sorry, something went wrong. Try again!"
+          me.gmap_error.show()
+      else
+        if type is "address"
+          me.gmap_error.html "Sorry! We couldn't find " + value + ". Try a different search term."
+          me.gmap_error.show()
+        else
+          me.gmap_error.html "Woah... that's pretty remote! You're going to have to manually enter a place name."
+          me.gmap_error.show()
+          me.update_ui "", value
+  
   initialize_map: ->
     @jmap.css('height', innerHeight - 158)
     unless @search_options.lat == "" and @search_options.lng == ""

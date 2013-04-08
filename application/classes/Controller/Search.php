@@ -27,30 +27,38 @@ class Controller_Search extends My_Layout_User_Controller {
                 ->link_js('libs/jquery.easing.1.3')
                 ->link_js('libs/jquery.timers-1.2')
                 ->link_js('libs/jquery.galleryview-3.0-dev')
+                ->link_js('libs/jquery.validate.min')
                 ->link_js('public/assets/workspace')
                 ->link_js('search/map');
-        if (!empty($_POST['type_id'])) {
-            $_POST['type_id'] = json_encode($_POST['type_id']);
+//        Helper_Main::print_flex($_GET);die;
+        $_GET['sel_types'] = "";
+        if (!empty($_GET['type_id'])) {
+            if (count($_GET['type_id']) > 2) {
+                $_GET['sel_types'] = implode(", ", $_GET['type_id']);
+            } else {
+                $_GET['sel_types'] = $_GET['type_id'][0];
+            }
+            $_GET['type_id'] = json_encode($_GET['type_id']);
         }
 
-        if (empty($_POST['lng'])) {
-            $_POST['lng'] = -110;
+        if (empty($_GET['lng'])) {
+            $_GET['lng'] = -110;
         }
 
-        if (empty($_POST['lat'])) {
-            $_POST['lat'] = 52;
+        if (empty($_GET['lat'])) {
+            $_GET['lat'] = 52;
         }
 
-        if (empty($_POST['from'])) {
-            $_POST['from'] = "";
+        if (empty($_GET['from'])) {
+            $_GET['from'] = "";
         }
 
-        if (empty($_POST['to'])) {
-            $_POST['to'] = "";
+        if (empty($_GET['to'])) {
+            $_GET['to'] = "";
         }
-        $_POST['types'] = ORM::factory('Type')->find_all();
+        $_GET['types'] = ORM::factory('Type')->find_all();
         $this->setTitle('Map Page')
-                ->view('search/map', $_POST)
+                ->view('search/map', $_GET)
                 ->render();
     }
 

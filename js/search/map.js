@@ -37,23 +37,90 @@ map = {
     this.search_pan = $(".my-hero-unit");
     this.map_name = "gmaps-canvas";
     $("#" + this.map_name).show();
-    this.search_pan.show();
     this.filter_btn = $(".filter-btn");
     this.modal = $('#myModal');
     this.title_modal = $('#title-modal');
-    return this.search_btn = $('#fin-search');
+    this.search_btn = $('#fin-search');
+    this.gmap_input = $("#search");
+    this.type_switcher = $("#type_switcher");
+    this.type = $("#type");
+    this.form_search = $("#form-search");
+    this.lat_input = $("#lat");
+    this.lng_input = $("#lng");
+    this.search_input = $("#search_input");
+    this.filter_label = $("#filter_label");
+    this.from = $("#from");
+    this.to = $("#to");
+    return this.sel_types = $("#sel_types");
   },
   bind_events: function() {
     this.initialize_map();
     this.search_clicker();
-    return this.fin_search_clicker();
+    this.autocomplete_init();
+    this.form_submiter();
+    this.prevent_enter();
+    this.init_validate();
+    return this.init_search_filter();
   },
-  fin_search_clicker: function() {
-    var _this = this;
-    return this.search_btn.click(function(e) {
-      var el;
-      el = $(e.currentTarget);
-      return _this.modal.modal('hide');
+  init_search_filter: function() {
+    this.search_pan.show();
+    console.log(this.search_input.val());
+    if (this.search_input.val() !== "") {
+      this.filter_label.after(' <span class="badge">' + this.search_input.val() + '</span>');
+    }
+    if (this.to.val() !== "") {
+      this.filter_label.after(' <span class="badge">To: $' + this.to.val() + '</span>');
+    }
+    if (this.from.val() !== "") {
+      this.filter_label.after(' <span class="badge">From: $' + this.from.val() + '</span>');
+    }
+    if (this.to.val() === "" && this.from.val() === "") {
+      this.filter_label.after(' <span class="badge">Any Price</span>');
+    }
+    if (this.sel_types.val() !== "") {
+      return this.filter_label.after(' <span class="badge">Beds: ' + this.sel_types.val() + '</span>');
+    } else {
+      return this.filter_label.after(' <span class="badge">Any Beds</span>');
+    }
+  },
+  form_submiter: function() {
+    var me,
+      _this = this;
+    me = this;
+    return this.form_search.submit(function() {
+      if (_this.form_search.valid()) {
+        return $(".btn-group .btn.active").each(function() {
+          var input;
+          input = document.createElement("input");
+          input.setAttribute("type", "hidden");
+          input.setAttribute("name", "type_id[]");
+          input.setAttribute("value", this.value);
+          return me.form_search.append(input);
+        });
+      }
+    });
+  },
+  prevent_enter: function() {
+    return $(window).keydown(function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  },
+  init_validate: function() {
+    return this.form_search.validate({
+      rules: {
+        search: {
+          required: true
+        },
+        highlight: function(label) {
+          return $(label).closest(".control-group").addClass("error");
+        },
+        success: function(label) {
+          return label.text("OK!").addClass("valid").closest(".control-group").addClass("success");
+        }
+      }
     });
   },
   search_clicker: function() {
@@ -62,6 +129,72 @@ map = {
       var el;
       el = $(e.currentTarget);
       return _this.modal.modal();
+    });
+  },
+  update_ui: function(address, latLng) {
+    this.gmap_input.autocomplete("close");
+    this.gmap_input.val(address);
+    this.lat_input.val(latLng.lat());
+    return this.lng_input.val(latLng.lng());
+  },
+  autocomplete_init: function() {
+    var me,
+      _this = this;
+    me = this;
+    this.geocoder = new google.maps.Geocoder();
+    this.gmap_input.autocomplete({
+      source: function(request, response) {
+        return me.geocoder.geocode({
+          address: request.term
+        }, function(results, status) {
+          return response($.map(results, function(item) {
+            return {
+              label: item.formatted_address,
+              value: item.formatted_address,
+              geocode: item
+            };
+          }));
+        });
+      },
+      select: function(event, ui) {
+        return me.update_ui(ui.item.value, ui.item.geocode.geometry.location);
+      }
+    });
+    return this.gmap_input.bind("keydown", function(event) {
+      if (event.keyCode === 13) {
+        _this.geocode_lookup("address", _this.gmap_input.val(), true);
+        return _this.gmap_input.autocomplete("disable");
+      } else {
+        return _this.gmap_input.autocomplete("enable");
+      }
+    });
+  },
+  geocode_lookup: function(type, value, update) {
+    var me, request;
+    me = this;
+    update = (typeof update !== "undefined" ? update : false);
+    request = {};
+    request[type] = value;
+    return this.geocoder.geocode(request, function(results, status) {
+      me.gmap_error.html("");
+      me.gmap_error.hide();
+      if (status === google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+          return me.update_ui(results[0].formatted_address, results[0].geometry.location);
+        } else {
+          me.gmap_error.html("Sorry, something went wrong. Try again!");
+          return me.gmap_error.show();
+        }
+      } else {
+        if (type === "address") {
+          me.gmap_error.html("Sorry! We couldn't find " + value + ". Try a different search term.");
+          return me.gmap_error.show();
+        } else {
+          me.gmap_error.html("Woah... that's pretty remote! You're going to have to manually enter a place name.");
+          me.gmap_error.show();
+          return me.update_ui("", value);
+        }
+      }
     });
   },
   initialize_map: function() {
