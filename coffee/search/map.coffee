@@ -189,7 +189,7 @@ map =
           me.update_ui "", value
   
   initialize_map: ->
-    @jmap.css('height', innerHeight - 158)
+    @jmap.css('height', innerHeight - 157)
     unless @search_options.lat == "" and @search_options.lng == ""
       @map_options.center = new google.maps.LatLng(@search_options.lat, @search_options.lng)  
     gmap = document.getElementById(@map_name)
