@@ -139,5 +139,17 @@ class Helper_Output {
             return '<span class="label label-important">In the process of approving by administrator</span>';
         }
     }
+    
+    public static function get_alert($alert) {
+        $query = array(
+            'search' => $alert->search,
+            'from'   => $alert->from,
+            'to'     => $alert->to,
+            'lat'    => $alert->lat,
+            'lng'    => $alert->lng,
+            'type_id'   => json_decode($alert->type_id)
+        );
+        return URL::site('search/map') . URL::query($query);;
+    }
 
 }

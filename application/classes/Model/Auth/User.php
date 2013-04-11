@@ -17,7 +17,8 @@ class Model_Auth_User extends ORM {
 	protected $_has_many = array(
 		'user_tokens'   => array('model' => 'User_Token'),
 		'roles'         => array('model' => 'Role', 'through' => 'roles_users'),
-                'apartments'    => array('model' => 'Apartment', 'through' => 'apartments_users')
+                'apartments'    => array('model' => 'Apartment', 'through' => 'apartments_users'),
+                'alerts'        => array('model' => 'Alert'),
 	);
         protected $_belongs_to = array(
 		'user_profile' => array('model' => 'User_Profile'),

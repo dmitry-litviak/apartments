@@ -1,1 +1,0 @@
-User <?php echo  $user['user_fullname']; ?> (<?php echo $user['email'];?>) want a request callback.

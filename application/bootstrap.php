@@ -128,6 +128,7 @@ Kohana::modules(array(
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+         'email'      => MODPATH.'email',
 	));
 
 Cookie::$salt 		= 'fdsh-tretgd-re-gfds-gt-erg-fdg-';

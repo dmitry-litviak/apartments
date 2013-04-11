@@ -21,6 +21,7 @@ class Controller_Search extends My_Layout_User_Controller {
     }
 
     public function action_map() {
+        Helper_Mainmenu::setActiveItem('map');
         Helper_Output::factory()->link_css('jquery-ui-1.8.16.custom')
                 ->link_css('jquery.galleryview-3.0-dev')
                 ->link_js('libs/underscore')
@@ -30,13 +31,16 @@ class Controller_Search extends My_Layout_User_Controller {
                 ->link_js('libs/jquery.validate.min')
                 ->link_js('public/assets/workspace')
                 ->link_js('search/map');
-//        Helper_Main::print_flex($_GET);die;
         $_GET['sel_types'] = "";
         if (!empty($_GET['type_id'])) {
-            if (count($_GET['type_id']) > 2) {
-                $_GET['sel_types'] = implode(", ", $_GET['type_id']);
+            $_GET['sel_types'] = array();
+            foreach ($_GET['type_id'] as $value) {
+               $_GET['sel_types'][] = ORM::factory("Type", $value)->title;
+            }
+            if (count($_GET['type_id']) >= 2) {
+                $_GET['sel_types'] = implode(", ", $_GET['sel_types']);
             } else {
-                $_GET['sel_types'] = $_GET['type_id'][0];
+                $_GET['sel_types'] = $_GET['sel_types'][0];
             }
             $_GET['type_id'] = json_encode($_GET['type_id']);
         }
@@ -44,7 +48,11 @@ class Controller_Search extends My_Layout_User_Controller {
         if (empty($_GET['lng'])) {
             $_GET['lng'] = -110;
         }
-
+        
+        if (empty($_GET['search'])) {
+            $_GET['search'] = "";
+        }
+        
         if (empty($_GET['lat'])) {
             $_GET['lat'] = 52;
         }

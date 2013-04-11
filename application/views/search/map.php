@@ -51,4 +51,26 @@
     </form>
 </div>
 
+<div id="alertModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-body">
+        <fieldset class="places">
+            <div class="row-fluid">
+                <div class="span12">
+                    <legend class="lead">Get alerts for this search</legend>
+                    <div class="control-group">
+                        <label class="control-label" for="title-alert">Name your search:</label>
+                        <div class="controls">
+                            <input type="text" class="span12" name='title' id="title-alert">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-warning" id="fin-alert" >Save</button>
+    </div>
+</div>
+
 <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js" ></script>

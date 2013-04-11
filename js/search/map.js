@@ -11,6 +11,7 @@ map = {
     this.gmap_input = $("#gmaps-input-address");
     this.gmap_error = $("#gmaps-error");
     this.search_options = {
+      search: $("#search_input").val(),
       lat: $("#lat").val(),
       lng: $("#lng").val(),
       to: $("#to").val(),
@@ -38,7 +39,9 @@ map = {
     this.map_name = "gmaps-canvas";
     $("#" + this.map_name).show();
     this.filter_btn = $(".filter-btn");
+    this.alert_btn = $(".alert-btn");
     this.modal = $('#myModal');
+    this.modal_alert = $('#alertModal');
     this.title_modal = $('#title-modal');
     this.search_btn = $('#fin-search');
     this.gmap_input = $("#search");
@@ -51,7 +54,10 @@ map = {
     this.filter_label = $("#filter_label");
     this.from = $("#from");
     this.to = $("#to");
-    return this.sel_types = $("#sel_types");
+    this.sel_types = $("#sel_types");
+    this.fin_alert = $("#fin-alert");
+    this.title_alert = $("#title-alert");
+    return this.ap_length = 0;
   },
   bind_events: function() {
     this.initialize_map();
@@ -60,7 +66,34 @@ map = {
     this.form_submiter();
     this.prevent_enter();
     this.init_validate();
-    return this.init_search_filter();
+    this.init_search_filter();
+    this.alert_clicker();
+    return this.fin_alert_click();
+  },
+  fin_alert_click: function() {
+    var me,
+      _this = this;
+    me = this;
+    return this.fin_alert.click(function(e) {
+      var el;
+      el = $(e.currentTarget);
+      return $.ajax({
+        url: SYS.baseUrl + 'alerts/save',
+        data: $.param({
+          title: me.title_alert.val(),
+          options: me.search_options,
+          count: me.ap_length
+        }),
+        type: 'POST',
+        dataType: 'json',
+        success: function(res) {
+          if (res.text = "success") {
+            _this.modal_alert.modal('hide');
+            return location.href = SYS.baseUrl + 'alerts';
+          }
+        }
+      });
+    });
   },
   init_search_filter: function() {
     this.search_pan.show();
@@ -129,6 +162,14 @@ map = {
       var el;
       el = $(e.currentTarget);
       return _this.modal.modal();
+    });
+  },
+  alert_clicker: function() {
+    var _this = this;
+    return this.alert_btn.click(function(e) {
+      var el;
+      el = $(e.currentTarget);
+      return _this.modal_alert.modal();
     });
   },
   update_ui: function(address, latLng) {
@@ -240,6 +281,7 @@ map = {
       success: function(res) {
         var markerClusterer;
         if (res.text = "success") {
+          me.ap_length = res.data.length;
           $.each(res.data, function(i, item) {
             var infowindow, marker;
             marker = new google.maps.Marker({

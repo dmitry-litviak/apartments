@@ -30,7 +30,10 @@
             </div>
             <div class="hero-unit my-hero-unit" style="display: none">
                 <span id="filter_label">Search filters:</span>
-                <span class="badge badge-warning filter-btn">Change filter</span>
+                -- <span class="badge badge-warning filter-btn">Change filter</span>
+                <?php if (Auth::instance()->logged_in()): ?>
+                    -- <span class="badge badge-info alert-btn"><i class="icon-time icon-white"></i> Get alerts for this search</span>
+                <?php endif; ?>
             </div>
             <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
             <div id="push"></div>

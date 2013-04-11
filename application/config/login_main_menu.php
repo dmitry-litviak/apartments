@@ -5,6 +5,11 @@ return array(
                                                       'url'     => 'search',
                                                       'status'  => 1
                                       ),
+                                      "map" => array(
+                                                      'title'   => 'Map',
+                                                      'url'     => 'search/map',
+                                                      'status'  => 0
+                                      ),
                                       "profile" => array(
                                                       'title' 	=> 'My Profile',
                                                       'url'    	=> 'user/profile',
@@ -18,6 +23,11 @@ return array(
                                       "favorites" => array(
                                                       'title' 	=> 'My Favorites',
                                                       'url'    	=> 'favorites',
+                                                      'status'  => 0
+                                      ),
+                                      "alerts" => array(
+                                                      'title' 	=> 'My Alerts',
+                                                      'url'    	=> 'alerts',
                                                       'status'  => 0
                                       ),
                                       "logout" => array(

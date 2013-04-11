@@ -1,0 +1,1 @@
+<p>You have new alerts. Follow the link to view them.</p>

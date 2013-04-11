@@ -7,7 +7,8 @@ map =
   detect_elements: ->
     @gmap_input     = $("#gmaps-input-address")
     @gmap_error     = $("#gmaps-error")
-    @search_options = 
+    @search_options =
+      search  : $("#search_input").val()
       lat     : $("#lat").val()
       lng     : $("#lng").val()
       to      : $("#to").val()
@@ -36,7 +37,9 @@ map =
     $("#" + @map_name).show()
     
     @filter_btn     = $(".filter-btn")
+    @alert_btn      = $(".alert-btn")
     @modal          = $('#myModal')
+    @modal_alert    = $('#alertModal')
     @title_modal    = $('#title-modal')
     @search_btn     = $('#fin-search')
     @gmap_input     = $("#search")
@@ -50,6 +53,9 @@ map =
     @from           = $("#from")
     @to             = $("#to")
     @sel_types      = $("#sel_types")
+    @fin_alert      = $("#fin-alert")
+    @title_alert    = $("#title-alert")
+    @ap_length      = 0;
     
   bind_events: ->
     do @initialize_map
@@ -59,6 +65,22 @@ map =
     do @prevent_enter
     do @init_validate
     do @init_search_filter
+    do @alert_clicker
+    do @fin_alert_click
+    
+  fin_alert_click: ->
+    me = @
+    @fin_alert.click (e) =>
+      el = $(e.currentTarget)
+      $.ajax
+        url: SYS.baseUrl + 'alerts/save'
+        data: $.param({title : me.title_alert.val(), options : me.search_options, count : me.ap_length})
+        type: 'POST'
+        dataType: 'json'
+        success: (res) =>
+          if res.text = "success"
+            @modal_alert.modal('hide')
+            location.href = SYS.baseUrl + 'alerts'
     
   init_search_filter: ->
     @search_pan.show()
@@ -109,6 +131,11 @@ map =
     @filter_btn.click (e) =>
       el = $(e.currentTarget)
       @modal.modal()
+  
+  alert_clicker: ->
+    @alert_btn.click (e) =>
+      el = $(e.currentTarget)
+      @modal_alert.modal()
   
   update_ui: (address, latLng) ->
     @gmap_input.autocomplete "close"
@@ -190,6 +217,7 @@ map =
       dataType: 'json'
       success: (res) =>
         if res.text = "success"
+          me.ap_length = res.data.length
           $.each res.data, (i, item) ->
             marker     = new google.maps.Marker(
               position: new google.maps.LatLng(item.lat, item.lng)

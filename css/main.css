@@ -185,6 +185,11 @@ a.head, a.head:visited, a.head:hover, a.head:active {
     cursor: pointer; 
 }
 
+.alert-btn {
+    cursor: hand;
+    cursor: pointer;   
+}
+
 .home_block {
     border: 1px solid #ab8ffc;
 }
