@@ -1,6 +1,6 @@
 <?php
 
-abstract class Stripe_Vendor
+abstract class Stripe
 {
   public static $apiKey;
   public static $apiBase = 'https://api.stripe.com';

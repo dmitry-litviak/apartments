@@ -6,9 +6,9 @@ class Controller_Payment extends My_Layout_User_Controller {
 
     public function before() {
         parent::before();
-        $key = Kohana::$config->load('stripe')->get('test');
-        
-        Stripe::setApiKey($key['secret_key']);
+        Kohana_Stripe::init();
+//        $key = Kohana::$config->load('stripe')->get('test');
+//        Stripe::setApiKey($key['secret_key']);
     }
 
     public function action_index() {
