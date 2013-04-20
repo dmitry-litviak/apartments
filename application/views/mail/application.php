@@ -2,9 +2,7 @@
     <body>
         <p>Hi, <?php echo $obj['owner']->first_name ?></p>
         <p>Someone interested in your apartment</p>
-        <p>Info:</p>
-        <a href="<?php echo $obj['application'] ?>"><?php echo $obj['title'] ?></a>
-        <p>If you want to know the name follow this link <a></a></p>
+        <p>If you want to get full info, follow this link <a href="<?php echo URL::site('payment/' . $obj['sending']->hash ) ?>">Link</a></p>
         <p>References:</p>
         <?php if ($obj['application']->ref_name_1 && $obj['application']->ref_rel_1 && $obj['application']->ref_phone_1 && $obj['application']->ref_email_1): ?>
             <h3>Reference #1:</h3>

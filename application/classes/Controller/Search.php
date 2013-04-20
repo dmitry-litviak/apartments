@@ -141,7 +141,8 @@ class Controller_Search extends My_Layout_User_Controller {
                     ->setView('mail/application', array(
                         'application' => ORM::factory('Application', $this->request->post('application_id')),
                         'user' => Auth::instance()->get_user(),
-                        'owner' => $owner
+                        'owner' => $owner,
+                        'sending' => $sending,
                     ))
                     ->send();
             Helper_Jsonresponse::render_json('success', "", "Sent");
