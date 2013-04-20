@@ -35,10 +35,10 @@
                 </div>
             </div>
             <div class="tab-pane ap-block center" id="lC<%=rand %>">
-                <p><a href="<%= SYS.baseUrl + 'user/application' %>">Please follow the link and fill the form as much as you can</a><p>
                 <% if (item.application_id == 0) { %>
                     <button class="btn btn-danger" disabled >You should log in or fill the application form in user profile</button>
                 <% } else { %>
+                    <p><a href="<%= SYS.baseUrl + 'user/application' %>">Please follow the link and fill the form as much as you can</a><p>
                     <button class="btn btn-primary" id="application" onclick="javascript: map.add_to_sends(<%= item.application_id %> , this, '<%= item.email %>' )" >Send Application</button>
                 <% } %>
             </div>
