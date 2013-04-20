@@ -7,6 +7,7 @@ class Controller_Payment extends My_Layout_User_Controller {
     public function before() {
         parent::before();
         $key = Kohana::$config->load('stripe')->get('test');
+        
         Stripe::setApiKey($key['secret_key']);
     }
 
@@ -55,7 +56,7 @@ class Controller_Payment extends My_Layout_User_Controller {
                     ))
                     ->send();
             $this->setTitle('Thanks')
-                    ->view('payment/thanks', $data)
+                    ->view('payment/thanks')
                     ->render();
         } else {
             $this->redirect($_SERVER['HTTP_REFERER']);
