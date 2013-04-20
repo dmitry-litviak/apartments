@@ -6,7 +6,8 @@ class Controller_Payment extends My_Layout_User_Controller {
 
     public function before() {
         parent::before();
-        Stripe::setApiKey(Kohana::$config->load('stripe')->get('test')['secret_key']);
+        $key = Kohana::$config->load('stripe')->get('test');
+        Stripe::setApiKey($key['secret_key']);
     }
 
     public function action_index() {
@@ -16,6 +17,8 @@ class Controller_Payment extends My_Layout_User_Controller {
         ;
         if ($this->request->query('hash')) {
             $data['hash'] = $this->request->query('hash');
+            $key = Kohana::$config->load('stripe')->get('test');
+            $data['key'] = $key['publishable_key'];
             $this->setTitle('Payment')
                     ->view('payment/index', $data)
                     ->render();
