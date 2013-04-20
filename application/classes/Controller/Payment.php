@@ -17,6 +17,7 @@ class Controller_Payment extends My_Layout_User_Controller {
                 ->link_js('payment/index')
         ;
         if ($this->request->query('hash')) {
+            echo phpinfo();die;
             $data['hash'] = $this->request->query('hash');
             $key = Kohana::$config->load('stripe')->get('test');
             $data['key'] = $key['publishable_key'];
