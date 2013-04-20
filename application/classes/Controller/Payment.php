@@ -32,6 +32,18 @@ class Controller_Payment extends My_Layout_User_Controller {
             $sending = ORM::factory('Send')->where('hash', '=', $this->request->post('hash'))->find();
             $application = ORM::factory('Application', $sending->application_id);
             $owner = ORM::factory('User', $sending->user_id);
+            $token = $_POST['stripeToken'];
+
+            $customer = Stripe_Customer::create(array(
+                        'email' => $owner->email,
+                        'card' => $token
+            ));
+
+            $charge = Stripe_Charge::create(array(
+                        'customer' => $customer->id,
+                        'amount' => 400,
+                        'currency' => 'usd'
+            ));
             Library_Mail::factory()
                     ->setFrom(array('0' => 'noreply@' . URL::base()))
                     ->setTo(array('0' => $owner->email))
