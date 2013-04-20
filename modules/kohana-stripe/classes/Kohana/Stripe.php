@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-require_once Kohana::find_file('vendor', 'stripe-php-1.6.5/lib/Stripe');
+require_once Kohana::find_file('vendor', 'stripe-php-1.7.15/lib/Stripe');
 
 /**
  * Image manipulation support. Allows images to be resized, cropped, etc.
