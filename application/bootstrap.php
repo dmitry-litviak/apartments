@@ -93,7 +93,8 @@ $whitelist = array('apartments.loc');
 if(in_array($_SERVER['HTTP_HOST'], $whitelist)){
 	Kohana::init(array(
 		'base_url'   => 'http://'.$_SERVER['HTTP_HOST'],
-		'index_file' => ''
+		'index_file' => '',
+                'errors' => TRUE
 	));
 } else {
 	Kohana::init(array(
@@ -129,6 +130,7 @@ Kohana::modules(array(
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
          'email'      => MODPATH.'email',
+         'kohana-stripe' => MODPATH.'kohana-stripe',
 	));
 
 Cookie::$salt 		= 'fdsh-tretgd-re-gfds-gt-erg-fdg-';
