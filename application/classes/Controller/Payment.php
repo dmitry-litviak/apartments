@@ -6,7 +6,7 @@ class Controller_Payment extends My_Layout_User_Controller {
 
     public function before() {
         parent::before();
-                    echo phpinfo();die;
+//                    echo phpinfo();die;
 
         Kohana_Stripe::init();
 //        $key = Kohana::$config->load('stripe')->get('test');
