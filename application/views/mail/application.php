@@ -2,7 +2,7 @@
     <body>
         <p>Hi, <?php echo $obj['owner']->first_name ?></p>
         <p>Someone interested in your apartment</p>
-        <p>If you want to get full info, follow this link <a href="<?php echo URL::site('payment/' . $obj['sending']->hash ) ?>">Link</a></p>
+        <p>If you want to get full info, follow this link <a href="<?php echo URL::site('payment/index?hash=' . $obj['sending']->hash ) ?>">Link</a></p>
         <p>References:</p>
         <?php if ($obj['application']->ref_name_1 && $obj['application']->ref_rel_1 && $obj['application']->ref_phone_1 && $obj['application']->ref_email_1): ?>
             <h3>Reference #1:</h3>
@@ -26,15 +26,15 @@
             <p>Email: <?php echo $obj['application']->ref_email_3 ?></p>
         <?php endif; ?>
         <h3>Current Address:</h3>
-        <p>Name: <?php echo $obj['application']->cur_addr ?></p>
-        <p>Relationship: <?php echo $obj['application']->cur_city_prov ?></p>
-        <p>Phone: <?php echo $obj['application']->cur_post ?></p>
-        <p>Email: <?php echo $obj['application']->cur_time ?></p>
+        <p>Address: <?php echo $obj['application']->cur_addr ?></p>
+        <p>City and Province: <?php echo $obj['application']->cur_city_prov ?></p>
+        <p>Post: <?php echo $obj['application']->cur_post ?></p>
+        <p>Time at Address: <?php echo $obj['application']->cur_time ?></p>
         <h3>Previous Address:</h3>
-        <p>Name: <?php echo $obj['application']->prev_addr ?></p>
-        <p>Relationship: <?php echo $obj['application']->prev_city_prov ?></p>
-        <p>Phone: <?php echo $obj['application']->prev_post ?></p>
-        <p>Email: <?php echo $obj['application']->prev_time ?></p>
+        <p>Address: <?php echo $obj['application']->prev_addr ?></p>
+        <p>City and Province: <?php echo $obj['application']->prev_city_prov ?></p>
+        <p>Post: <?php echo $obj['application']->prev_post ?></p>
+        <p>Time at Address: <?php echo $obj['application']->prev_time ?></p>
         <h3>Additional info:</h3>
         <p>Pets: <?php echo $obj['application']->pets ?></p>
         <p>Parking Required: <?php echo $obj['application']->parking ?></p>
