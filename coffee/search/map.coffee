@@ -206,6 +206,17 @@ map =
           success: (res) =>
             if res.text = "success"
               $(element).addClass("disabled").html "In Favorites"
+              
+  add_to_sends: (id, element, email) ->
+      if !$(element).hasClass 'disabled'
+        $.ajax
+          url: SYS.baseUrl + 'search/set_send'
+          data: $.param({application_id : id, email : email})
+          type: 'POST'
+          dataType: 'json'
+          success: (res) =>
+            if res.text = "success"
+              $(element).addClass("disabled").html res.data
     
   
   get_markers: ->

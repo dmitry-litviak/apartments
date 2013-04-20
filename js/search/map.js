@@ -267,6 +267,25 @@ map = {
       });
     }
   },
+  add_to_sends: function(id, element, email) {
+    var _this = this;
+    if (!$(element).hasClass('disabled')) {
+      return $.ajax({
+        url: SYS.baseUrl + 'search/set_send',
+        data: $.param({
+          application_id: id,
+          email: email
+        }),
+        type: 'POST',
+        dataType: 'json',
+        success: function(res) {
+          if (res.text = "success") {
+            return $(element).addClass("disabled").html(res.data);
+          }
+        }
+      });
+    }
+  },
   get_markers: function() {
     var me,
       _this = this;

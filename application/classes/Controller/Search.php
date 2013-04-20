@@ -35,7 +35,7 @@ class Controller_Search extends My_Layout_User_Controller {
         if (!empty($_GET['type_id'])) {
             $_GET['sel_types'] = array();
             foreach ($_GET['type_id'] as $value) {
-               $_GET['sel_types'][] = ORM::factory("Type", $value)->title;
+                $_GET['sel_types'][] = ORM::factory("Type", $value)->title;
             }
             if (count($_GET['type_id']) >= 2) {
                 $_GET['sel_types'] = implode(", ", $_GET['sel_types']);
@@ -48,11 +48,11 @@ class Controller_Search extends My_Layout_User_Controller {
         if (empty($_GET['lng'])) {
             $_GET['lng'] = -110;
         }
-        
+
         if (empty($_GET['search'])) {
             $_GET['search'] = "";
         }
-        
+
         if (empty($_GET['lat'])) {
             $_GET['lat'] = 52;
         }
@@ -101,10 +101,12 @@ class Controller_Search extends My_Layout_User_Controller {
         $apartment->type_id = $apartment->type->title;
         $fav = 0;
         $user_id = 0;
+        $application_id = 0;
         if (Auth::instance()->logged_in()) {
             $user = Auth::instance()->get_user();
             $user_id = $user->id;
             $fav = DB::select()->from('apartments_users')->where('apartment_id', '=', $apartment->id)->where('user_id', '=', $user_id)->execute()->get('id');
+            $application_id = DB::select()->from('applications')->where('user_id', '=', Auth::instance()->get_user()->id)->execute()->get('id');
         }
         $images = DB::select()->from('images')->where('apartment_id', '=', $apartment->id)->execute()->as_array();
         if (!count($images)) {
@@ -114,6 +116,7 @@ class Controller_Search extends My_Layout_User_Controller {
         Helper_Jsonresponse::render_json('success', "", array("ap" => $apartment->as_array(),
             "email" => $apartment->owner->email,
             "images" => $images,
+            "application_id" => $application_id,
             "fav" => array(
                 "status" => $fav,
                 "user_id" => $user_id,
@@ -124,6 +127,27 @@ class Controller_Search extends My_Layout_User_Controller {
     public function action_set_favorite() {
         DB::insert('apartments_users', array('apartment_id', 'user_id'))->values(array($this->request->post('id'), $this->request->post('user_id')))->execute();
         Helper_Jsonresponse::render_json('success', "", "");
+    }
+
+    public function action_set_send() {
+        $owner = ORM::factory('User')->where('email', '=', $this->request->post('email'))->find();
+        $sending = ORM::factory('Send')->where('application_id', '=', $this->request->post('application_id'))->find();
+        if (empty($sending->id)) {
+            DB::insert('sends', array('application_id', 'user_id', 'hash'))->values(array($this->request->post('application_id'), $owner->id, md5($owner->email . time())))->execute();
+            Library_Mail::factory()
+                    ->setFrom(array('0' => 'noreply@' . URL::base()))
+                    ->setTo(array('0' => $owner->email))
+                    ->setSubject('New Application')
+                    ->setView('mail/application', array(
+                        'application' => ORM::factory('Application', $this->request->post('application_id')),
+                        'user' => Auth::instance()->get_user(),
+                        'owner' => $owner
+                    ))
+                    ->send();
+            Helper_Jsonresponse::render_json('success', "", "Sent");
+        } else {
+            Helper_Jsonresponse::render_json('success', "", "You already sent application for this ad");
+        }
     }
 
 }

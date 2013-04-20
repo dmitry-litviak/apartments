@@ -36,6 +36,7 @@
                 </div>
             </fieldset>
         <input class="btn btn-large" value="Cancel" type="reset">
+        <a href="<?php echo URL::site('user/application') ?>" class="btn btn-info btn-large">Edit Application Form</a>
         <input class="btn btn-large btn-primary" value="Save" type="submit">
     </form>
 </div>

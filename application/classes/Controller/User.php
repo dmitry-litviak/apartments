@@ -4,6 +4,11 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Controller_User extends My_Layout_User_Logged_Controller {
 
+    public function before() {
+        parent::before();
+        Helper_Mainmenu::setActiveItem('profile');
+    }
+
     public function action_index() {
         $this->redirect('user/profile');
     }
@@ -60,6 +65,35 @@ class Controller_User extends My_Layout_User_Logged_Controller {
         }
 
         $this->redirect('user/profile');
+    }
+
+    public function action_application() {
+        Helper_Output::factory()
+                ->link_js('libs/jquery.validate.min')
+                ->link_js('users/application')
+        ;
+        Session::instance()->set('refferer', $_SERVER['HTTP_REFERER']);
+        $data['application'] = ORM::factory('Application')->where('user_id', '=', $this->logged_user->id)->find();
+        $this->setTitle('My Application Form')
+                ->view('user/application', $data)
+                ->render();
+    }
+
+    public function action_save_aplication() {
+        if ($this->request->post()) {
+            $post = Helper_Output::clean($this->request->post());
+            try {
+                $model = ORM::factory('Application')->where('user_id', '=', $this->logged_user->id)->find();
+                $model->values($post);
+                $model->save();
+                $this->redirect(Session::instance()->get_once('refferer'));
+            } catch (ORM_Validation_Exception $e) {
+                Helper_Alert::setStatus('error');
+                Helper_Alert::set_flash(Kohana::$config->load('errors')->get('001'));
+            }
+        } else {
+            $this->redirect('application');
+        }
     }
 
 }

@@ -34,13 +34,18 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane ap-block" id="lC<%=rand %>">
-                <p><strong>Email</strong>: <%= item.email %> </p>
+            <div class="tab-pane ap-block center" id="lC<%=rand %>">
+                <p><a href="<%= SYS.baseUrl + 'user/application' %>">Please follow the link and fill the form as much as you can</a><p>
+                <% if (item.application_id == 0) { %>
+                    <button class="btn btn-danger" disabled >You should log in or fill the application form in user profile</button>
+                <% } else { %>
+                    <button class="btn btn-primary" id="application" onclick="javascript: map.add_to_sends(<%= item.application_id %> , this, '<%= item.email %>' )" >Send Application</button>
+                <% } %>
             </div>
             <div class="tab-pane ap-block" id="lD<%=rand %>">
                 <div class="center">
                     <% if (item.fav.user_id != 0) { %>
-                    <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite( < %= item.ap.id % > , this, < %= item.fav.user_id % > )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
+                    <button class="btn btn-primary <%= item.fav.status ? 'disabled' : '' %>" id="favorite" onclick="javascript: map.add_to_favorite(<%= item.ap.id %> , this, <%= item.fav.user_id %> )" ><%= item.fav.status ? 'In Favorites' : 'Add to Favorites'%></button>
                     <% } else { %>
                     <button class="btn btn-danger disabled" id="favorite" >You should sign in to use favorites feature</button>
                     <% } %>
@@ -50,7 +55,7 @@
         <ul class="nav nav-tabs" style="width: 360px">
             <li><a href="#lA<%=rand %>" data-toggle="tab">Photos</a></li>
             <li class="active"><a href="#lB<%=rand %>" data-toggle="tab">Details</a></li>
-            <li><a href="#lC<%=rand %>" data-toggle="tab">Contact</a></li>
+            <li><a href="#lC<%=rand %>" data-toggle="tab">Apply</a></li>
             <li><a href="#lD<%=rand %>" data-toggle="tab">Add to Favorites</a></li>
         </ul>
     </div>
