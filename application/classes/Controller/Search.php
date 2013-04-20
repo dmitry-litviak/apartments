@@ -142,7 +142,7 @@ class Controller_Search extends My_Layout_User_Controller {
                         'application' => ORM::factory('Application', $this->request->post('application_id')),
                         'user' => Auth::instance()->get_user(),
                         'owner' => $owner,
-                        'sending' => $sending,
+                        'sending' => ORM::factory('Send')->where('application_id', '=', $this->request->post('application_id'))->where('user_id', '=', $owner->id)->find(),
                     ))
                     ->send();
             Helper_Jsonresponse::render_json('success', "", "Sent");
