@@ -38,14 +38,33 @@
                     </div>
                 </div>
                 <div class="control-group">
+                    <label class="control-label" for="smoking">Smoking:</label>
+                    <div class="controls">
+                        <select name="smoking">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="pets">Pets:</label>
+                    <div class="controls">
+                        <select name="pets">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                            <option value="2">Some considered</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
                     <label class="control-label" for="gmaps-input-address">Type address:</label>
                     <div class="controls">
                         <input id='gmaps-input-address' name="address" class="span12" placeholder='Start typing a place name...' type='text' name="" />
                         <div id='gmaps-error'></div>
                     </div>
                 </div>
-            </div>
-            <div class="span6">
                 <div class="control-group">
                     <label class="control-label">Map:</label>
                     <div class="controls">

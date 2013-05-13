@@ -31,14 +31,33 @@
                     </div>
                 </div>
                 <div class="control-group">
+                    <label class="control-label" for="smoking">Smoking:</label>
+                    <div class="controls">
+                        <select name="smoking">
+                            <option <?php echo $apartment->smoking ? "" : "selected" ?> value="0">No</option>
+                            <option <?php echo $apartment->smoking ? "selected" : "" ?>  value="1">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="pets">Pets:</label>
+                    <div class="controls">
+                        <select name="pets">
+                            <option <?php echo $apartment->pets == 0 ? "selected" : "" ?> value="0">No</option>
+                            <option <?php echo $apartment->pets == 1 ? "selected" : "" ?> value="1">Yes</option>
+                            <option <?php echo $apartment->pets == 2 ? "selected" : "" ?> value="2">Some considered</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="control-group">
                     <label class="control-label" for="gmaps-input-address">Type address:</label>
                     <div class="controls">
                         <input id='gmaps-input-address' name="address" class="span12" placeholder='Start typing a place name...' type='text' name="" value="<?php echo $apartment->address ?>" />
                         <div id='gmaps-error'></div>
                     </div>
                 </div>
-            </div>
-            <div class="span6">
                 <div class="control-group">
                     <label class="control-label">Map:</label>
                     <div class="controls">
@@ -57,13 +76,13 @@
     <legend>Gallery</legend>
     <span class="label label-important">Note: Remove button delete image without pressing "SAVE" button</span>
     <p></p>
-<!--    <div class="uploaded_avatar">
-        <div class="left">
-            <div class="fileselector">
-                <input id="fileupload" type="file" name="file" data-url="<?php // echo URL::site('uploader/temp'); ?>" enctype="multipart/form-data"/>
+    <!--    <div class="uploaded_avatar">
+            <div class="left">
+                <div class="fileselector">
+                    <input id="fileupload" type="file" name="file" data-url="<?php // echo URL::site('uploader/temp');  ?>" enctype="multipart/form-data"/>
+                </div>
             </div>
-        </div>
-    </div>-->
+        </div>-->
     <div class="fileupload fileupload-new" data-provides="fileupload">
         <span class="btn btn-file">
             <span class="fileupload-new">Select file</span>

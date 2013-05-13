@@ -31,6 +31,12 @@ class Controller_Search extends My_Layout_User_Controller {
                 ->link_js('libs/jquery.validate.min')
                 ->link_js('public/assets/workspace')
                 ->link_js('search/map');
+        $session = Session::instance();
+        if (empty($_GET)) {
+            $_GET = $session->get('parameters');
+        } else {
+            $session->set('parameters', $_GET);
+        }
         $_GET['sel_types'] = "";
         if (!empty($_GET['type_id'])) {
             $_GET['sel_types'] = array();

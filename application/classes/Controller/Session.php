@@ -68,34 +68,6 @@ class Controller_Session extends My_Layout_User_Controller {
         }
     }
 
-    public function action_test() {
-//        $config = Kohana::$config->load('email');
-//        $swift = email::connect($config);
-//        $message = Swift_Message::newInstance();
-//        $message->setSubject('hello')
-//                ->setFrom(array('alex@example.com.au' => 'Alex'))
-//                ->setTo(array('dmitry.litviak@gmail.com' => 'Dmitry'))
-//                ->setBody('hello');
-////
-//        $swift->send($message);
-//        $config = Kohana::$config->load('email');
-//        $mailer = Email::connect($config);
-//        $message = Swift_Message::newInstance("123123", "123123", 'text/html', 'utf-8');
-//        $message->setTo("litvdim@gmail.com", "Dmitry");
-//        $message->setFrom("no-reply@apartments.com", "Service");
-//        $mailer->send($message);
-
-//        $config = Kohana::$config->load('email');
-//        Email::connect($config);
-//
-//        $to = 'dmitry.litviak@gmail.com';
-//        $subject = 'Сообщение от Коханой..т.е. Коханы.';
-//        $from = 'kohanaframework@test.ru';
-//        $message = 'Проверка связи';
-//        Email::send($to, $from, $subject, $message, $html = false);
-//        Library_Mail::factory()->setFrom(array('0' => 'noreply@apartments.loc'))->setTo(array('0' => "litvdim@gmail.com"))->setSubject('Отпуск')->setView('mail/alert', array())->send();
-    }
-
 }
 
 // End Session Controller

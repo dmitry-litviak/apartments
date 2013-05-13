@@ -29,6 +29,24 @@
                         <%= item.ap.type_id %>
                     </div>
                     <div>
+                        <strong>Smoking:</strong>
+                        <% if (item.ap.smoking == 0){ %>
+                            No
+                        <% } else { %>
+                            Yes
+                        <% } %>
+                    </div>
+                    <div>
+                        <strong>Pets:</strong>
+                        <% if (item.ap.pets == 0){ %>
+                            No
+                        <% } else if (item.ap.pets == 1) { %>
+                            Yes
+                        <% } else { %>
+                            Some considered
+                        <% } %>
+                    </div>
+                    <div>
                         <strong>Cost:</strong>
                         <span class="label label-success">$<%= item.ap.cost %></span>
                     </div>

@@ -191,5 +191,56 @@ a.head, a.head:visited, a.head:hover, a.head:active {
 }
 
 .home_block {
-    border: 1px solid #ab8ffc;
+    border: 1px solid transparent;
+    background-color: transparent;
+}
+
+.title-main {
+    /*-webkit-text-stroke: 1px black;*/
+    color: white;
+    /*    text-shadow:
+            3px 3px 0 #000,
+            -1px -1px 0 #000,  
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;*/
+    /*text-shadow: 3px 4px 5px #000;*/
+    /*text-shadow: 0px 0px 20px #006;*/
+    text-shadow: 
+        0px -1px 5px #6b5a9f,     /* north      */
+        0px  1px 5px #6b5a9f,     /* south      */
+        -1px  0px 5px #6b5a9f,     /* west       */
+        1px  0px 5px #6b5a9f,     /* east       */
+        -1px -1px 5px #6b5a9f,     /* north-west */
+        -1px  1px 5px #6b5a9f,     /* north-east */
+        1px -1px 5px #6b5a9f,     /* south-west */
+        1px  1px 5px #6b5a9f;     /* south-east */
+
+}
+
+.box-main {
+    -webkit-box-shadow: 0px -1px 5px #6b5a9f,     /* north      */
+        0px  1px 5px #6b5a9f,     /* south      */
+        -1px  0px 5px #6b5a9f,     /* west       */
+        1px  0px 5px #6b5a9f,     /* east       */
+        -1px -1px 5px #6b5a9f,     /* north-west */
+        -1px  1px 5px #6b5a9f,     /* north-east */
+        1px -1px 5px #6b5a9f,     /* south-west */
+        1px  1px 5px #6b5a9f !important;
+    -moz-box-shadow:    0px -1px 5px #6b5a9f,     /* north      */
+        0px  1px 5px #6b5a9f,     /* south      */
+        -1px  0px 5px #6b5a9f,     /* west       */
+        1px  0px 5px #6b5a9f,     /* east       */
+        -1px -1px 5px #6b5a9f,     /* north-west */
+        -1px  1px 5px #6b5a9f,     /* north-east */
+        1px -1px 5px #6b5a9f,     /* south-west */
+        1px  1px 5px #6b5a9f !important;
+    box-shadow:                 0px -1px 5px #6b5a9f,     /* north      */
+        0px  1px 5px #6b5a9f,     /* south      */
+        -1px  0px 5px #6b5a9f,     /* west       */
+        1px  0px 5px #6b5a9f,     /* east       */
+        -1px -1px 5px #6b5a9f,     /* north-west */
+        -1px  1px 5px #6b5a9f,     /* north-east */
+        1px -1px 5px #6b5a9f,     /* south-west */
+        1px  1px 5px #6b5a9f !important; 
 }
