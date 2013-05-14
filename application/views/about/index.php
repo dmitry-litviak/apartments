@@ -1,4 +1,3 @@
-
 <form class="form-actions">
     <fieldset class="places">
         <div class="row-fluid">
