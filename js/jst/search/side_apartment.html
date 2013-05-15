@@ -1,0 +1,47 @@
+<div class="media">
+    <a class="pull-left" href="javascript: map.marker_click('<%= marker %>')">
+        <% if (item.images[0].id == 0) { %>
+            <img class="media-object" style="width: 64px; height: 64px;" src="<%= item.images[0].name %>" alt="">
+        <% } else { %>
+            <img class="media-object" style="width: 64px; height: 64px;" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + item.images[0].name %>" alt="">
+        <% } %>
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading"><%= item.ap.title %></h4>
+        <div>
+            <strong>Description:</strong>
+            <%= item.ap.descr %>
+        </div>
+        <div>
+            <strong>Address:</strong>
+            <%= item.ap.address %>
+        </div>
+        <div>
+            <strong>Rooms:</strong>
+            <%= item.ap.type_id %>
+        </div>
+        <div>
+            <strong>Smoking:</strong>
+            <% if (item.ap.smoking == 0){ %>
+                No
+            <% } else { %>
+                Yes
+            <% } %>
+        </div>
+        <div>
+            <strong>Pets:</strong>
+            <% if (item.ap.pets == 0){ %>
+                No
+            <% } else if (item.ap.pets == 1) { %>
+                Yes
+            <% } else { %>
+                Some considered
+            <% } %>
+        </div>
+        <div>
+            <strong>Cost:</strong>
+            <span class="label label-success">$<%= item.ap.cost %></span>
+        </div>
+    </div>
+</div>
+<hr>

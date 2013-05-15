@@ -28,20 +28,28 @@
             <div class="container">
                 <?php echo $content; ?>
             </div>
-            <div class="hero-unit my-hero-unit" style="display: none">
+            <div class="hero-unit my-hero-unit" style="display: none;">
                 <span id="filter_label">Search filters:</span>
                 -- <span class="badge badge-warning filter-btn">Change filter</span>
                 <?php if (Auth::instance()->logged_in()): ?>
                     -- <span class="badge badge-info alert-btn"><i class="icon-time icon-white"></i> Get alerts for this search</span>
                 <?php endif; ?>
             </div>
-            <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
+            <div class="row-fluid">
+                <div class="span10">
+
+                    <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
+                </div>
+                <div class="span2 scrollable side-bar" style="margin-left: 25px; overflow: auto; padding-right: 25px">
+                </div>
+            </div>
             <div id="push"></div>
         </div>
 
         <?php echo View::factory('layouts/partials/footer')->render(); ?>
         <!--</div>-->
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+        <script type="text/javascript" charset="UTF-8" src="http://maps.gstatic.com/cat_js/intl/en_us/mapfiles/api-3/12/11/%7Bcommon,map,util,marker%7D.js"></script>
         <?php echo Helper_Output::renderJs(); ?>
     </body>
 </html>

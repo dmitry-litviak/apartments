@@ -1,5 +1,6 @@
 map = 
   template       : JST["search/apartment"]
+  side_template  : JST["search/side_apartment"]
   init: ->
     do @detect_elements
     do @bind_events
@@ -33,6 +34,7 @@ map =
       type: "poly"
     
     @search_pan  = $(".my-hero-unit")
+    @side_bar    = $(".side-bar")
     @map_name    = "gmaps-canvas"
     $("#" + @map_name).show()
     
@@ -56,6 +58,7 @@ map =
     @fin_alert      = $("#fin-alert")
     @title_alert    = $("#title-alert")
     @ap_length      = 0;
+    @gmarkers       = []
     
   bind_events: ->
     do @initialize_map
@@ -84,7 +87,6 @@ map =
     
   init_search_filter: ->
     @search_pan.show()
-    console.log @search_input.val()
     unless @search_input.val() is ""
       @filter_label.after ' <span class="badge">' + @search_input.val() + '</span>'
     unless @to.val() is ""
@@ -190,6 +192,7 @@ map =
   
   initialize_map: ->
     @jmap.css('height', innerHeight - 160)
+    @side_bar.css('height', innerHeight - 160)
     unless @search_options.lat == "" and @search_options.lng == ""
       @map_options.center = new google.maps.LatLng(@search_options.lat, @search_options.lng)  
     gmap = document.getElementById(@map_name)
@@ -218,6 +221,10 @@ map =
             if res.text = "success"
               $(element).addClass("disabled").html res.data
     
+  marker_click: (i) ->
+    map.map.setZoom(17);
+    map.map.panTo(map.gmarkers[i].position);
+    google.maps.event.trigger map.gmarkers[i], "click"
   
   get_markers: ->
     me = @
@@ -236,6 +243,16 @@ map =
               shadow  : me.shadow
               shape   : me.shape
             )
+            me.gmarkers.push(marker)
+            index = me.gmarkers.length-1
+            $.ajax
+                url: SYS.baseUrl + 'search/get_apartment'
+                data: $.param({id : item.id})
+                type: 'POST'
+                dataType: 'json'
+                success: (res) =>
+                  if res.text = "success"
+                    me.side_bar.append me.side_template({item: res.data, url : SYS.baseUrl, marker : index})
             infowindow = new google.maps.InfoWindow(content: "")
             google.maps.event.addListener marker, "click", ->
               $.ajax

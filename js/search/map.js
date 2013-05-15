@@ -3,6 +3,7 @@ var map;
 
 map = {
   template: JST["search/apartment"],
+  side_template: JST["search/side_apartment"],
   init: function() {
     this.detect_elements();
     return this.bind_events();
@@ -36,6 +37,7 @@ map = {
       type: "poly"
     };
     this.search_pan = $(".my-hero-unit");
+    this.side_bar = $(".side-bar");
     this.map_name = "gmaps-canvas";
     $("#" + this.map_name).show();
     this.filter_btn = $(".filter-btn");
@@ -57,7 +59,8 @@ map = {
     this.sel_types = $("#sel_types");
     this.fin_alert = $("#fin-alert");
     this.title_alert = $("#title-alert");
-    return this.ap_length = 0;
+    this.ap_length = 0;
+    return this.gmarkers = [];
   },
   bind_events: function() {
     this.initialize_map();
@@ -97,7 +100,6 @@ map = {
   },
   init_search_filter: function() {
     this.search_pan.show();
-    console.log(this.search_input.val());
     if (this.search_input.val() !== "") {
       this.filter_label.after(' <span class="badge">' + this.search_input.val() + '</span>');
     }
@@ -241,6 +243,7 @@ map = {
   initialize_map: function() {
     var gmap;
     this.jmap.css('height', innerHeight - 160);
+    this.side_bar.css('height', innerHeight - 160);
     if (!(this.search_options.lat === "" && this.search_options.lng === "")) {
       this.map_options.center = new google.maps.LatLng(this.search_options.lat, this.search_options.lng);
     }
@@ -286,6 +289,11 @@ map = {
       });
     }
   },
+  marker_click: function(i) {
+    map.map.setZoom(17);
+    map.map.panTo(map.gmarkers[i].position);
+    return google.maps.event.trigger(map.gmarkers[i], "click");
+  },
   get_markers: function() {
     var me,
       _this = this;
@@ -302,12 +310,32 @@ map = {
         if (res.text = "success") {
           me.ap_length = res.data.length;
           $.each(res.data, function(i, item) {
-            var infowindow, marker;
+            var index, infowindow, marker,
+              _this = this;
             marker = new google.maps.Marker({
               position: new google.maps.LatLng(item.lat, item.lng),
               icon: me.image,
               shadow: me.shadow,
               shape: me.shape
+            });
+            me.gmarkers.push(marker);
+            index = me.gmarkers.length - 1;
+            $.ajax({
+              url: SYS.baseUrl + 'search/get_apartment',
+              data: $.param({
+                id: item.id
+              }),
+              type: 'POST',
+              dataType: 'json',
+              success: function(res) {
+                if (res.text = "success") {
+                  return me.side_bar.append(me.side_template({
+                    item: res.data,
+                    url: SYS.baseUrl,
+                    marker: index
+                  }));
+                }
+              }
             });
             infowindow = new google.maps.InfoWindow({
               content: ""
