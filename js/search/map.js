@@ -319,6 +319,7 @@ map = {
               shape: me.shape
             });
             me.gmarkers.push(marker);
+            me.side_bar.empty();
             index = me.gmarkers.length - 1;
             $.ajax({
               url: SYS.baseUrl + 'search/get_apartment',

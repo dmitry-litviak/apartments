@@ -41,6 +41,7 @@
                     <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
                 </div>
                 <div class="span2 scrollable side-bar" style="margin-left: 25px; overflow: auto; padding-right: 25px">
+                    <h4 class="center">Nothing is here</h4>
                 </div>
             </div>
             <div id="push"></div>
