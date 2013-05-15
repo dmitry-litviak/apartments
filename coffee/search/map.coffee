@@ -236,6 +236,8 @@ map =
       success: (res) =>
         if res.text = "success"
           me.ap_length = res.data.length
+          if res.data.length == 0 
+            me.side_bar.append '<h4 class="center">Nothing is here</h4>'
           $.each res.data, (i, item) ->
             marker     = new google.maps.Marker(
               position: new google.maps.LatLng(item.lat, item.lng)

@@ -309,6 +309,9 @@ map = {
         var markerClusterer;
         if (res.text = "success") {
           me.ap_length = res.data.length;
+          if (res.data.length === 0) {
+            me.side_bar.append('<h4 class="center">Nothing is here</h4>');
+          }
           $.each(res.data, function(i, item) {
             var index, infowindow, marker,
               _this = this;
