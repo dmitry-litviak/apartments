@@ -150,8 +150,8 @@ map =
       selected = $(this).children(":selected").val()
       switch selected
         when "1" then $(".side-bar>div").tsort("span.time",{order:"desc"}); 
-        when "2" then $(".side-bar>div").tsort("span.cost",{order:"desc"}); 
-        when "3" then $(".side-bar>div").tsort("span.cost",{order:"asc"}); 
+        when "2" then $(".side-bar>div").tsort("span.cost",{order:"asc"}); 
+        when "3" then $(".side-bar>div").tsort("span.cost",{order:"desc"}); 
         else $(".side-bar>div").tsort("span.time",{order:"desc"});
   
   update_ui: (address, latLng) ->

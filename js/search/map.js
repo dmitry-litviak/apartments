@@ -192,11 +192,11 @@ map = {
           });
         case "2":
           return $(".side-bar>div").tsort("span.cost", {
-            order: "desc"
+            order: "asc"
           });
         case "3":
           return $(".side-bar>div").tsort("span.cost", {
-            order: "asc"
+            order: "desc"
           });
         default:
           return $(".side-bar>div").tsort("span.time", {
