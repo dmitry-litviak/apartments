@@ -8,9 +8,13 @@ body {
 }
 
 .bkg {
-    background-image: url(../img/background.jpg);
-    background-position: inherit;
-    background-repeat: repeat repeat;
+    background: url(../img/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /*background-position: inherit;*/
+    /*background-repeat: repeat repeat;*/
 }
 
 /* Wrapper for page content to push down footer */
@@ -216,43 +220,43 @@ a.head, a.head:visited, a.head:hover, a.head:active {
     /*text-shadow: 3px 4px 5px #000;*/
     /*text-shadow: 0px 0px 20px #006;*/
     text-shadow: 
-        0px -1px 15px #7764b1,     /* north      */
-        0px  1px 15px #7764b1,     /* south      */
-        -1px  0px 15px #7764b1,     /* west       */
-        1px  0px 15px #7764b1,     /* east       */
-        -1px -1px 15px #7764b1,     /* north-west */
-        -1px  1px 15px #7764b1,     /* north-east */
-        1px -1px 15px #7764b1,     /* south-west */
-        1px  1px 15px #7764b1;     /* south-east */
+        0px -1px 5px black,     /* north      */
+        0px  1px 5px black,     /* south      */
+        -1px  0px 5px black,     /* west       */
+        1px  0px 5px black,     /* east       */
+        -1px -1px 5px black,     /* north-west */
+        -1px  1px 5px black,     /* north-east */
+        1px -1px 5px black,     /* south-west */
+        1px  1px 5px black;     /* south-east */
 
 }
 
 .box-main {
     margin: 0 5px !important;
-    -webkit-box-shadow: 0px -1px 5px #7764b1,     /* north      */
-        0px  1px 15px #7764b1,     /* south      */
-        -1px  0px 15px #7764b1,     /* west       */
-        1px  0px 15px #7764b1,     /* east       */
-        -1px -1px 15px #7764b1,     /* north-west */
-        -1px  1px 15px #7764b1,     /* north-east */
-        1px -1px 15px #7764b1,     /* south-west */
-        1px  1px 15px #7764b1 !important;
-    -moz-box-shadow:    0px -1px 5px #7764b1,     /* north      */
-        0px  1px 15px #7764b1,     /* south      */
-        -1px  0px 15px #7764b1,     /* west       */
-        1px  0px 15px #7764b1,     /* east       */
-        -1px -1px 15px #7764b1,     /* north-west */
-        -1px  1px 15px #7764b1,     /* north-east */
-        1px -1px 15px #7764b1,     /* south-west */
-        1px  1px 15px #7764b1 !important;
-    box-shadow:                 0px -1px 5px #7764b1,     /* north      */
-        0px  1px 15px #7764b1,     /* south      */
-        -1px  0px 15px #7764b1,     /* west       */
-        1px  0px 15px #7764b1,     /* east       */
-        -1px -1px 15px #7764b1,     /* north-west */
-        -1px  1px 15px #7764b1,     /* north-east */
-        1px -1px 15px #7764b1,     /* south-west */
-        1px  1px 15px #7764b1 !important; 
+    -webkit-box-shadow: 0px -1px 5px black,     /* north      */
+        0px  1px 5px black,     /* south      */
+        -1px  0px 5px black,     /* west       */
+        1px  0px 5px black,     /* east       */
+        -1px -1px 5px black,     /* north-west */
+        -1px  1px 5px black,     /* north-east */
+        1px -1px 5px black,     /* south-west */
+        1px  1px 5px black !important;
+    -moz-box-shadow:    0px -1px 5px black,     /* north      */
+        0px  1px 5px black,     /* south      */
+        -1px  0px 5px black,     /* west       */
+        1px  0px 5px black,     /* east       */
+        -1px -1px 5px black,     /* north-west */
+        -1px  1px 5px black,     /* north-east */
+        1px -1px 5px black,     /* south-west */
+        1px  1px 5px black !important;
+    box-shadow:                 0px -1px 5px black,     /* north      */
+        0px  1px 5px black,     /* south      */
+        -1px  0px 5px black,     /* west       */
+        1px  0px 5px black,     /* east       */
+        -1px -1px 5px black,     /* north-west */
+        -1px  1px 5px black,     /* north-east */
+        1px -1px 5px black,     /* south-west */
+        1px  1px 5px black !important; 
 }
 label.error-none {
     display:none !important;
@@ -261,4 +265,16 @@ label.error-none {
 .scrollable {
     height: 100%;
     overflow: auto;
+}
+
+.center-parent {
+    display: table; 
+}
+
+.center-children {
+    display: table-cell;
+    vertical-align: middle; 
+}
+
+.filter {
 }

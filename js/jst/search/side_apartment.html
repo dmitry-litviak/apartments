@@ -8,40 +8,14 @@
     </a>
     <div class="media-body">
         <h4 class="media-heading"><%= item.ap.title %></h4>
-        <div>
-            <strong>Description:</strong>
-            <%= item.ap.descr %>
-        </div>
-        <div>
             <strong>Address:</strong>
-            <%= item.ap.address %>
-        </div>
-        <div>
+            <span><%= item.ap.address %></span><br>
             <strong>Rooms:</strong>
-            <%= item.ap.type_id %>
-        </div>
-        <div>
-            <strong>Smoking:</strong>
-            <% if (item.ap.smoking == 0){ %>
-                No
-            <% } else { %>
-                Yes
-            <% } %>
-        </div>
-        <div>
-            <strong>Pets:</strong>
-            <% if (item.ap.pets == 0){ %>
-                No
-            <% } else if (item.ap.pets == 1) { %>
-                Yes
-            <% } else { %>
-                Some considered
-            <% } %>
-        </div>
-        <div>
+            <span><%= item.ap.type_id %></span><br>
+            <strong>Time:</strong>
+            <span class="time"><%= item.ap.date %></span><br>
             <strong>Cost:</strong>
-            <span class="label label-success">$<%= item.ap.cost %></span>
-        </div>
+            <span class="label label-success cost">$<%= item.ap.cost %></span>
     </div>
+    <hr>
 </div>
-<hr>

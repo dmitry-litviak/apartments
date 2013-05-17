@@ -4,6 +4,7 @@ var map;
 map = {
   template: JST["search/apartment"],
   side_template: JST["search/side_apartment"],
+  select_template: JST["search/select"],
   init: function() {
     this.detect_elements();
     return this.bind_events();
@@ -71,7 +72,13 @@ map = {
     this.init_validate();
     this.init_search_filter();
     this.alert_clicker();
-    return this.fin_alert_click();
+    this.fin_alert_click();
+    return setTimeout(this.first_sort, 1000);
+  },
+  first_sort: function() {
+    return $(".side-bar>div").tsort("span.time", {
+      order: "desc"
+    });
   },
   fin_alert_click: function() {
     var me,
@@ -172,6 +179,30 @@ map = {
       var el;
       el = $(e.currentTarget);
       return _this.modal_alert.modal();
+    });
+  },
+  filter_clicker: function() {
+    return $(".filter").change(function() {
+      var selected;
+      selected = $(this).children(":selected").val();
+      switch (selected) {
+        case "1":
+          return $(".side-bar>div").tsort("span.time", {
+            order: "desc"
+          });
+        case "2":
+          return $(".side-bar>div").tsort("span.cost", {
+            order: "desc"
+          });
+        case "3":
+          return $(".side-bar>div").tsort("span.cost", {
+            order: "asc"
+          });
+        default:
+          return $(".side-bar>div").tsort("span.time", {
+            order: "desc"
+          });
+      }
     });
   },
   update_ui: function(address, latLng) {
@@ -311,6 +342,9 @@ map = {
           me.ap_length = res.data.length;
           if (res.data.length === 0) {
             me.side_bar.append('<h4 class="center">Nothing is here</h4>');
+          } else {
+            me.side_bar.append(me.select_template({}));
+            _this.filter_clicker();
           }
           $.each(res.data, function(i, item) {
             var index, infowindow, marker,
@@ -322,7 +356,6 @@ map = {
               shape: me.shape
             });
             me.gmarkers.push(marker);
-            me.side_bar.empty();
             index = me.gmarkers.length - 1;
             $.ajax({
               url: SYS.baseUrl + 'search/get_apartment',

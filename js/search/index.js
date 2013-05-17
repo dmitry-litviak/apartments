@@ -17,7 +17,8 @@ index = {
     this.type_switcher = $("#type_switcher");
     this.type = $("#type");
     this.form_search = $("#form-search");
-    return this.body = $("body");
+    this.body = $("body");
+    return $(".main").addClass("center-parent").height(window.innerHeight / 1.5);
   },
   bind_events: function() {
     this.body_bkg();

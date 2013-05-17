@@ -1,7 +1,7 @@
 <style type="text/css">
     label.error {display:none !important;}
 </style>
-<form class="form-actions home_block" action="<?php echo URL::site('search/map') ?>" method="GET" id="form-search">
+<form class="form-actions home_block center-children" action="<?php echo URL::site('search/map') ?>" method="GET" id="form-search">
     <h1 class="title-main">Canada's easiest rental search</h1>
     <fieldset class="places">
         <div class="row-fluid">

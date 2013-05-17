@@ -16,6 +16,7 @@ index =
     @type          = $("#type") 
     @form_search   = $("#form-search")
     @body          = $("body")
+    $(".main").addClass("center-parent").height(window.innerHeight/1.5)
     
   bind_events: ->
 #    do @gmaps_init

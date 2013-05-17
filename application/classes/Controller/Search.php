@@ -30,6 +30,7 @@ class Controller_Search extends My_Layout_User_Controller {
                 ->link_js('libs/jquery.galleryview-3.0-dev')
                 ->link_js('libs/jquery.validate.min')
                 ->link_js('public/assets/workspace')
+                ->link_js('libs/tinysort')
                 ->link_js('search/map');
         $session = Session::instance();
         if (empty($_GET)) {

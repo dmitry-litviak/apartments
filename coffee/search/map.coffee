@@ -1,6 +1,7 @@
 map = 
   template       : JST["search/apartment"]
   side_template  : JST["search/side_apartment"]
+  select_template: JST["search/select"]
   init: ->
     do @detect_elements
     do @bind_events
@@ -70,7 +71,12 @@ map =
     do @init_search_filter
     do @alert_clicker
     do @fin_alert_click
-    
+#    do @first_sort
+    setTimeout(@first_sort, 1000)
+  
+  first_sort: ->
+    $(".side-bar>div").tsort("span.time",{order:"desc"});
+
   fin_alert_click: ->
     me = @
     @fin_alert.click (e) =>
@@ -138,6 +144,15 @@ map =
     @alert_btn.click (e) =>
       el = $(e.currentTarget)
       @modal_alert.modal()
+      
+  filter_clicker: ->
+    $(".filter").change ->
+      selected = $(this).children(":selected").val()
+      switch selected
+        when "1" then $(".side-bar>div").tsort("span.time",{order:"desc"}); 
+        when "2" then $(".side-bar>div").tsort("span.cost",{order:"desc"}); 
+        when "3" then $(".side-bar>div").tsort("span.cost",{order:"asc"}); 
+        else $(".side-bar>div").tsort("span.time",{order:"desc"});
   
   update_ui: (address, latLng) ->
     @gmap_input.autocomplete "close"
@@ -238,6 +253,9 @@ map =
           me.ap_length = res.data.length
           if res.data.length == 0 
             me.side_bar.append '<h4 class="center">Nothing is here</h4>'
+          else
+            me.side_bar.append me.select_template({})
+            do @filter_clicker
           $.each res.data, (i, item) ->
             marker     = new google.maps.Marker(
               position: new google.maps.LatLng(item.lat, item.lng)
@@ -246,7 +264,7 @@ map =
               shape   : me.shape
             )
             me.gmarkers.push(marker)
-            me.side_bar.empty()
+#            me.side_bar.empty()
             index = me.gmarkers.length-1
             $.ajax
                 url: SYS.baseUrl + 'search/get_apartment'
