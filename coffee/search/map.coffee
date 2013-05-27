@@ -212,7 +212,18 @@ map =
       @map_options.center = new google.maps.LatLng(@search_options.lat, @search_options.lng)  
     gmap = document.getElementById(@map_name)
     @map = new google.maps.Map(gmap, @map_options)
+    google.maps.visualRefresh = true
     do @get_markers
+    do @hover_side
+  
+  hover_side: ->
+    setTimeout (->
+      console.log $(".row-side")
+      $(".row-side").hover (->
+        $(this).css("background-color", "white")
+      ), ->
+        $(this).css("background-color", "whitesmoke")
+    ), 500
   
   add_to_favorite: (id, element, user_id) ->
       if !$(element).hasClass 'disabled'
@@ -291,7 +302,7 @@ map =
                         panel_height: 285
                         panel_scale: 'fit'
                         frame_scale: 'fit'
-                    ), 70
+                    ), 500
 
             me.markers.push(marker);
           markerClusterer = new MarkerClusterer(me.map, me.markers,
@@ -323,7 +334,7 @@ map =
                       url: SYS.baseUrl + "img/marker-images/clusterMarker4.png"
                       width: 56
                     ]
-          )      
+          )  
  
 $(document).ready ->
   do map.init

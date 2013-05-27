@@ -1,21 +1,18 @@
-<div class="media">
-    <a class="pull-left" href="javascript: map.marker_click('<%= marker %>')">
-        <% if (item.images[0].id == 0) { %>
-            <img class="media-object" style="width: 64px; height: 64px;" src="<%= item.images[0].name %>" alt="">
-        <% } else { %>
-            <img class="media-object" style="width: 64px; height: 64px;" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + item.images[0].name %>" alt="">
-        <% } %>
-    </a>
-    <div class="media-body">
-        <h4 class="media-heading"><%= item.ap.title %></h4>
-            <strong>Address:</strong>
-            <span><%= item.ap.address %></span><br>
-            <strong>Rooms:</strong>
-            <span><%= item.ap.type_id %></span><br>
-            <strong>Time:</strong>
-            <span class="time"><%= item.ap.date %></span><br>
-            <strong>Cost:</strong>
-            <span class="label label-success cost">$<%= item.ap.cost %></span>
+<div class="row-side">
+    <div class="row-fluid">
+            <a class="pull-left" href="javascript: map.marker_click('<%= marker %>')">
+                <% if (item.images[0].id == 0) { %>
+                    <img class="media-object" style="width: 80px; height: 80px;" src="<%= item.images[0].name %>" alt="">
+                <% } else { %>
+                    <img class="media-object" style="width: 80px; height: 80px;" src="<%= url + 'files/apartments/'+ item.ap.id + '/photos/' + item.images[0].name %>" alt="">
+                <% } %>
+            </a>
+        <div class="span8">
+            <!--<h4 class="media-heading"><%= item.ap.title %></h4>-->
+                <strong>$<%= item.ap.cost %></strong> | <%= item.ap.type_id %><br>
+                <span><%= item.ap.address.substring(0,30) %>...</span><br>
+                <span class="time"><%= item.ap.date %></span><br>
+        </div>
     </div>
-    <hr>
+    <hr class="hr-very-thin">
 </div>

@@ -280,7 +280,19 @@ map = {
     }
     gmap = document.getElementById(this.map_name);
     this.map = new google.maps.Map(gmap, this.map_options);
-    return this.get_markers();
+    google.maps.visualRefresh = true;
+    this.get_markers();
+    return this.hover_side();
+  },
+  hover_side: function() {
+    return setTimeout((function() {
+      console.log($(".row-side"));
+      return $(".row-side").hover((function() {
+        return $(this).css("background-color", "white");
+      }), function() {
+        return $(this).css("background-color", "whitesmoke");
+      });
+    }), 500);
   },
   add_to_favorite: function(id, element, user_id) {
     var _this = this;
@@ -400,7 +412,7 @@ map = {
                         panel_scale: 'fit',
                         frame_scale: 'fit'
                       });
-                    }), 70);
+                    }), 500);
                   }
                 }
               });
