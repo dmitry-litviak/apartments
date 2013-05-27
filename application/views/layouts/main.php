@@ -36,7 +36,7 @@
                 <?php endif; ?>
             </div>
             <div class="row-fluid">
-                <div class="span10">
+                <div class="span12">
 
                     <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
                 </div>
