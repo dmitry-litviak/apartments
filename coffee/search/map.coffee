@@ -223,7 +223,7 @@ map =
         $(this).css("background-color", "white")
       ), ->
         $(this).css("background-color", "whitesmoke")
-    ), 500
+    ), 1000
   
   add_to_favorite: (id, element, user_id) ->
       if !$(element).hasClass 'disabled'
