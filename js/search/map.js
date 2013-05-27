@@ -292,7 +292,7 @@ map = {
       }), function() {
         return $(this).css("background-color", "whitesmoke");
       });
-    }), 1000);
+    }), 2000);
   },
   add_to_favorite: function(id, element, user_id) {
     var _this = this;
