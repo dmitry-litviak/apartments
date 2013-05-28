@@ -41,6 +41,7 @@ map = {
     this.side_bar = $(".side-bar");
     this.map_name = "gmaps-canvas";
     $("#" + this.map_name).show();
+    this.side_bar.show();
     this.filter_btn = $(".filter-btn");
     this.alert_btn = $(".alert-btn");
     this.modal = $('#myModal');

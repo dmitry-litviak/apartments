@@ -40,7 +40,7 @@
 
                     <div id='gmaps-canvas' class="map_canvas" style="display: none"></div>
                 </div>
-                <div class="scrollable side-bar" style="overflow: auto;">
+                <div class="scrollable side-bar" style="overflow: auto; display: none">
     
                 </div>
             </div>

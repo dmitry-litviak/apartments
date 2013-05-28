@@ -38,6 +38,7 @@ map =
     @side_bar    = $(".side-bar")
     @map_name    = "gmaps-canvas"
     $("#" + @map_name).show()
+    @side_bar.show()
     
     @filter_btn     = $(".filter-btn")
     @alert_btn      = $(".alert-btn")
