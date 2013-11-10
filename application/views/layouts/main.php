@@ -21,6 +21,7 @@
 
     </head>
     <body>
+        <div id="fb-root"></div>
         <!--<div style="max-width: 100%">-->
         <div id="wrap">
             <?php echo View::factory('layouts/partials/header')->render(); ?>

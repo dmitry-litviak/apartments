@@ -54,8 +54,8 @@ if(in_array($_SERVER['HTTP_HOST'], $whitelist)){
                  */
                 'hostname'   => 'localhost',
                 'database'   => 'apartments',
-                'username'   => 'root',
-                'password'   => 'qwerfvbnm321Q',
+                'username'   => 'apartment',
+                'password'   => 'Sandwiches@77',
                 'persistent' => FALSE,
             ),
             'table_prefix' => '',
