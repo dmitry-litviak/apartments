@@ -35,7 +35,7 @@ index = {
       bServerSide: true,
       iDisplayLength: 10,
       bRetrieve: true,
-      sAjaxSource: SYS.baseUrl + "admin/users/getAjaxData"
+      sAjaxSource: SYS.baseUrl + "admin/apartments/getAjaxData"
     });
   }
 };

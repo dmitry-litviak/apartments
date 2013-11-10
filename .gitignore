@@ -1,9 +1,19 @@
 application/cache/*
 application/logs/*
+<<<<<<< HEAD
 files/*
 /.htaccess
+=======
+files/users/*
+files/temp/*
+>>>>>>> 20c12a8c9b0793345111d6b353f16378a74a0a83
 # Ignore RubyMine area
 /.idea
 # Ignore NetBeans area
 /nbproject
+<<<<<<< HEAD
 
+=======
+.DS_Store
+/application/config/database.php
+>>>>>>> 20c12a8c9b0793345111d6b353f16378a74a0a83
